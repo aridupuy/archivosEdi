@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'EfectivoDigital'),
+    'name' => env('APP_NAME', 'EDISOFT'),
 
     /*
     |--------------------------------------------------------------------------

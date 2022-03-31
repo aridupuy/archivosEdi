@@ -31,7 +31,7 @@ class Gestor_de_tokens {
     }
     /*A futuro usar jwt para la autenticacion*/
     
-    public function crear($cuenta) {
+    public function crear(\Usuario $usuario) {
         $time = time();
 //        var_dump($_SERVER);
         $host = $_SERVER["HTTP_HOST"] . "";
@@ -39,23 +39,23 @@ class Gestor_de_tokens {
         $server = $_SERVER["SERVER_ADDR"] . "";
 //        var_dump($host,$addr);
         $jws = Jose\Easy\Build::jws()
-                ->exp($time + 3600)
+                ->exp($time + INTERVALO_SESION*60)
                 ->iat($time)
                 ->nbf($time)
-                ->jti($cuenta->get_id(), true)
+                ->jti($usuario->get_id(), true)
                 ->alg('RS512')
                 ->iss('api')
                 ->typ("jwe")
-                ->aud($cuenta->get_id())
-                ->aud($cuenta->get_titular())
+                ->aud($usuario->get_id())
+                ->aud($usuario->get_nombre_usuario())
                 ->aud("REMOTE_HOST: " . $host)
                 ->aud("REMOTE_ADDR: " . $addr)
                 ->aud("SERVER_ADDR: " . $server)
                 ->sub(APP_NAME)
-                ->claim('roles', ['vip' => false, 'usuario' => $cuenta->get_id_cuenta()])
+                ->claim('roles', ['vip' => false, 'usuario' => $usuario->get_id()])
                 ->crit(['alg'])
                 ->sign($this->rsaKey());
-//    developer_log($jws);
+        
         return $jws;
     }
 
@@ -89,6 +89,7 @@ class Gestor_de_tokens {
     }
 
     public function leer($access_token): ?Jose\Easy\JWT {
+//        var_dump($access_token);
         if (!$access_token) {
             developer_log("La peticion no se puede procesar sin estar autenticado.");
             return null;
@@ -96,23 +97,19 @@ class Gestor_de_tokens {
         if (str_contains($access_token, "Bearer")) {
             $bearer = explode("Bearer ", $access_token);
             $token = $bearer[1];
+//            var_dump($token);
             $time = time();
             
          error_log($access_token);
          $jws = \Jose\Easy\Load::jws($token)
                     ->algs(['RS512']) // The key encryption algorithms allowed to be used
-//            ->encs(['A256GCM']) // The content encryption algorithms allowed to be used
                     ->exp()
                     ->iat()
                     ->nbf()
-//            ->aud('audience1')
                     ->iss('api')
                     ->sub(APP_NAME)
-//            ->jti('0123456789')
                     ->key($this->rsaKey()) // Key used to decrypt the token
                     ->run();
-//            var_dump($jws);
-
             return $jws;
         } else {
             return null;

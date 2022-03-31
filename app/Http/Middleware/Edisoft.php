@@ -8,7 +8,7 @@ use Model;
 use Token;
 
 
-class EdiSoft {
+class Edisoft {
 
     const CLAVE_CIFRADO = "teganamoscon9";
 
@@ -80,7 +80,7 @@ class EdiSoft {
         if (!Controller::set_cuenta($token)) {
             return $this->retornar(false, "Error en la autenticacion, La cuenta no existe ", [])->header("Access-Control-Allow-Origin", "*");
         }
-        \Logger::log("Entrada ".APP_NAME." (App) id_cuenta -->" . Controller::$CUENTA->get_id() . " | id_usuario -->" . Controller::$USUARIO->get_id(), isset($vars)? $vars : "", $request->getRequestUri());
+        \Logger::log("Entrada ".APP_NAME." (App) id_usuario -->" . Controller::$USUARIO->get_id() , isset($vars)? $vars : "", $request->getRequestUri());
         if ($request)
             return $next($request)->header("Access-Control-Allow-Origin", "*")
                             //Métodos que a los que se da acceso
@@ -96,18 +96,22 @@ class EdiSoft {
     }
 
     private function verificar_autenticacion($token) {
-        $result = Token::checktoken($token);
+        $tok = new \Gestor_de_tokens();
         
-        if ($result) {
-            developer_log("true");
-            $token = Token::select_token($token);
-            $token->set_ultimo_uso("now()");
-            $token->set();
+        $lectura = $tok->leer($token);
+        $usuario = new \Usuario();
+        if($lectura==null){
+            return false;
+        }
+        $usuario->get($lectura->claims->get("roles")["usuario"]);
+//        var_dump($usuario);
+        if ($usuario->get_id()==null) {
+            Controller::set_cuenta($token);
         }
         else{
             developer_log("false");
         }
-        return ($result);
+        return ($usuario);
     }
 
     public function retornar($resultado, $log, ...$param) {

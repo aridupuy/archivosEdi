@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "616b9d9cb543d212cffb69b8e54d32f6",
+    "content-hash": "546840c549c67a8d46fec271b1e0ef7c",
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.22.0",
+            "version": "v5.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "d99127b8811a9f949c00ab425065e380dce6bdc1"
+                "reference": "64cfc1a65648e4d1245c724ca0c347c9c5eaf2f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/d99127b8811a9f949c00ab425065e380dce6bdc1",
-                "reference": "d99127b8811a9f949c00ab425065e380dce6bdc1",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/64cfc1a65648e4d1245c724ca0c347c9c5eaf2f6",
+                "reference": "64cfc1a65648e4d1245c724ca0c347c9c5eaf2f6",
                 "shasum": ""
             },
             "require": {
@@ -61,7 +61,7 @@
                 "library",
                 "php"
             ],
-            "time": "2022-02-07T23:42:42+00:00"
+            "time": "2022-03-30T08:49:08+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -6768,16 +6768,16 @@
         },
         {
             "name": "web-token/jwt-core",
-            "version": "v2.2.7",
+            "version": "v2.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-core.git",
-                "reference": "e68c4940da62682426e78eafb1e3a3ba4c7cbabe"
+                "reference": "53beb6f6c1eec4fa93c1c3e5d9e5701e71fa1678"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-token/jwt-core/zipball/e68c4940da62682426e78eafb1e3a3ba4c7cbabe",
-                "reference": "e68c4940da62682426e78eafb1e3a3ba4c7cbabe",
+                "url": "https://api.github.com/repos/web-token/jwt-core/zipball/53beb6f6c1eec4fa93c1c3e5d9e5701e71fa1678",
+                "reference": "53beb6f6c1eec4fa93c1c3e5d9e5701e71fa1678",
                 "shasum": ""
             },
             "require": {
@@ -6837,20 +6837,20 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-12-13T16:35:27+00:00"
+            "time": "2021-03-17T14:55:52+00:00"
         },
         {
             "name": "web-token/jwt-easy",
-            "version": "v2.2.7",
+            "version": "v2.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-easy.git",
-                "reference": "e4b659ef6749bc1dca74c7c4118c8746ed199731"
+                "reference": "01db23252bb53d4fd36975b55dd58466bab1bb30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-token/jwt-easy/zipball/e4b659ef6749bc1dca74c7c4118c8746ed199731",
-                "reference": "e4b659ef6749bc1dca74c7c4118c8746ed199731",
+                "url": "https://api.github.com/repos/web-token/jwt-easy/zipball/01db23252bb53d4fd36975b55dd58466bab1bb30",
+                "reference": "01db23252bb53d4fd36975b55dd58466bab1bb30",
                 "shasum": ""
             },
             "require": {
@@ -6920,7 +6920,7 @@
                 }
             ],
             "abandoned": true,
-            "time": "2020-12-13T16:35:27+00:00"
+            "time": "2021-03-17T14:55:52+00:00"
         },
         {
             "name": "web-token/jwt-encryption",
@@ -9314,11 +9314,11 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "phpmailer/phpmailer": 20
     },
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.2.5"

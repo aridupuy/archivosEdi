@@ -7,7 +7,8 @@
  */
 
 namespace App\Http\Controllers;
-require 'log_in.php';
+//require 'log_in.php';
+use App\Http\Controllers\Log_in_app;
 use Illuminate\Http\Request;
 use Usuario;
 use Token;
@@ -17,7 +18,7 @@ use Exception;
  *
  * @author ariel
  */
-class Auth_BO_Controller extends Log_in {
+class Auth_BO_Controller extends Log_in_app {
 
     public function login(Request $request) {
         try {

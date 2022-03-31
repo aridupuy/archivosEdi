@@ -62,8 +62,8 @@ class Gestor_de_log {
         $ulog->set_id_authcode(1);
         $ulog->set_mensaje($mensaje);
         $ulog->set_loglevel($loglevel);
-
-        $ulog->set_fecha('now()');
+        
+//        $ulog->set_fecha('CURRENT_TIMESTAMP()');
 
         $ulog->set_sesion('72'); #What?
         #$ulog->set_iddoc(); #What?
@@ -105,7 +105,7 @@ class Gestor_de_log {
         $ulog->set_mensaje($mensaje);
         $ulog->set_loglevel(self::LOGLEVEL_WEBSERVICE);
 
-        $ulog->set_fecha('now()');
+//        $ulog->set_fecha('CURRENT_TIMESTAMP()');
 
         $ulog->set_sesion('72'); #What?
         #$ulog->set_iddoc(); #What?
@@ -154,7 +154,7 @@ class Gestor_de_log {
         $ulog->set_mensaje($mensaje);
         $ulog->set_loglevel(self::LOGLEVEL_MICROSITIO);
 
-        $ulog->set_fecha('now()');
+//        $ulog->set_fecha('CURRENT_TIMESTAMP()');
 
         $ulog->set_sesion('72'); #What?
         $ulog->set_transaccion_correcta('1');
@@ -236,7 +236,7 @@ class Gestor_de_log {
         else
             $ulog->set_transaccion_correcta('0');
 
-        $ulog->set_fecha('now()');
+//        $ulog->set_fecha('CURRENT_TIMESTAMP()');
 
         $ulog->set_sesion('72'); #What?
         if (isset($parametros[$id_tabla]))

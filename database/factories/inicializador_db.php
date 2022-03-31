@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__.'/../../app/lib.php';
-/*define('PATH_PUBLIC', __DIR__.'/../../storage/app/public/');
-define('PATH_MODELS',"/home/adupuy/proyectos/efectivoBackend/efectivoBackend/app/models/");
-define('PATH_VENDOR',"/home/adupuy/proyectos/efectivoBackend/efectivoBackend/vendor/");
-define('PATH_CLASSES',"/home/adupuy/proyectos/efectivoBackend/efectivoBackend/app/Classes/");
-define('PATH_TRAITS',"/home/adupuy/proyectos/efectivoBackend/efectivoBackend/app/traits/");*/
+
 define('PATH_PUBLIC', __DIR__.'/../../storage/app/public/');
 define('PATH_MODELS',__DIR__."/../../app/models/");
 define('PATH_VENDOR',__DIR__."/../../vendor/");
@@ -13,12 +9,10 @@ define('PATH_EXCEPTIONS',__DIR__."/../../app/Exceptions/");
 define('PATH_TRAITS',__DIR__."/../../app/traits/");
  
 //hay que buscar una mejor forma para esto
-define('DB_CONNECTION',getenv("DATABASE_ENGINE"));
-define('DATABASE_HOST',getenv("DATABASE_HOST"));
-define('DATABASE_PORT',getenv("DATABASE_PORT"));
-define('DATABASE_NAME','LauraEfectivoDigital');
-define('DATABASE_USERNAME',getenv("DATABASE_USERNAME"));
-define('DATABASE_USERPASS',getenv("DATABASE_USERPASS"));
+define('DB_CONNECTION',"mysqli");
+define('DATABASE_NAME','EDI');
+define('DATABASE_USERNAME','mobul_usr');
+define('DATABASE_USERPASS','.t&]7+tBU7!R');
 define('NOMBRE_HIDDEN_INSTANCIA',getenv('NOMBRE_HIDDEN_INSTANCIA'));
 define('ALGORITMO_HASH',getenv('ALGORITMO_HASH'));
 define('PATH_VENDOR_HANDLE_ERROR',PATH_VENDOR.'/adodb/adodb-php/adodb-errorhandler.inc.php');
@@ -70,11 +64,8 @@ define('INTERVALO_SESION', "200");
 define('TIEMPO_EXTENDIDO', "day");
 define('TIEMPO', "minute");
 define('SOLO_REPLICA', false);
-define('COMERCIO_COLLECT', "SH783525");
-define('SID_COLLECT', "BKSKGDUAPXADBWVOHDFOWZOHDAFJDIZCDHHHCSOFJSQATVKNPBVTXYGBVV");
-define('APP_NAME',' MIAPP');
-define('DATABASE_HOST',' localhost');
-define('DATABASE_PORT',' 5400');
+define('DATABASE_HOST','localhost');
+define('DATABASE_PORT','3306');
 define('PROJECT_KEY','');
 define('PROJECT_ID','');
 define('EMAIL_USER_INFO','noresponder@unmail.com');
@@ -89,6 +80,7 @@ define('APP_NAME','EDISOFT');
 
 require_once PATH_MODELS."model.php";
 function mi_autoload($clase) {
+    developer_log($clase);
   if($clase===ucfirst(strtolower($clase))){
     $clase=strtolower($clase);
 //    developer_log($clase); 

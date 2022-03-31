@@ -8,26 +8,20 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Usuario;
-use Cuenta_usuario;
-use Cuenta;
 use Token;
 use Exception;
+
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     const RESPUESTA_CORRECTA=1;
     const RESPUESTA_INCORRECTA=0;
     const CLAVE_DE_ENCRIPTACION="teganamoscon9";
-    public static $CUENTA;
     public static $USUARIO;
-    public static $CUENTA_USUARIO;
     private $metodo_actual;
-    public static $HASH=true;
+    public static $HASH=false;
     protected static $variables;
-//    public function __construct() {
-//        self::$CUENTA= new \Cuenta();
-//        self::$USUARIO=new \Usuario();
-//    }
+
     public function retornar($resultado,$log,...$param){
         /* Encriptamos todas las respuestas */
 //        var_dump($resultado,$log,$param);
@@ -35,10 +29,8 @@ abstract class Controller extends BaseController
             self::$HASH = false;
         }
         if(!self::$HASH){
-
-
           $response=json_encode([
-            "resultado"=>$resultado,
+            "resultado"=> boolval($resultado),
             "log"=>$log,
             "extras"=>$param
             ]);
@@ -47,18 +39,18 @@ abstract class Controller extends BaseController
 //            developer_log("aca");
             $hash=new \Gestor_de_hash(self::CLAVE_DE_ENCRIPTACION);
             developer_log(json_encode([
-                "resultado"=>$resultado,
+                "resultado"=>boolval($resultado),
                 "log"=>$log,
                 "extras"=>$param
             ]));
             $response=$hash->cryptoJsAesEncrypt(self::CLAVE_DE_ENCRIPTACION, json_encode([
-                "resultado"=>$resultado,
+                "resultado"=>boolval($resultado),
                 "log"=>$log,
                 "extras"=>$param
             ]));
         }
 	developer_log(json_encode([
-                "resultado"=>$resultado,
+                "resultado"=>boolval($resultado),
                 "log"=>$log,
                 "extras"=>$param
             ]));
@@ -66,7 +58,9 @@ abstract class Controller extends BaseController
                             //Métodos que a los que se da acceso
                             ->header("Access-Control-Allow-Methods", "GET, POST, PUT,OPTIONS, DELETE")
                             //Headers de la petición
-                            ->header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, X-Token-Auth, Authorization");
+                            ->header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, X-Token-Auth, Authorization")
+                            ->header('Content-Type', 'application/json');
+                            
                 /*->json(
         [
             "resultado"=>$resultado,
@@ -103,24 +97,20 @@ abstract class Controller extends BaseController
 //            developer_log("ACA------".\GuzzleHttp\json_encode(self::$variables));
     }
     public static function set_cuenta($token){
-//        var_dump($token);
         developer_log("TOKEN:".$token);
-        $rs= Token::select(array("token"=>$token));
-        $row =$rs->fetchRow();
-        $Cuenta_usuario = new \Cuenta_usuario();
-        $Cuenta_usuario->get($row["id_cuenta_usuario"]);
-        developer_log("CUENTA_USUARIO:". $Cuenta_usuario->get_id());
-        self::$CUENTA_USUARIO=$Cuenta_usuario;
+        $gestor_de_tok = new \Gestor_de_tokens();
+        $lectura = $gestor_de_tok->leer($token);
+        if($lectura == null){
+            throw new \Exception("No autorizado");
+        }
+        
         self::$USUARIO = new \Usuario();
-        self::$USUARIO->get($Cuenta_usuario->get_id_usuario());
+        self::$USUARIO->get($lectura->claims->get("roles")["usuario"]);
+        if(self::$USUARIO->get_id()== null or self::$USUARIO->get_id_authstat()!=1){
+            throw new \Exception("No autorizado");
+        }
         developer_log("USUARIO:".self::$USUARIO->get_id());
-        self::$CUENTA= new \Cuenta();
-
-//        var_dump( self::$USUARIO);
-//        var_dump( self::$CUENTA);
-        self::$CUENTA->get($Cuenta_usuario->get_id_cuenta());
-        developer_log("CUENTA:".self::$CUENTA->get_id());
-        if(self::$CUENTA->get_id_cuenta()==null){
+        if(self::$USUARIO->get_id_usuario()==null){
             return false;
         }
         return true;

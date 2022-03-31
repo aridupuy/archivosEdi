@@ -7,16 +7,13 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Usuario;
-use Token;
-use Exception;
-abstract class Log_in extends Controller
+use App\Http\Controllers\Controller;
+abstract class Log_in_app extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     const RESPUESTA_CORRECTA=1;
     const RESPUESTA_INCORRECTA=0;
     const CLAVE_CIFRADO="teganamoscon9";
-    public static $CUENTA;
     public static $USUARIO;
     private $metodo_actual;
     private $request_actual;

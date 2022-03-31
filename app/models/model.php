@@ -7,10 +7,10 @@ include PATH_VENDOR_HANDLE_ERROR;
 
 abstract class Model {
     protected static $conexion; # Conexion a la base de datos # ES PRIVATE!!
-    public static $prefijo_tabla='ef_'; # Re-escribir en caso que haga falta
+    public static $prefijo_tabla='ed_'; # Re-escribir en caso que haga falta
     public static $id_tabla='id'; # Re-escribir en caso que haga falta
-    public static $secuencia='paratodo'; #Secuencia de generacion de Ids # Re-escribir en caso que haga falta
-//    public static $secuencia='GENERAR_ID_MAXIMO'; #ESTE VALOR BUSCA SIEMPRE EL ULTIMO ID DE LA TABLA Y LE SUMA 1
+//    public static $secuencia=GENERAR_ID_MAXIMO; #Secuencia de generacion de Ids # Re-escribir en caso que haga falta
+    public static $secuencia='GENERAR_ID_MAXIMO'; #ESTE VALOR BUSCA SIEMPRE EL ULTIMO ID DE LA TABLA Y LE SUMA 1
     public static $transaccion_actual=0;
     const PREFIJO_GETTERS='get_';
     const PREFIJO_SETTERS='set_';

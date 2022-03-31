@@ -1,12 +1,18 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
+    "name": "archivosedi/archivosedi",
+    "description": "api para generacion y administracion de contenedores",
+    "type": "archivos-edi",
+    "authors": [
+        {
+            "name": "Ariel Dupuy",
+            "email": "adupuy@cobrodigital.com"
+        }
+    ],
+    "license": "MIT",
     "keywords": [
         "framework",
         "laravel"
     ],
-    "license": "MIT",
     "require": {
         "php": "^7.2.5",
         "adodb/adodb-php": "^5.20",
@@ -21,12 +27,13 @@
         "lkaybob/php-fcm-v1": "^1.0.1",
         "phpmailer/phpmailer": "dev-master",
         "phpoffice/phpexcel": "^1.8",
-        "web-token/jwt-core": "v2.2.7",
-        "web-token/jwt-easy": "v2.2.7",
+        "web-token/jwt-core": "^2.2",
+        "web-token/jwt-easy": "^2.2",
         "web-token/jwt-encryption-algorithm-aeskw": "v2.2.7",
         "web-token/jwt-signature-algorithm-hmac": "v2.2.7",
         "web-token/jwt-signature-algorithm-rsa": "v2.2.7"
-    },
+    }
+    ,
     "require-dev": {
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
@@ -34,19 +41,13 @@
         "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^8.5"
     },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "autoload": {
+     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "App\\Http\\": "app/Http/",
+            "App\\Http\\Controllers\\": "app/Http/Controllers",
+            "App\\Http\\Controllers\\Edisoft\\": "app/Http/Controllers/Edisoft/",
+            "App\\Http\\Controllers\\Backoffice\\": "app/Http/Controllers/Backoffice/"
         },
         "classmap": [
             "database/factories"
@@ -56,19 +57,6 @@
         "psr-4": {
             "Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
     }
+
 }

@@ -55,8 +55,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'EdiSoft'=>\App\Http\Middleware\EdiSoft::class,
-        'Backoffice'=>\App\Http\Middleware\Backoffice::class,
+        'Edisoft'=>\App\Http\Middleware\Edisoft::class,
+//        'Backoffice'=>\App\Http\Middleware\Backoffice,
         'Events'=>\App\Http\Middleware\Events::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
