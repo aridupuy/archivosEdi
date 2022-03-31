@@ -196,6 +196,27 @@ class Container extends Model{
         return $this;
     }
 
-
+    public static function select_containers(){
+        $sql = "select * from ed_container A "
+                . "left join ho_authstat B on A.id_authstat=B.id_authstat "
+                . "left join ho_tipo_ingreso C on A.id_tipoingreso = C.id_tipo_ingreso "
+                . "left join ho_tipocontainer D on A.id_tipocontainer = D.id_tipocontainer "
+                . "left join ed_cliente E on A.id_cliente= E.id_cliente "
+                . "left join ed_usuario F on A.id_usuario= F.id_usuario "
+                . "left join ho_ie G on A.id_ie= G.id_ie "
+                . "where A.id_authstat in (?,?,?,?)";
+        $variables=[Authstat::ACTIVO, Authstat::ENTRADA, Authstat::SALIDA, Authstat::INACTIVO];
+        return self::execute_select($sql, $variables);
+    }
+    public static function select_containers_entrada(){
+        $sql = "select * from ed_container where id_authstat in (?,?)";
+        $variables=[Authstat::ACTIVO, Authstat::ENTRADA];
+        return self::execute_select($sql, $variables);
+    }
+    public static function select_containers_salida(){
+        $sql = "select * from ed_container where id_authstat in (?)";
+        $variables=[Authstat::SALIDA];
+        return self::execute_select($sql, $variables);
+    }
 
 }

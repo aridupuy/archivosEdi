@@ -125,6 +125,16 @@ class Posiciones extends Model{
         return $this;
     }
 
-
+    public static function select_posiciones() {
+        $sql = "select * from ed_posiciones A "
+                . "left join ed_container B on  A.id_container=B.id_container "
+                . "left join ho_authstat C on A.id_authstat=C.id_authstat "
+                . "left join ho_tipo_ingreso D on B.id_tipoingreso = D.id_tipo_ingreso "
+                . "left join ho_tipocontainer E on B.id_tipocontainer = E.id_tipocontainer "
+                . "left join ed_cliente F on A.id_cliente= F.id_cliente "
+                . "left join ed_usuario G on A.id_usuario= G.id_usuario "
+                ." order by A.id_posicion desc ";
+        return self::execute_select($sql);
+    }
     
 }

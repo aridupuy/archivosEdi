@@ -68,7 +68,7 @@ function iterate($middleware = false) {
                 //añado metodos
                 //ver como diferenciar get de post
                 $metodo_post = explode("_post", $metodo);
-
+//                var_dump($metodo_post);
                 if (count($metodo_post) > 1) {
 //            "si el metodo es _post la consulta se resuelve por post";
                     Route::post(strtolower($ruta . "/" . $metodo_post[0]), "$middleware\\" . $controller_class . '@' . $metodo)->middleware($middleware);

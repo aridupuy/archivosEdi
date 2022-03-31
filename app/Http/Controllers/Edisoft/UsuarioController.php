@@ -29,12 +29,18 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $linea["username"] = $usuario->get_nombre_usuario();
             $linea["email"] = $usuario->get_email();
             $linea["activo"] = $usuario->get_id_authstat();
-            $fecha = \DateTime::createFromFormat("Y-m-d H:i:s",$usuario->get_last_login());
-            $linea["ultimo_login"] = $fecha->format("Y-m-d H:i:s");
+            
+            if($usuario->get_last_login()==null){
+                $linea["ultimo_login"] = "No Login";
+            }
+            else{
+                $fecha = \DateTime::createFromFormat("Y-m-d H:i:s",$usuario->get_last_login());
+                $linea["ultimo_login"] = $fecha->format("Y-m-d H:i:s");
+            }
             $respuesta[] = $linea;
         }
 
-        return $this->retornar(self::RESPUESTA_CORRECTA, "", $respuesta);
+        return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados ".$usuarios->rowCount(), $respuesta);
     }
 
     public function cambiar_estado_post() {
@@ -46,62 +52,44 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $usuario->set_id_authstat(\Authstat::ACTIVO);
         }
         if ($usuario->set()) {
-            return $this->retornar(self::RESPUESTA_CORRECTA, "", ["id" => $usuario->get_id_authstat()]);
+            return $this->retornar(self::RESPUESTA_CORRECTA, "", ["id_authstat" => $usuario->get_id_authstat()]);
         }
         return $this->retornar(self::RESPUESTA_INCORRECTA, "Error al cambiar estado", ["resultado" => "not-ok"]);
     }
 
     public function crear_usuario_post() {
         /* No me gusta mezclar controladores ya que son dos capaz iguales, seria mejor pasar la logica a un trait */
-        $persona = new \App\Http\Controllers\Backoffice\PersonaJuridicaController();
-
-        $params["id_cuenta"] = self::$CUENTA->get_id();
-        $params["documento"] = self::$variables["documento"];
+//        var_dump(self::$variables);
         $params["email"] = self::$variables["email"];
-        $params["nombre"] = self::$variables["nombre"];
-        $params["nombre_completo"] = self::$variables["nombre"];
-        $params["titular"] = self::$variables["nombre"];
+        $params["nombre_usuario"] = self::$variables["nombre_usuario"];
+        $params["nombre_completo"] = self::$variables["nombre_completo"];
         $params["celular"] = self::$variables["telefono"];
-        $params["cod_pais"] = self::$variables["cod_pais"];
-        $params["codArea"] = $params["cod_pais"] . self::$variables["codArea"];
-        $params["tipodoc"] = self::$variables["tipodoc"];
-        if(self::$variables["tipodoc"]=="DNI"){
-            $documento=self::$variables["documento"];
-        }
-        else{
-            $documento= substr(self::$variables["documento"], 2,strlen(self::$variables["documento"])-3);
-        }
-        
-        $rs_usuario = \Usuario::select_busqueda_cuenta($params["email"], $documento, self::$CUENTA->get_id());
+        $params["cod_area"] = self::$variables["cod_area"];
+        $params["password"]=self::$variables["password"];
+        $rs_usuario = \Usuario::select_busqueda_cuenta($params["email"], $params["nombre_usuario"], self::$USUARIO->get_id());
         if ($rs_usuario and $rs_usuario->fetchRow() > 0) {
-//            throw new \Exception("Ya existe este usuario");
-            $response = $persona->asociar_usuario(new \Usuario($rs_usuario->fetchRow()),self::$CUENTA->get_id());
-            $response = $response->getData(true);
-            $id_cuenta_usuario = $response["id_cuenta_usuario"];
+            throw new \Exception("Ya existe este usuario");
         }
         else{
-            $response = $persona->crear_usuario_post($params);
-            $resp = self::RESPUESTA_INCORRECTA;
-            if ($response) {
-                $response = $response->getData(true);
-                $id_cuenta_usuario = $response["id_cuenta_usuario"];
-                if ($response["resultado"]) {
-                    $response = $persona->generar_url_post("usuario", $response["id"], true, true);
-                    $resp = self::RESPUESTA_CORRECTA;
-                }
+            $usuario = new \Usuario();
+            $usuario->set_celular($params["celular"]);
+            $usuario->set_cod_area($params["cod_area"]);
+            $usuario->set_email($params["email"]);
+            $usuario->set_nombre_completo($params["nombre_completo"]);
+            $usuario->set_nombre_usuario($params["nombre_usuario"]);
+            $usuario->set_password($params["password"]);
+            $usuario->set_id_authstat(\Authstat::ACTIVO);
+            if($usuario->set()){
+                $id_usuario= $usuario->getId();
+                $response["msg"]="Usuario generado Correctamente.";
+                $resp = self::RESPUESTA_CORRECTA;
+            }
+            else{
+                $response["msg"]="Error al generar el usuario";
+                $resp = self::RESPUESTA_INCORRECTA;
             }
         }
-        \Gestor_de_notificaciones::notificar_y_guardar(self::$CUENTA->get_id_cuenta(), self::$USUARIO->get_nombre_usuario()." Generó un nuevo usuario para la cuenta ".self::$CUENTA->get_titular(), "Nuevo usuario generado", "usuarios");
-            $view=new \Vista();
-            $view->cargar("views/mail_avisos.html");
-            $usuario=$view->getElementById("usuario");
-            $usuario->appendChild($view->createTextNode(self::$CUENTA->get_titular()));
-            $mensaje=$view->getElementById("mensaje");
-            $mensaje->appendChild($view->createTextNode(self::$USUARIO->get_nombre_usuario()." Generó un nuevo usuario para la cuenta ".self::$CUENTA->get_titular()));
-            $usser = new \Usuario();
-            $usser ->get(self::$CUENTA->get_id_usuario_titular());
-            \Gestor_de_correo::enviar(\Gestor_de_correo::MAIL_COBRODIGITAL_ATENCION_AL_CLIENTE, $usser ->get_email(), "Nuevo usuario generado", $view->saveHTML());
-        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_cuenta_usuario" => $id_cuenta_usuario]);
+        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
     }
 
     public function obtener_permisos() {

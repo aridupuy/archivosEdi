@@ -11,6 +11,7 @@
  * @author adupuy
  */
 class Usuario extends Model{
+    protected $hash=true;
     
     public static $id_tabla="id_usuario";
     private $id_usuario;
@@ -23,7 +24,12 @@ class Usuario extends Model{
     private $celular;
     private $last_login;
     
-    
+    public function activar_hash(){
+           $this->hash=true;
+    }
+    public function desactivar_hash(){
+           $this->hash=false;
+    }
     public function get_id_usuario() {
         return $this->id_usuario;
     }
@@ -106,23 +112,22 @@ class Usuario extends Model{
     }
 
         
-    public function __set($property, $value) {
-	developer_log("-------->".get_called_class($this));
-        if ($this->hash and property_exists($this, $property)) {
-            if (($value != false or $value != null)) {
-                return;
-            } elseif ($property == "password" and ($this->get_id_usuario() == null or $this->actualizar_password)) {
-                $this->$property = $this->calcular_passw2($value);
-            } else
-                $this->$property = $value;
+    public function set() {
+//	developer_log("-------->".get_called_class($this));
+//        developer_log($property);
+        if ($this->hash and $this->password!=null) {
+            if (($this->get_id_usuario() == null or $this->actualizar_password)) {
+                $this->password = $this->calcular_passw2($this->password);
+            } 
         }
-        
+        return parent::set();
     }
 
     public static function select_login($usuario, $password) {
         $array["usuario"] = strtolower($usuario);
         $array["password"] = $password;
-        $sql = "select * from ed_usuario where nombre_usuario=? and sha1(?) = password";
+        $array["authstat"] = Authstat::ACTIVO;
+        $sql = "select * from ed_usuario where nombre_usuario=? and sha1(?) = password and id_authstat=?";
 //      print_r($sql);
         return self::execute_select($sql, $array);
     }
@@ -191,6 +196,13 @@ class Usuario extends Model{
         return '';
     }
 
-
+    public static function select_busqueda_cuenta($email,$usuario,$id_usuario){
+        $sql = "select * from ed_usuario where ( email = ? OR nombre_usuario=?  ) and id_usuario!=?";
+        $variables[]=$email;
+        $variables[]=$usuario;
+        $variables[]=$id_usuario;
+        
+        return self::execute_select($sql, $variables);
+    }
     
 }

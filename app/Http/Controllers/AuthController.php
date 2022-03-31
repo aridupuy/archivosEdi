@@ -25,7 +25,7 @@ class AuthController extends Log_in_app {
 
     public function login(Request $request) {
         try {
-            error_log(json_encode($request->json()->all()));
+//            error_log(json_encode($request->json()->all()));
             return response()->json(
 //				    error_log($request->json()->all());
                                     $this->loginAction($request->json()->all())

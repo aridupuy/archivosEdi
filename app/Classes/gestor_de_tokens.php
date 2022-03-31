@@ -100,7 +100,7 @@ class Gestor_de_tokens {
 //            var_dump($token);
             $time = time();
             
-         error_log($access_token);
+//         error_log($access_token);
          $jws = \Jose\Easy\Load::jws($token)
                     ->algs(['RS512']) // The key encryption algorithms allowed to be used
                     ->exp()

@@ -30,10 +30,11 @@ class Logger {
             touch(storage_path(getenv("apilog")));
             chmod(storage_path(getenv("apilog")), 0777);
         }
-//        developer_log("Logueando");
+        developer_log("Logueando");
 //        $file=fopen(storage_path(getenv("apilog")), "w+");
 //        fwrite($file, $log, strlen($log));
 //        fclose($file);
+        developer_log(storage_path(getenv("apilog")));
         file_put_contents(storage_path(getenv("apilog")),$log."\n\n\n" ,FILE_APPEND);
     }
 }

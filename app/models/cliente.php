@@ -18,6 +18,7 @@ class Cliente extends Model{
     private $email;
     private $telefono;
     private $documento;
+    private $id_authstat;
     
     
     public function get_id_cliente() {
@@ -64,8 +65,22 @@ class Cliente extends Model{
         $this->documento = $documento;
         return $this;
     }
+    public function get_id_authstat() {
+        return $this->id_authstat;
+    }
+
+    public function set_id_authstat($id_authstat) {
+        $this->id_authstat = $id_authstat;
+        return $this;
+    }
 
 
+public static function select_busqueda_cliente($email, $documento){
+    $sql = "select * from ed_cliente where email =? or documento =?";
+    $vars[]=$email;
+    $vars[]=$documento;
+    return self::execute_select($sql, $vars);
+}
     
     
     

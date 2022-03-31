@@ -38,22 +38,22 @@ abstract class Controller extends BaseController
         else{
 //            developer_log("aca");
             $hash=new \Gestor_de_hash(self::CLAVE_DE_ENCRIPTACION);
-            developer_log(json_encode([
-                "resultado"=>boolval($resultado),
-                "log"=>$log,
-                "extras"=>$param
-            ]));
+//            developer_log(json_encode([
+//                "resultado"=>boolval($resultado),
+//                "log"=>$log,
+//                "extras"=>$param
+//            ]));
             $response=$hash->cryptoJsAesEncrypt(self::CLAVE_DE_ENCRIPTACION, json_encode([
                 "resultado"=>boolval($resultado),
                 "log"=>$log,
                 "extras"=>$param
             ]));
         }
-	developer_log(json_encode([
-                "resultado"=>boolval($resultado),
-                "log"=>$log,
-                "extras"=>$param
-            ]));
+//	developer_log(json_encode([
+//                "resultado"=>boolval($resultado),
+//                "log"=>$log,
+//                "extras"=>$param
+//            ]));
         return response($response)->header("Access-Control-Allow-Origin", "*")
                             //Métodos que a los que se da acceso
                             ->header("Access-Control-Allow-Methods", "GET, POST, PUT,OPTIONS, DELETE")
@@ -97,7 +97,7 @@ abstract class Controller extends BaseController
 //            developer_log("ACA------".\GuzzleHttp\json_encode(self::$variables));
     }
     public static function set_cuenta($token){
-        developer_log("TOKEN:".$token);
+//        developer_log("TOKEN:".$token);
         $gestor_de_tok = new \Gestor_de_tokens();
         $lectura = $gestor_de_tok->leer($token);
         if($lectura == null){
@@ -109,7 +109,7 @@ abstract class Controller extends BaseController
         if(self::$USUARIO->get_id()== null or self::$USUARIO->get_id_authstat()!=1){
             throw new \Exception("No autorizado");
         }
-        developer_log("USUARIO:".self::$USUARIO->get_id());
+//        developer_log("USUARIO:".self::$USUARIO->get_id());
         if(self::$USUARIO->get_id_usuario()==null){
             return false;
         }

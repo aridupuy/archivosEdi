@@ -11,6 +11,11 @@
  * @author adupuy
  */
 class Authstat extends Model{
+    CONST ACTIVO = 1;
+    CONST ENTRADA = 2;
+    CONST SALIDA = 3;
+    CONST INACTIVO = 4;
+    
     public static $id_tabla="id_authstat";
     public static $prefijo_tabla="ho_";
     private $id_authstat;
