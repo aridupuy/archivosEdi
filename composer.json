@@ -35,9 +35,8 @@
         "php-edifact/edifact-generator": "^1.1",
         "ext-bcmath": "*",
         "ext-mcrypt": "*",
-        "ext-memcached": "*",
-        "ext-mongodb": "^1.1.0"
-    
+        "ext-memcached": "*"
+        
     },
     "repositories":[
         {
