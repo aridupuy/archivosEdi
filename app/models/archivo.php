@@ -18,6 +18,7 @@ class Archivo extends Model{
     private $fecha_gen;
     private $id_authstat;
     private $id_usuario;
+    private $nombre;
     
     public function get_id_archivo() {
         return $this->id_archivo;
@@ -63,6 +64,15 @@ class Archivo extends Model{
         $this->id_usuario = $id_usuario;
         return $this;
     }
+    public function get_nombre() {
+        return $this->nombre;
+    }
+
+    public function set_nombre($nombre) {
+        $this->nombre = $nombre;
+        return $this;
+    }
+
 
 
     

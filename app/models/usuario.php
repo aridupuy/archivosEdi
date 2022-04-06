@@ -128,7 +128,7 @@ class Usuario extends Model{
         $array["password"] = $password;
         $array["authstat"] = Authstat::ACTIVO;
         $sql = "select * from ed_usuario where nombre_usuario=? and sha1(?) = password and id_authstat=?";
-//      print_r($sql);
+        
         return self::execute_select($sql, $array);
     }
 

@@ -73,7 +73,9 @@ class Cliente extends Model{
         $this->id_authstat = $id_authstat;
         return $this;
     }
-
+    public function get($id):?bool{
+        return parent::get($id);
+    }
 
 public static function select_busqueda_cliente($email, $documento){
     $sql = "select * from ed_cliente where email =? or documento =?";

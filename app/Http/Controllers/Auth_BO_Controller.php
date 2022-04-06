@@ -21,6 +21,7 @@ use Exception;
 class Auth_BO_Controller extends Log_in_app {
 
     public function login(Request $request) {
+        var_dump("aca");
         try {
             return response()->json(
                             $this->loginAction($request->json()->all())

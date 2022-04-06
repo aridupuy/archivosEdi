@@ -33,6 +33,7 @@ abstract class Model {
             $DB->raiseErrorFn = 'ErrorHandler';
             
             try {
+                developer_log(DATABASE_HOST.":".DATABASE_PORT, DATABASE_USERNAME, DATABASE_USERPASS,DATABASE_NAME);
                 $resultado=$DB->Connect(DATABASE_HOST.":".DATABASE_PORT, DATABASE_USERNAME, DATABASE_USERPASS,DATABASE_NAME);
             } catch (Exception $e) {
                 $resultado=false;

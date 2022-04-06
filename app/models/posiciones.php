@@ -137,4 +137,7 @@ class Posiciones extends Model{
         return self::execute_select($sql);
     }
     
+    
+    
+    
 }

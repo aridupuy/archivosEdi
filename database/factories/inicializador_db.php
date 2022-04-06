@@ -3,6 +3,7 @@ date_default_timezone_set("America/Argentina/Buenos_Aires");
 require_once __DIR__.'/../../app/lib.php';
 
 define('PATH_PUBLIC', __DIR__.'/../../storage/app/public/');
+define('PATH_PUBLIC_FOLDER', __DIR__.'/../../public/');
 define('PATH_MODELS',__DIR__."/../../app/models/");
 define('PATH_VENDOR',__DIR__."/../../vendor/");
 define('PATH_CLASSES',__DIR__."/../../app/Classes/");
@@ -32,6 +33,7 @@ define('GENERAR_ID_MAXIMO','GENERAR_ID_MAXIMO');
 define('PREFIJO_PARA_ELEMENTOS_CIFRRADOS',getenv('PREFIJO_PARA_ELEMENTOS_CIFRRADOS'));
 define('EXTENSION_ARCHIVO_DE_SISTEMA', getenv('EXTENSION_ARCHIVO_DE_SISTEMA'));
 define('DEVELOPER',"1");
+define('MAXIMO_REGISTROS_POR_CONSULTA_CONSOLA',"5000");
 define('ACTIVAR_LOG_APACHE',"1"); 
 $GLOBALS['ACTIVAR_LOG_NAVEGADOR']="0";
 define('ACTIVAR_LOG_CONSOLA_NAVEGADOR',"0"); 

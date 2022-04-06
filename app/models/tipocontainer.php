@@ -17,6 +17,12 @@ class Tipocontainer extends Model{
 
     private $id_tipocontainer;
     private $tipo_container;
+    private $code;
+    private $descrip;
+    private $teu;
+    private $tipo;
+    private $cntr_type;
+    
     public function get_id_tipocontainer() {
         return $this->id_tipocontainer;
     }
@@ -34,6 +40,51 @@ class Tipocontainer extends Model{
         $this->tipo_container = $tipo_container;
         return $this;
     }
+    public function get_code() {
+        return $this->code;
+    }
+
+    public function get_descrip() {
+        return $this->descrip;
+    }
+
+    public function get_teu() {
+        return $this->teu;
+    }
+
+    public function get_tipo() {
+        return $this->tipo;
+    }
+
+    public function get_cntr_type() {
+        return $this->cntr_type;
+    }
+
+    public function set_code($code) {
+        $this->code = $code;
+        return $this;
+    }
+
+    public function set_descrip($descrip) {
+        $this->descrip = $descrip;
+        return $this;
+    }
+
+    public function set_teu($teu) {
+        $this->teu = $teu;
+        return $this;
+    }
+
+    public function set_tipo($tipo) {
+        $this->tipo = $tipo;
+        return $this;
+    }
+
+    public function set_cntr_type($cntr_type) {
+        $this->cntr_type = $cntr_type;
+        return $this;
+    }
+
 
 
 }

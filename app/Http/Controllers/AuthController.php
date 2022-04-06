@@ -25,9 +25,10 @@ class AuthController extends Log_in_app {
 
     public function login(Request $request) {
         try {
+            //var_dump($request->json()->all());
 //            error_log(json_encode($request->json()->all()));
             return response()->json(
-//				    error_log($request->json()->all());
+				    
                                     $this->loginAction($request->json()->all())
                             )->header("Access-Control-Allow-Origin", "*")
                             //Métodos que a los que se da acceso
@@ -91,13 +92,12 @@ class AuthController extends Log_in_app {
             $hash = new \Gestor_de_hash(self::CLAVE_CIFRADO);
             $variables = $hash->cryptoJsAesDecrypt($variables[0]);
         }
-//       var_dump(json_encode($variables));
+       
         if (!isset($variables["usuario"]) and!isset($variables["clave"])) {
             throw new \Exception("Error en credenciales.");
         }
         $rs_usuario = \Usuario::select_login($variables["usuario"], $variables["clave"]);
         $usuario = new \Usuario($rs_usuario->fetchRow());
-        developer_log("Usuarios encontradas " . $rs_usuario->rowCount());
         if($rs_usuario->rowCount()==0){
             throw new Exception("Falla en la autenticacion, revise credenciales");    
         }

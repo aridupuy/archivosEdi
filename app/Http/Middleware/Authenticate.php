@@ -16,9 +16,10 @@ class Authenticate {
      * @return string|null
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next) {
+        //var_dump(__DIR__);        
         ///inicializo la base de datos para $APP_NAME.
         Model::singleton();
-//        developer_log("aca no se verifica autenticacion previa");
+        //var_dump("aca no se verifica autenticacion previa");
         return $next($request)->header("Access-Control-Allow-Origin", "*")
                         //Métodos que a los que se da acceso
                         ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
