@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Model;
 
-require_once '../database/factories/inicializador_db.php';
+require_once 'database/factories/inicializador_db.php';
 
 class Authenticate {
 
