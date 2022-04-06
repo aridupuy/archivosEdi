@@ -33,9 +33,7 @@
         "web-token/jwt-signature-algorithm-hmac": "v2.2.7",
         "web-token/jwt-signature-algorithm-rsa": "v2.2.7",
         "php-edifact/edifact-generator": "^1.1",
-        "ext-bcmath": "*",
-        "ext-mcrypt": "*",
-        "ext-memcached": "*"
+        "ext-bcmath": "*"
         
     },
     "repositories":[
