@@ -25,6 +25,14 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
     public function generar_archivo() {
         $container = new \Container();
         $container->get(self::$variables["id"]);
+        $container->get(self::$variables["id"]);
+        if(isset(self::$variables["fecha_recepcion"]))
+            $container->set_fecha_recepcion(self::$variables["fecha_recepcion"]);
+        if(isset(self::$variables["hora_recepcion"]))
+            $container->set_hora_recepcion(self::$variables["hora_recepcion"]);
+        if(isset(self::$variables["comentario"]))
+            $container->set_nota(self::$variables["comentario"]);
+        
         $obj = \Edi::factory($container, self::$variables);
 //        var_dump($obj);
         if ($obj) {

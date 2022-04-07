@@ -52,9 +52,14 @@ class Codeco_entrada extends \Edi{
                 ->setLoc99($this->container->get_viaje()) /*ver si es viaje el campo que va aca*/ 
 //                ->setOrderDescription("lalalal", "lalala")
                 ->setModeOfTransport("MERCHANT", 3)
-                ->setGoodsDescription($this->container->get_destino())              
+                
+                
         ;       
-
+        if($this->container->get_peso()>0)
+            $oCodeco->setWeight($this->container->get_unidad_peso(),$this->container->get_peso());
+        if($this->container->get_nota())
+            $oCodeco->setGoodsDescription($this->container->get_nota()); /*texto libre*/
+            
         $oCodeco = $oCodeco->addContainer($oContainer);
         
         $oCodeco = $oCodeco->compose(9, 36);

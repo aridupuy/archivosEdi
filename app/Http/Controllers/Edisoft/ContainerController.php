@@ -14,8 +14,8 @@ namespace App\Http\Controllers\Edisoft;
  */
 class ContainerController extends \App\Http\Controllers\Controller{
     //put your code here
-    public function obtener(){
-        $rs = \Container::select_containers();
+    public function obtener_entradas(){
+        $rs = \Container::select_containers("entrada");
         $respuesta = [];
         $i=0;
         foreach ($rs as $row){
@@ -45,6 +45,51 @@ class ContainerController extends \App\Http\Controllers\Controller{
             $respuesta[$i]["usuario"]=$usuario->get_nombre_usuario();
             $respuesta[$i]["authstat"]=$authstat->get_authstat();
             $respuesta[$i]["ie"]=$ie->get_ie();
+            $respuesta[$i]["peso"]=$container->get_peso();
+            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
+            unset($respuesta[$i]["id_usuario"]);
+            unset($respuesta[$i]["id_tipoingreso"]);
+            unset($respuesta[$i]["id_tipocontainer"]);
+            unset($respuesta[$i]["id_authstat"]);
+            unset($respuesta[$i]["id_cliente"]);
+            unset($respuesta[$i]["id_ie"]);
+            $i++;
+        }
+        return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados ".$rs->rowCount(), $respuesta);
+    }
+    public function obtener_salidas(){
+        $rs = \Container::select_containers("salida");
+        $respuesta = [];
+        $i=0;
+        foreach ($rs as $row){
+            $container = new \Container($row);
+            $methods=get_class_methods($container);
+            foreach ($methods as $method){
+//                var_dump($method);
+                if($method!=="get_id" and strstr($method, "get_")){
+                    $respuesta[$i][substr($method, 4, strlen($method)-4)]=$container->$method();
+                }
+                
+            }
+            $tipocontainer = new \Tipocontainer($row);
+//            $tipocontainer->get($container->get_id_tipocontainer());
+            $tipoingreso=new \Tipo_ingreso($row);
+//            $tipoingreso->get($container->get_id_tipoingreso());
+            $cliente=new \Cliente($row);
+//            $cliente->get($posicion->get_id_cliente());
+            $usuario=new \Usuario($row);
+//            $usuario->get($posicion->get_id_usuario());
+            $authstat=new \Authstat($row);
+            $ie=new \Ie($row);
+//            $authstat->get($posicion->get_id_authstat());
+            $respuesta[$i]["tipocontainer"]=$tipocontainer->get_tipo_container();
+            $respuesta[$i]["tipoingreso"]=$tipoingreso->get_id_tipo_ingreso();
+            $respuesta[$i]["cliente"]=$cliente->get_nombre_completo();
+            $respuesta[$i]["usuario"]=$usuario->get_nombre_usuario();
+            $respuesta[$i]["authstat"]=$authstat->get_authstat();
+            $respuesta[$i]["ie"]=$ie->get_ie();
+            $respuesta[$i]["peso"]=$container->get_peso();
+            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
             unset($respuesta[$i]["id_tipocontainer"]);
@@ -120,7 +165,9 @@ class ContainerController extends \App\Http\Controllers\Controller{
                 "destino",
                 "id_ie",
                 "rff_ep",
-                "id_tipoingreso"
+                "id_tipoingreso",
+                "peso",
+                "unidad_peso"
         ];
         foreach ($vars as $valor){
             if(!array_key_exists($valor, $params)){
@@ -176,7 +223,8 @@ class ContainerController extends \App\Http\Controllers\Controller{
             $posicion->set_id_usuario(self::$USUARIO->get_id());
             $posicion->set_agente_aduana(self::$variables["agente_aduana"]);
             $posicion->set_maniobra("SALIDA");
-            if($posicion->set()){
+            $container->set_id_authstat(\Authstat::SALIDA);
+            if($posicion->set() and $container->set()){
                 $id_container= $container->get_id_container();
                 $id_posicion= $posicion->get_id_posicion();
                 $response["msg"]="Container movido correctamente a salida.";

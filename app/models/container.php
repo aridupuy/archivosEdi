@@ -33,6 +33,10 @@ class Container extends Model {
     private $rff_ep;
     private $id_tipoingreso;
     private $tiene_edi;
+    private $peso;
+    private $unidad_peso;
+    private $fecha_recepcion;
+    private $hora_recepcion;
 
     public function get_id_container() {
         return $this->id_container;
@@ -204,8 +208,48 @@ class Container extends Model {
         $this->tiene_edi = $tiene_edi;
         return $this;
     }
+    
+    public function get_peso() {
+        return $this->peso;
+    }
 
-    public static function select_containers() {
+    public function get_unidad_peso() {
+        return $this->unidad_peso;
+    }
+
+    public function set_peso($peso) {
+        $this->peso = $peso;
+        return $this;
+    }
+
+    public function set_unidad_peso($unidad_peso) {
+        $this->unidad_peso = $unidad_peso;
+        return $this;
+    }
+    
+    public function get_fecha_recepcion() {
+        return $this->fecha_recepcion;
+    }
+
+    public function get_hora_recepcion() {
+        return $this->hora_recepcion;
+    }
+
+    public function set_fecha_recepcion($fecha_recepcion) {
+        $this->fecha_recepcion = $fecha_recepcion;
+        return $this;
+    }
+
+    public function set_hora_recepcion($hora_recepcion) {
+        $this->hora_recepcion = $hora_recepcion;
+        return $this;
+    }
+
+        
+    public static function select_containers($tipo) {
+        $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA];
+        $tipo = $array[$tipo];
+        
         $sql = "select * from ed_container A "
                 . "left join ho_authstat B on A.id_authstat=B.id_authstat "
                 . "left join ho_tipo_ingreso C on A.id_tipoingreso = C.id_tipo_ingreso "
@@ -213,8 +257,9 @@ class Container extends Model {
                 . "left join ed_cliente E on A.id_cliente= E.id_cliente "
                 . "left join ed_usuario F on A.id_usuario= F.id_usuario "
                 . "left join ho_ie G on A.id_ie= G.id_ie "
-                . "where A.id_authstat in (?,?,?,?)";
-        $variables = [Authstat::ACTIVO, Authstat::ENTRADA, Authstat::SALIDA, Authstat::INACTIVO];
+                . "where A.id_authstat in (?)";
+//        $variables = [Authstat::ACTIVO, Authstat::ENTRADA, Authstat::SALIDA, Authstat::INACTIVO];
+        $variables = [$tipo];
         return self::execute_select($sql, $variables);
     }
 
