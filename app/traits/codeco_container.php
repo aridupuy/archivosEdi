@@ -101,7 +101,6 @@ class Codeco_container extends \EDI\Generator\Codeco\Container{
 //                $composed[] = $dest;    
 //            }
         }
-        var_dump($this->weight);
         if ($this->weight !== null) {
             $composed[] = $this->weight;
         }

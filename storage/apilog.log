@@ -1645,3 +1645,90 @@ PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/g
 PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
 
 
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/salida
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/log/resetlog
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/log/resetlog
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/log/resetlog
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/log/resetlog
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/log/resetlog
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/log/resetlog
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/obtener
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/obtener
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/tipocontainer/obtener
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/salida
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/salida
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/salida
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/salida
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+

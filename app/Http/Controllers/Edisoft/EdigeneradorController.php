@@ -32,9 +32,11 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
             $container->set_hora_recepcion(self::$variables["hora_recepcion"]);
         if(isset(self::$variables["comentario"]))
             $container->set_nota(self::$variables["comentario"]);
-        
-        $obj = \Edi::factory($container, self::$variables);
-//        var_dump($obj);
+        try{
+            $obj = \Edi::factory($container, self::$variables);
+        } catch (\Exception $e){
+            return $this->retornar(false, $e->getMessage() . $container->get_id());
+        }
         if ($obj) {
             if (($url=$obj->generar_edi())) {
                 if ($container->set()) {
@@ -44,7 +46,7 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
             }
             return $this->retornar(false, "Error al generar archivo.");
         }
-
+        
         return $this->retornar(false, "El contenedor ya tiene edi generado.");
     }
 

@@ -22,7 +22,8 @@ class Codeco_entrada extends \Codeco{
         if($archivo){
             $this->container->set_tiene_edi_entrada(true);
         }
-        return $archivo;
+        if($this->container->set())
+            return $archivo;
     }
     public function nombrar_archivo(){
         

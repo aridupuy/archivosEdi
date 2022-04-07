@@ -19,9 +19,12 @@ class Codeco_salida extends \Codeco{
     //put your code here
     public function generar_edi() {
         $archivo = parent::generar_edi();
+//        var_dump($archivo);
         if($archivo){
             $this->container->set_tiene_edi_salida(true);
         }
+        if($this->container->set())
+            return $archivo;
     }
     public function nombrar_archivo(){
         

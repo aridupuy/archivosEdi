@@ -52,7 +52,7 @@ abstract class Edi {
                 }
             }
             else{
-                return null;
+                throw new Exception("El contenedor ya tiene todos sus edi generado.");
             }
             
 //        }
