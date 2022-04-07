@@ -144,11 +144,11 @@ class Usuario extends Model{
         return '';
     }
 
-    public static function select_cel_mail($cel = "", $mail = "") {
-        $sql = "select * from ed_usuario where celular= ? or email= ?";
-        $variables = array($cel, $mail);
-        return self::execute_select($sql, $variables);
-    }
+//    public static function select_cel_mail($cel = "", $mail = "") {
+//        $sql = "select * from ed_usuario where celular= ? or email= ?";
+//        $variables = array($cel, $mail);
+//        return self::execute_select($sql, $variables);
+//    }
 
     public function login($usuario, $password) {
 
