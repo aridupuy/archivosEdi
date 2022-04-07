@@ -22,7 +22,7 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
     //put your code here
 
 
-    public function generar_archivo() {
+    public function generar_archivo_post() {
         $container = new \Container();
         $container->get(self::$variables["id"]);
         $container->get(self::$variables["id"]);
