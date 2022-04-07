@@ -46,7 +46,7 @@ class ContainerController extends \App\Http\Controllers\Controller{
             $respuesta[$i]["authstat"]=$authstat->get_authstat();
             $respuesta[$i]["ie"]=$ie->get_ie();
             $respuesta[$i]["peso"]=$container->get_peso();
-            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
+//            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
             unset($respuesta[$i]["id_tipocontainer"]);
@@ -89,7 +89,7 @@ class ContainerController extends \App\Http\Controllers\Controller{
             $respuesta[$i]["authstat"]=$authstat->get_authstat();
             $respuesta[$i]["ie"]=$ie->get_ie();
             $respuesta[$i]["peso"]=$container->get_peso();
-            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
+//            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
             unset($respuesta[$i]["id_tipocontainer"]);
@@ -102,7 +102,7 @@ class ContainerController extends \App\Http\Controllers\Controller{
     }
     public function entrada_post(){
         if($this->validar_entrada(self::$variables)){
-            throw new Exception("Error en los parametros");
+            throw new \Exception("Error en los parametros");
         }
         \Model::StartTrans();
         $container= new \Container();
@@ -183,13 +183,13 @@ class ContainerController extends \App\Http\Controllers\Controller{
         $container = new \Container();
         $container ->get($id);
         if ($container->get_id_cliente() == null) {
-            throw new Exception("No existe el container ");
+            throw new \Exception("No existe el container ");
         }
         if (in_array($container->get_id_authstat(),[ \Authstat::ACTIVO, \Authstat::ENTRADA])) {
             $container->set_id_authstat(\Authstat::INACTIVO);
         }
         else{
-            throw new Exception("No se puede modificar este container");
+            throw new \Exception("No se puede modificar este container");
         }
         if ($container->set()) {
             $id_container = $container->get_id_container();
@@ -238,7 +238,7 @@ class ContainerController extends \App\Http\Controllers\Controller{
             
         }
         else{
-            throw new Exception("No se puede mover este container");
+            throw new \Exception("No se puede mover este container");
         }
 
     }
