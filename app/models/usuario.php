@@ -19,9 +19,9 @@ class Usuario extends Model{
     private $id_authstat;
     private $nombre_usuario;
     private $password;
-    private $email;
-    private $cod_area;
-    private $celular;
+//    private $email;
+//    private $cod_area;
+//    private $celular;
     private $last_login;
     
     public function activar_hash(){
@@ -50,17 +50,17 @@ class Usuario extends Model{
         return $this->password;
     }
 
-    public function get_email() {
-        return $this->email;
-    }
-
-    public function get_cod_area() {
-        return $this->cod_area;
-    }
-
-    public function get_celular() {
-        return $this->celular;
-    }
+//    public function get_email() {
+//        return $this->email;
+//    }
+//
+//    public function get_cod_area() {
+//        return $this->cod_area;
+//    }
+//
+//    public function get_celular() {
+//        return $this->celular;
+//    }
 
     public function set_id_usuario($id_usuario) {
         $this->id_usuario = $id_usuario;
@@ -87,21 +87,21 @@ class Usuario extends Model{
         return $this;
     }
 
-    public function set_email($email) {
-        $this->email = $email;
-        return $this;
-    }
-
-    public function set_cod_area($cod_area) {
-        $this->cod_area = $cod_area;
-        return $this;
-    }
-
-    public function set_celular($celular) {
-        $this->celular = $celular;
-        return $this;
-    }
-    
+//    public function set_email($email) {
+//        $this->email = $email;
+//        return $this;
+//    }
+//
+//    public function set_cod_area($cod_area) {
+//        $this->cod_area = $cod_area;
+//        return $this;
+//    }
+//
+//    public function set_celular($celular) {
+//        $this->celular = $celular;
+//        return $this;
+//    }
+//    
     public function get_last_login() {
         return $this->last_login;
     }
