@@ -69,9 +69,9 @@ class AuthController extends Log_in_app {
         $usu["nombre_completo"]=$usuario->get_nombre_completo();
         $usu["nombre_usuario"]=$usuario->get_nombre_usuario();
         $usu["id_usuario"]=$usuario->get_id_usuario();
-        $usu["email"]=$usuario->get_email();
-        $usu["celular"]=$usuario->get_celular();
-        $usu["cod_area"]=$usuario->get_cod_area();
+//        $usu["email"]=$usuario->get_email();
+//        $usu["celular"]=$usuario->get_celular();
+//        $usu["cod_area"]=$usuario->get_cod_area();
         $response = json_encode(["check" => boolval($lectura),"cuenta"=> $usu]);
         return response($response)->header("Access-Control-Allow-Origin", "*")
                         //Métodos que a los que se da acceso

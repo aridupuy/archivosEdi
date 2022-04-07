@@ -1597,3 +1597,51 @@ PID: 71572 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/tipocontainer/
 PID: 71573 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/tipoingreso/obtener
 
 
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66883 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+
+PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
+
+

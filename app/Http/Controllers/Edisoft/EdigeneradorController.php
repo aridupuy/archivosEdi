@@ -37,7 +37,6 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
 //        var_dump($obj);
         if ($obj) {
             if (($url=$obj->generar_edi())) {
-                $container->set_tiene_edi(true);
                 if ($container->set()) {
                     return $this->retornar(true, "Archivo generado correctamente.",["url"=>$url]);
                 }
@@ -46,7 +45,7 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
             return $this->retornar(false, "Error al generar archivo.");
         }
 
-        return $this->retornar(false, "El contenedor ya tiene edi actualizado.");
+        return $this->retornar(false, "El contenedor ya tiene edi generado.");
     }
 
 }

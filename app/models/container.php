@@ -32,9 +32,9 @@ class Container extends Model {
     private $id_ie;
     private $rff_ep;
     private $id_tipoingreso;
-    private $tiene_edi;
+    private $tiene_edi_entrada;
+    private $tiene_edi_salida;
     private $peso;
-    private $unidad_peso;
     private $fecha_recepcion;
     private $hora_recepcion;
 
@@ -200,32 +200,35 @@ class Container extends Model {
         return $this;
     }
 
-    public function get_tiene_edi() {
-        return $this->tiene_edi;
+    public function get_tiene_edi_entrada() {
+        return $this->tiene_edi_entrada;
     }
 
-    public function set_tiene_edi($tiene_edi) {
-        $this->tiene_edi = $tiene_edi;
+    public function set_tiene_edi_entrada($tiene_edi) {
+        $this->tiene_edi_entrada= $tiene_edi;
         return $this;
     }
     
+    public function get_tiene_edi_salida() {
+        return $this->tiene_edi_salida;
+    }
+
+    public function set_tiene_edi_salida($tiene_edi_salida) {
+        $this->tiene_edi_salida = $tiene_edi_salida;
+        return $this;
+    }
+
     public function get_peso() {
         return $this->peso;
     }
 
-    public function get_unidad_peso() {
-        return $this->unidad_peso;
-    }
+   
 
     public function set_peso($peso) {
         $this->peso = $peso;
         return $this;
     }
 
-    public function set_unidad_peso($unidad_peso) {
-        $this->unidad_peso = $unidad_peso;
-        return $this;
-    }
     
     public function get_fecha_recepcion() {
         return $this->fecha_recepcion;

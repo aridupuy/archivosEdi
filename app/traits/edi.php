@@ -19,6 +19,7 @@ abstract class Edi {
     protected function __construct(\Container $container,$variables) {
         $this->container = $container;
         $this->variables=$variables;
+        
     }
 
     public function get_posiciones(): \Array_posiciones {
@@ -28,7 +29,11 @@ abstract class Edi {
     //put your code here
     public static function factory(\Container $container,$variables) {
 //        var_dump($container->get_id_authstat());
-        if (!$container->get_tiene_edi()) {
+        self::$posiciones = new \Array_posiciones();
+        $rs = Posiciones::select(["id_container"=>$container->get_id()]);
+        self::agregar_posiciones($container);
+//          
+        if (!$container->get_tiene_edi_entrada()) {
 
             if ($container->get_id_authstat() == Authstat::ENTRADA) {
                 return new Codeco_entrada($container,$variables);
@@ -37,15 +42,19 @@ abstract class Edi {
 //        } else {
 //            self::$posiciones = new \Array_posiciones();
 //            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::ACTIVO]);
-////            $rs = Posiciones::select(["id_container"=>$container->get_id(),"id_authstat"=> Authstat::ENTRADA]);
-//            self::agregar_posiciones($container);
-//            if ($rs->rowCount() > 0) {
+//              if ($rs->rowCount() > 0) {
 //                return new Codeco($container,$variables);
 //            }
-            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::SALIDA]);
-            if ($rs->rowCount() > 0) {
-                return new \Codeco_salida($container,$variables);
+            elseif (!$container->get_tiene_edi_salida()) {
+                $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::SALIDA]);
+                if ($rs->rowCount() > 0) {
+                    return new \Codeco_salida($container,$variables);
+                }
             }
+            else{
+                return null;
+            }
+            
 //        }
     }
 
@@ -54,7 +63,7 @@ abstract class Edi {
     }
 
     public abstract function generar_edi();
-
+    
     private static function agregar_posiciones($container) {
         $rs = \Posiciones::select_order(["id_container" => $container->get_id()], "id_posicion", "asc");
         foreach ($rs as $row) {

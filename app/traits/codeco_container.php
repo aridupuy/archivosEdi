@@ -20,6 +20,7 @@ class Codeco_container extends \EDI\Generator\Codeco\Container{
     protected $loc;
     protected $seal ;
     protected $modeOfTransport;
+    protected $weight;
     
     
     public function setLocation($locode) {
@@ -69,6 +70,11 @@ class Codeco_container extends \EDI\Generator\Codeco\Container{
 
         return $this;
     }
+    public function setWeight($weight,$type="G") {
+        $this->weight = ['MEA', 'WT', $type, ['KGM', $weight]];
+        return $this;
+
+    }
     public function compose()
     {
 //        var_dump($this->cntr);
@@ -95,6 +101,7 @@ class Codeco_container extends \EDI\Generator\Codeco\Container{
 //                $composed[] = $dest;    
 //            }
         }
+        var_dump($this->weight);
         if ($this->weight !== null) {
             $composed[] = $this->weight;
         }
