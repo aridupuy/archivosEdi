@@ -60,21 +60,21 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     public function crear_usuario_post() {
         /* No me gusta mezclar controladores ya que son dos capaz iguales, seria mejor pasar la logica a un trait */
 //        var_dump(self::$variables);
-        $params["email"] = self::$variables["email"];
+//        $params["email"] = self::$variables["email"];
         $params["nombre_usuario"] = self::$variables["nombre_usuario"];
         $params["nombre_completo"] = self::$variables["nombre_completo"];
-        $params["celular"] = self::$variables["telefono"];
-        $params["cod_area"] = self::$variables["cod_area"];
+//        $params["celular"] = self::$variables["telefono"];
+//        $params["cod_area"] = self::$variables["cod_area"];
         $params["password"]=self::$variables["password"];
-        $rs_usuario = \Usuario::select_busqueda_cuenta($params["email"], $params["nombre_usuario"], self::$USUARIO->get_id());
+        $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"], self::$USUARIO->get_id());
         if ($rs_usuario and $rs_usuario->fetchRow() > 0) {
             throw new \Exception("Ya existe este usuario");
         }
         else{
             $usuario = new \Usuario();
-            $usuario->set_celular($params["celular"]);
-            $usuario->set_cod_area($params["cod_area"]);
-            $usuario->set_email($params["email"]);
+//            $usuario->set_celular($params["celular"]);
+//            $usuario->set_cod_area($params["cod_area"]);
+//            $usuario->set_email($params["email"]);
             $usuario->set_nombre_completo($params["nombre_completo"]);
             $usuario->set_nombre_usuario($params["nombre_usuario"]);
             $usuario->set_password($params["password"]);

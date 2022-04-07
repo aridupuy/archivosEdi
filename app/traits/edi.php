@@ -31,21 +31,22 @@ abstract class Edi {
         if (!$container->get_tiene_edi()) {
 
             if ($container->get_id_authstat() == Authstat::ENTRADA) {
-                return new Coparn($container,$variables);
-            }
-        } else {
-            self::$posiciones = new \Array_posiciones();
-            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::ACTIVO]);
-//            $rs = Posiciones::select(["id_container"=>$container->get_id(),"id_authstat"=> Authstat::ENTRADA]);
-            self::agregar_posiciones($container);
-            if ($rs->rowCount() > 0) {
-                return new Codeco($container,$variables);
-            }
-            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::SALIDA]);
-            if ($rs->rowCount() > 0) {
-                return new \Codeco($container,$variables);
+                return new Codeco_entrada($container,$variables);
             }
         }
+//        } else {
+//            self::$posiciones = new \Array_posiciones();
+//            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::ACTIVO]);
+////            $rs = Posiciones::select(["id_container"=>$container->get_id(),"id_authstat"=> Authstat::ENTRADA]);
+//            self::agregar_posiciones($container);
+//            if ($rs->rowCount() > 0) {
+//                return new Codeco($container,$variables);
+//            }
+            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::SALIDA]);
+            if ($rs->rowCount() > 0) {
+                return new \Codeco_salida($container,$variables);
+            }
+//        }
     }
 
     public function __destruct() {
@@ -67,8 +68,7 @@ abstract class Edi {
 //        developer_log($content);
         $gestor_de_disco = new \Gestor_de_disco();
         $gestor_de_disco->crear_carpeta(PATH_PUBLIC_FOLDER . "Export/");
-        $fecha = new \DateTime("now");
-        $filename = get_called_class() . "_" . $this->variables["id"] . "_archivo_" . $fecha->format("Ymdhis") . ".edi";
+        $filename = $this->nombrar_archivo();
 //        developer_log($filename);
         $filas= explode("\n", $content);
         $header= $filas[0];
@@ -98,12 +98,31 @@ abstract class Edi {
             }
         }
         if(!$error){
-            Model::CompleteTrans();
-            return "Export/".$filename;
+            if($this->enviar_ftp("Export/".$filename)){
+                Model::CompleteTrans();
+                return "Export/".$filename;
+            }
         }
         Model::FailTrans();
         Model::CompleteTrans();
         return false;
     }
-
+    public function enviar_ftp($file){
+        return true;
+        /*dejo esto preparado*/
+        $conn = Safe\ftp_connect($host);
+        if(!$conn){
+            developer_log("No pudimos conectarnos al ftp");
+        }
+        if(ftp_login($conn, $username, $password)){
+            if(ftp_put($conn, $remote_file, PATH_PUBLIC_FOLDER.$file)){
+                return true;
+            }
+            developer_log("No pudimos cargar el archivo al ftp");
+        }
+        developer_log("No pudimos loguearnos al ftp");
+        return false;
+    }
+    
+    abstract function nombrar_archivo();
 }

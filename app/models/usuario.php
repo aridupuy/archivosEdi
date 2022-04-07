@@ -196,9 +196,8 @@ class Usuario extends Model{
         return '';
     }
 
-    public static function select_busqueda_cuenta($email,$usuario,$id_usuario){
-        $sql = "select * from ed_usuario where ( email = ? OR nombre_usuario=?  ) and id_usuario!=?";
-        $variables[]=$email;
+    public static function select_busqueda_cuenta($usuario,$id_usuario){
+        $sql = "select * from ed_usuario where (nombre_usuario=?  ) and id_usuario!=?";
         $variables[]=$usuario;
         $variables[]=$id_usuario;
         

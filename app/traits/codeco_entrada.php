@@ -13,7 +13,7 @@
  * Movimiento de contenedores
  * 
  */
-class Codeco extends \Edi{
+class Codeco_entrada extends \Edi{
 
     
     //put your code here
@@ -61,6 +61,14 @@ class Codeco extends \Edi{
         $aComposed = $oInterchange->addMessage($oCodeco)->getComposed();
         
         return $this->generar_archivo((new \_encoder($aComposed, false))->get());
+    }
+    public function nombrar_archivo(){
+        
+//        $filename = get_called_class() . "_" . $this->variables["id"] . "_archivo_" . $fecha->format("Ymdhis") . ".edi";
+        $cliente = new Cliente();
+        $cliente->get($this->container->get_id_cliente());
+        $fecha = new DateTime("now");
+        return $cliente->get_nombre_completo()."GATE_IN".$this->variables["id"]."_".$fecha->format("Ymdhis").".edi";
     }
 
 }
