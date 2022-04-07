@@ -27,7 +27,6 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $linea["nombre"] = $usuario->get_nombre_completo();
             $linea["id"] = $usuario->get_id();
             $linea["username"] = $usuario->get_nombre_usuario();
-            $linea["email"] = $usuario->get_email();
             $linea["activo"] = $usuario->get_id_authstat();
             
             if($usuario->get_last_login()==null){
@@ -232,7 +231,6 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $mensaje->appendChild($view->createTextNode("Se efectuaron cambios en tus permisos para el usuario: .".$usser->get_nombre_usuario()));
             $usser = new \Usuario();
             $usser ->get($cuenta_usuario->get_id_usuario());
-            \Gestor_de_correo::enviar(\Gestor_de_correo::MAIL_COBRODIGITAL_ATENCION_AL_CLIENTE, $usser ->get_email(), "Cambios en tu usuario", $view->saveHTML());
             return $this->retornar(self::RESPUESTA_CORRECTA, "Permisos seteados", []);
         }
         return $this->retornar(self::RESPUESTA_INCORRECTA, "No se pudo setear el permiso", []);
