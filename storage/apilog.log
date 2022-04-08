@@ -1783,3 +1783,24 @@ PID: 123956 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/ent
 PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
 
 
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
+
+
+PID: 132746 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/obtener
+
+
+PID: 123960 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/obtener
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
+
+
+PID: 132746 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
+
+
+PID: 123960 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
+
+

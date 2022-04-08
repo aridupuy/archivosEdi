@@ -46,6 +46,9 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     public function cambiar_estado_post() {
         $usuario = new \Usuario();
         $usuario->get(self::$variables["id"]);
+        if($usuario->getId()==null){
+            throw new \Exception("no se puede identificar el usuario");
+        }
         if ($usuario->get_id_authstat() == \Authstat::ACTIVO) {
             $usuario->set_id_authstat(\Authstat::INACTIVO);
         } elseif ($usuario->get_id_authstat() == null OR $usuario->get_id_authstat() == \Authstat::INACTIVO) {
