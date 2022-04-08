@@ -67,6 +67,7 @@ class AuthController extends Log_in_app {
 //            return response("No autorizado");
             $response = json_encode(["check" => false,"log"=> "No autorizado"]);
             return response($response);
+            
         }
         $usu["nombre_completo"]=$usuario->get_nombre_completo();
         $usu["nombre_usuario"]=$usuario->get_nombre_usuario();
