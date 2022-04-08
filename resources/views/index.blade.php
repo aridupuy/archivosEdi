@@ -1,3 +1,1 @@
-ACA!
-<?php
-//include public_path().'/dist/index.html';
+<h3>No autorizado<h3>
