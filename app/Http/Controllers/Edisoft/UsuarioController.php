@@ -47,7 +47,10 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         $usuario = new \Usuario();
         $usuario->get(self::$variables["id"]);
         if($usuario->getId()==null){
-            throw new \Exception("no se puede identificar el usuario");
+            throw new \Exception("No se puede identificar el usuario");
+        }
+        if($usuario->get_id()==self::$USUARIO->get_id()){
+            throw new \Exception("No se puede desactivar el usuario logueado.");
         }
         if ($usuario->get_id_authstat() == \Authstat::ACTIVO) {
             $usuario->set_id_authstat(\Authstat::INACTIVO);

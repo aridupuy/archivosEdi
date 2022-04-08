@@ -1804,3 +1804,9 @@ PID: 123960 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambi
 PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
 
 
+PID: 132746 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
+
+
+PID: 123960 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
+
+

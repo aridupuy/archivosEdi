@@ -63,7 +63,7 @@ class AuthController extends Log_in_app {
         }
         $usuario = new \Usuario();
         $usuario->get($lectura->claims->get("roles")["usuario"]);
-        if($usuario->getId()==null){
+        if($usuario->getId()==null or $usuario->getId()!= \Authstat::ACTIVO){
             return response("No autorizado");
         }
         $usu["nombre_completo"]=$usuario->get_nombre_completo();
