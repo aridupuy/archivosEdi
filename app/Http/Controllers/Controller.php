@@ -94,7 +94,18 @@ abstract class Controller extends BaseController
             self::$variables=$parametros;
         else
             self::$variables=array_merge(self::$variables,$parametros);
+        
+        self::validar_datos();
 //            developer_log("ACA------".\GuzzleHttp\json_encode(self::$variables));
+    }
+    public static function validar_datos(){
+        $variables =[];
+        foreach (self::$variables as $key=>$vars){
+            if($vars!="" and $vars!=null){
+                $variables[$key]=$vars;
+            }
+        }
+        self::$variables=$variables;
     }
     public static function set_cuenta($token){
 //        developer_log("TOKEN:".$token);

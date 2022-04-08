@@ -14,6 +14,7 @@ namespace App\Http\Controllers\Edisoft;
  */
 class UsuarioController extends \App\Http\Controllers\Controller {
     //put your code here
+    static $campos_obligatorios=["nombre_usuario","nombre_completo","password"];
     
     //put your code here
     public function obtener() {
@@ -56,14 +57,18 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         return $this->retornar(self::RESPUESTA_INCORRECTA, "Error al cambiar estado", ["resultado" => "not-ok"]);
     }
 
+    public function validar_campos(){
+        $vars = array_keys(self::$variables);
+        $diff = array_diff(self::$campos_obligatorios,$vars);
+        if(count($diff))
+            throw new \Exception("Faltan parametros.");
+    }
     public function crear_usuario_post() {
         /* No me gusta mezclar controladores ya que son dos capaz iguales, seria mejor pasar la logica a un trait */
-//        var_dump(self::$variables);
-//        $params["email"] = self::$variables["email"];
+        $this->validar_campos();
         $params["nombre_usuario"] = self::$variables["nombre_usuario"];
         $params["nombre_completo"] = self::$variables["nombre_completo"];
-//        $params["celular"] = self::$variables["telefono"];
-//        $params["cod_area"] = self::$variables["cod_area"];
+
         $params["password"]=self::$variables["password"];
         $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"], self::$USUARIO->get_id());
         if ($rs_usuario and $rs_usuario->fetchRow() > 0) {
@@ -71,9 +76,6 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         }
         else{
             $usuario = new \Usuario();
-//            $usuario->set_celular($params["celular"]);
-//            $usuario->set_cod_area($params["cod_area"]);
-//            $usuario->set_email($params["email"]);
             $usuario->set_nombre_completo($params["nombre_completo"]);
             $usuario->set_nombre_usuario($params["nombre_usuario"]);
             $usuario->set_password($params["password"]);

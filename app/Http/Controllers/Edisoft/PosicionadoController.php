@@ -14,6 +14,13 @@ namespace App\Http\Controllers\Edisoft;
  */
 class PosicionadoController extends \App\Http\Controllers\Controller {
 
+    static $campos_obligatorios=["id","agente_aduana","maniobra"];
+    public function validar_campos(){
+        $vars = array_keys(self::$variables);
+        $diff = array_diff(self::$campos_obligatorios,$vars);
+        if(count($diff))
+            throw new \Exception("Faltan parametros.");
+    }
     //put your code here
     public function obtener() {
         $id = self::$variables["id"];
@@ -64,6 +71,7 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
     }
 
     public function posicionar_post() {
+        $this->validar_campos();
         if (!isset(self::$variables["id"])) {
             throw new \Exception("No hay id");
         }

@@ -20,7 +20,14 @@ use EDI\Generator\Interchange;
 class EdigeneradorController extends \App\Http\Controllers\Controller {
 
     //put your code here
-
+    static $campos_obligatorios=array("id","fecha_recepcion","hora_recepcion");
+    public function validar_campos(){
+        $vars = array_keys(self::$variables);
+        $diff = array_diff(self::$campos_obligatorios,$vars);
+        if(count($diff))
+            throw new \Exception("Faltan parametros.");
+    }
+    
 
     public function generar_archivo_post() {
         $container = new \Container();

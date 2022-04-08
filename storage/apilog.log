@@ -1732,3 +1732,54 @@ PID: 66884 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obte
 PID: 66880 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
 
 
+PID: 123956 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123959 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123956 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123959 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123956 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123959 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123956 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/crear_usuario
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 123959 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 123956 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 123959 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 123956 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+
+PID: 123957 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/entrada
+
+

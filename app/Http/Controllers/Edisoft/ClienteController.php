@@ -15,7 +15,14 @@ namespace App\Http\Controllers\Edisoft;
 class ClienteController extends \App\Http\Controllers\Controller {
 
     //put your code here
-
+    static $campos_obligatorios=array("documento","email","nombre_completo","telefono");
+    public function validar_campos(){
+        $vars = array_keys(self::$variables);
+        $diff = array_diff(self::$campos_obligatorios,$vars);
+        if(count($diff))
+            throw new \Exception("Faltan parametros.");
+    }
+    
     public function obtener() {
         $rs = \Cliente::select(["id_authstat"=> \Authstat::ACTIVO]);
         $respuesta = [];
@@ -30,20 +37,10 @@ class ClienteController extends \App\Http\Controllers\Controller {
         }
         return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados ".$rs->rowCount(), $respuesta);
     }
-    private function validar_entrada($params) {
-        $valores = array("documento","email","nombre_completo","telefono");
-        foreach ($valores as $valor){
-            if(!array_key_exists($valor, $params)){
-                return false;
-            }
-        }
-        return true;
-    }
+    
     public function crear_post() {
         
-        if(!$this->validar_entrada(self::$variables)){
-            throw new Exception("Error en los parametros");
-        }
+        $this->validar_campos();
         $rs_cliente = \Cliente::select_busqueda_cliente(self::$variables["email"], self::$variables["documento"]);
         if ($rs_cliente and $rs_cliente->fetchRow() > 0) {
             throw new \Exception("Ya existe este usuario");

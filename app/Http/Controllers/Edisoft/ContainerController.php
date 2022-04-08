@@ -14,6 +14,29 @@ namespace App\Http\Controllers\Edisoft;
  */
 class ContainerController extends \App\Http\Controllers\Controller{
     //put your code here
+    static $campos_obligatorios=array(
+        "cod_contenedor",
+        "eir",
+        "id_tipocontainer",
+        "id_cliente",
+        "bl",
+        "booking",
+        "buque",
+        "viaje",
+        "sello",
+        "destino",
+        "id_ie",
+        "rff_ep",
+        "id_tipoingreso",
+        "peso",
+    );
+    public function validar_campos(){
+        $vars = array_keys(self::$variables);
+        $diff = array_diff(self::$campos_obligatorios,$vars);
+        if(count($diff))
+            throw new \Exception("Faltan parametros.");
+    }
+    
     public function obtener_entradas(){
         $rs = \Container::select_containers("entrada");
         $respuesta = [];
@@ -101,9 +124,8 @@ class ContainerController extends \App\Http\Controllers\Controller{
         return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados ".$rs->rowCount(), $respuesta);
     }
     public function entrada_post(){
-        if($this->validar_entrada(self::$variables)){
-            throw new \Exception("Error en los parametros");
-        }
+        $this->validar_campos();
+            
         \Model::StartTrans();
         $container= new \Container();
         foreach (self::$variables as $key=>$val){
@@ -202,7 +224,7 @@ class ContainerController extends \App\Http\Controllers\Controller{
         return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_authstat" => $container->get_id_authstat()]);
     }
     public function salida_post(){
-        
+        $this->validar_campos();
         if(!isset(self::$variables["id"])){
             throw new \Exception("No hay id");
         }
