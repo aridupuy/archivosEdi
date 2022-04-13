@@ -14,17 +14,67 @@ namespace App\Http\Controllers\Edisoft;
  */
 class PosicionadoController extends \App\Http\Controllers\Controller {
 
-    static $campos_obligatorios=["id","agente_aduana","maniobra"];
-    public function validar_campos(){
+    static $campos_obligatorios = ["id", "agente_aduana", "maniobra"];
+    static $filtrado =["fecha_desde","fecha_hasta", "cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino"];
+    public function validar_campos() {
         $vars = array_keys(self::$variables);
-        $diff = array_diff(self::$campos_obligatorios,$vars);
-        if(count($diff))
+        $diff = array_diff(self::$campos_obligatorios, $vars);
+        if (count($diff))
             throw new \Exception("Faltan parametros.");
     }
+
     //put your code here
     public function obtener() {
+        $respuesta = $this->get_posiciones();
+        return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados " . count($respuesta), $respuesta);
+    }
+
+    public function obtener_post(){
+        return $this->obtener();
+    }
+    
+    public function posicionar_post() {
+        $this->validar_campos();
+        if (!isset(self::$variables["id"])) {
+            throw new \Exception("No hay id");
+        }
+        $container = new \Container();
+        $container->get(self::$variables["id"]);
+        $rs = \Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => \Authstat::SALIDA]);
+        if ($rs->rowCount() > 0) {
+            throw new \Exception("El container ya fue marcado como salida.");
+        }
+
+        if (in_array($container->get_id_authstat(), [\Authstat::ENTRADA, \Authstat::ACTIVO])) {
+            $posicionado = new \Posiciones();
+            $posicionado->set_agente_aduana(self::$variables["agente_aduana"]);
+            $posicionado->set_bl($container->get_bl());
+            $posicionado->set_id_authstat(\Authstat::ACTIVO);
+            $posicionado->set_maniobra(self::$variables["maniobra"]);
+            $posicionado->set_id_cliente($container->get_id_cliente());
+            $posicionado->set_id_container($container->get_id_container());
+            $posicionado->set_id_tipoingreso($container->get_id_tipoingreso());
+            $posicionado->set_id_usuario(self::$USUARIO->get_id_usuario());
+
+            if ($posicionado->set()) {
+                $id_container = $container->get_id_container();
+                $id_posicion = $posicionado->get_id_posicion();
+                $response["msg"] = "Maniobra " . $posicionado->get_maniobra() . " correctamente";
+                $resp = self::RESPUESTA_CORRECTA;
+            } else {
+                $response["msg"] = "Error al ingresar la posicion " . $posicionado->get_maniobra();
+                $resp = self::RESPUESTA_INCORRECTA;
+            }
+            return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_container" => $id_container, "id_posicion" => $id_posicion]);
+        } else {
+            throw new Exception("No se puede mover este container");
+        }
+    }
+
+    private function get_posiciones() {
+        $filtros= $this->set_filtros(); 
         $id = self::$variables["id"];
-        $rs = \Posiciones::select_posiciones(["id_container" => $id]);
+        $rs = \Posiciones::select_posiciones($id,$filtros);
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
@@ -67,45 +117,25 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             unset($respuesta[$i]["id_cliente"]);
             $i++;
         }
-        return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados " . $rs->rowCount(), $respuesta);
+        return $respuesta;
     }
 
-    public function posicionar_post() {
-        $this->validar_campos();
-        if (!isset(self::$variables["id"])) {
-            throw new \Exception("No hay id");
+    public function exportar_post() {
+        $resultado = $this->get_posiciones();
+        $fecha = new \DateTime("now");
+        switch (self::$variables["tipo"]) {
+            case "xls":
+                $filename = "Export_posiciones" . $fecha->format("Y-m-d_h_i_s") . ".xlsx";
+                break;
+            case "pdf":
+                $filename = "Export_posiciones" . $fecha->format("Y-m-d_h_i_s") . ".pdf";
+                break;
         }
-        $container = new \Container();
-        $container->get(self::$variables["id"]);
-        $rs = \Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => \Authstat::SALIDA]);
-        if ($rs->rowCount() > 0) {
-            throw new \Exception("El container ya fue marcado como salida.");
-        }
-
-        if (in_array($container->get_id_authstat(), [\Authstat::ENTRADA, \Authstat::ACTIVO])) {
-            $posicionado = new \Posiciones();
-            $posicionado->set_agente_aduana(self::$variables["agente_aduana"]);
-            $posicionado->set_bl($container->get_bl());
-            $posicionado->set_id_authstat(\Authstat::ACTIVO);
-            $posicionado->set_maniobra(self::$variables["maniobra"]);
-            $posicionado->set_id_cliente($container->get_id_cliente());
-            $posicionado->set_id_container($container->get_id_container());
-            $posicionado->set_id_tipoingreso($container->get_id_tipoingreso());
-            $posicionado->set_id_usuario(self::$USUARIO->get_id_usuario());
-
-            if ($posicionado->set()) {
-                $id_container = $container->get_id_container();
-                $id_posicion = $posicionado->get_id_posicion();
-                $response["msg"] = "Maniobra ".$posicionado->get_maniobra()." correctamente";
-                $resp = self::RESPUESTA_CORRECTA;
-            } else {
-                $response["msg"] = "Error al ingresar la posicion ".$posicionado->get_maniobra();
-                $resp = self::RESPUESTA_INCORRECTA;
-            }
-            return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_container" => $id_container, "id_posicion" => $id_posicion]);
-        } else {
-            throw new Exception("No se puede mover este container");
-        }
+        return $this->export($filename, $resultado);
     }
-
+    
+    
+   
+    
+    
 }

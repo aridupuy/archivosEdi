@@ -249,20 +249,74 @@ class Container extends Model {
     }
 
         
-    public static function select_containers($tipo) {
+    public static function select_containers($tipo,$filtros=[]) {
         $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA];
-        $tipo = $array[$tipo];
+        $where=" TRUE ";
+        if(isset($array[$tipo])){
+            $tipo = $array[$tipo];
+            $where .= " and A.id_authstat in (?) ";
+            $variables = [$tipo];
+        }
+        else if(isset($filtros["id_estado"])){
+            $where.=" and A.id_authstat in (?)  ";
+            $variables[]=$filtros["id_estado"];
+        }
         
-        $sql = "select * from ed_container A "
+        if(isset($filtros["tiene_edi_entrada"])){
+            $where.=" and A.tiene_edi_entrada = ?";
+            $variables[]=$filtros["tiene_edi_entrada"];
+        }
+        if(isset($filtros["tiene_edi_salida"])){
+            $where.=" and A.tiene_edi_salida= ?";
+            $variables[]=$filtros["tiene_edi_salida"];
+        }
+        if(isset($filtros["fecha_desde"])){
+            $where.=" and date(A.fecha_gen)  >=? ";
+            $variables[]=$filtros["fecha_desde"];
+        }
+        if(isset($filtros["fecha_hasta"])){
+            $where.=" and date(A.fecha_gen) <=? ";
+            $variables[]=$filtros["fecha_hasta"];
+        }
+        if(isset($filtros["cod_contenedor"])){
+            $where.=" and A.cod_contenedor =? ";
+            $variables[]=$filtros["cod_contenedor"];
+        }
+        
+        if(isset($filtros["id_cliente"])){
+            $where.=" and E.id_cliente =? ";
+            $variables[]=$filtros["id_cliente"];
+        }
+        if(isset($filtros["tipocontenedor"])){
+            $where.=" and LOWER(D.tipo_container ) LIKE  LOWER( concat('%' , concat(? , '%' ))) ";
+            $variables[]=$filtros["tipocontenedor"];
+        }
+        if(isset($filtros["cliente"])){
+            $where.=" and LOWER(F.nombre_completo) LIKE LOWER( concat('%' , concat(? , '%' )))";
+            $variables[]=$filtros["cliente"];
+        }
+        if(isset($filtros["id_tipocontenedor"])){
+            $where.=" and D.id_tipocontainer = ? ";
+            $variables[]=$filtros["id_tipocontenedor"];
+        }
+        if(isset($filtros["destino"])){
+            $where.=" and LOWER(A.destino) LIKE LOWER( concat('%' , concat(? , '%' )))";
+            $variables[]=$filtros["destino"];
+        }
+        
+        $sql = "select *,
+                    A.fecha_gen as fecha_gen,
+                    F.fecha_gen as fecha_usuario  "
+                . "from ed_container A "
                 . "left join ho_authstat B on A.id_authstat=B.id_authstat "
                 . "left join ho_tipo_ingreso C on A.id_tipoingreso = C.id_tipo_ingreso "
                 . "left join ho_tipocontainer D on A.id_tipocontainer = D.id_tipocontainer "
                 . "left join ed_cliente E on A.id_cliente= E.id_cliente "
                 . "left join ed_usuario F on A.id_usuario= F.id_usuario "
                 . "left join ho_ie G on A.id_ie= G.id_ie "
-                . "where A.id_authstat in (?)";
+                . "where $where ";
 //        $variables = [Authstat::ACTIVO, Authstat::ENTRADA, Authstat::SALIDA, Authstat::INACTIVO];
-        $variables = [$tipo];
+//        print_r($sql);
         return self::execute_select($sql, $variables);
     }
 

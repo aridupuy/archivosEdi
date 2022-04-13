@@ -22,6 +22,17 @@ abstract class Controller extends BaseController
     public static $HASH=false;
     protected static $variables;
 
+    
+    protected function set_filtros(){
+        $filtros=[];
+        foreach (static::$filtrado as $filtro){
+            if(isset(self::$variables[$filtro])){
+                $filtros[$filtro]=self::$variables[$filtro];
+            }
+        }
+        return $filtros;
+    }
+    
     public function retornar($resultado,$log,...$param){
         /* Encriptamos todas las respuestas */
 //        var_dump($resultado,$log,$param);
@@ -125,5 +136,37 @@ abstract class Controller extends BaseController
             return false;
         }
         return true;
+    }
+    protected function export($filename,$resultado){
+//        foreach ($resultado as $clave => $row) {
+//            foreach ($row as $key => $value) {
+//                if (in_array($key, ["tiene_edi_entrada", "tiene_edi_salida", "tipoingreso", "authstat"])) {
+//                    unset($resultado[$clave][$key]);
+//                }
+//            }
+//        }
+        $gestor_de_disco = new \Gestor_de_disco();
+        $ejemplo = $resultado[0];
+        $values = array_keys($ejemplo);
+        $encabezados = array($values);
+        $resultado = array_merge($encabezados, $resultado);
+        if (!isset(self::$variables["tipo"]) OR!in_array(self::$variables["tipo"], ["xls", "pdf"])) {
+            throw new Exception("Debe proporcionar un tipo correcto xls o pdf");
+        }
+        $error = false;
+        switch (self::$variables["tipo"]) {
+            case "xls":
+                if (!$gestor_de_disco->exportar_xls(PATH_PUBLIC_FOLDER . "Export/", $filename, $resultado))
+                    $error = true;
+                break;
+            case "pdf":
+                if (!$gestor_de_disco->generar_pdf($resultado, "Export/" . $filename)) {
+                    $error = true;
+                }
+                break;
+        }
+        if (!$error)
+            return $this->retornar(true, "Generado correctamente", ["url" => "Export/" . $filename]);
+        return $this->retornar(false, "Error al generar archivo");
     }
 }

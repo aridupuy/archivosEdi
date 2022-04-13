@@ -1810,3 +1810,612 @@ PID: 132746 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambi
 PID: 123960 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/usuario/cambiar_estado
 
 
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_salidas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_salidas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_salidas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_salidas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/posicionado/exportar
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/posicionado/exportar
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156844 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156843 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 196605 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 195018 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 156845 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 227192 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 227192 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"5\"}" ---> /api/posicionado/obtener?id=5
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"7\"}" ---> /api/posicionado/obtener?id=7
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"5\"}" ---> /api/posicionado/obtener?id=5
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"5\"}" ---> /api/posicionado/obtener?id=5
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"5\"}" ---> /api/posicionado/obtener?id=5
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"5\"}" ---> /api/posicionado/obtener?id=5
+
+
+PID: 227192 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 227192 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 227192 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225268 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225267 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "{\"id\":\"6\"}" ---> /api/posicionado/obtener?id=6
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/posicionado/obtener
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_entradas
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 225266 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_salidas
+
+
+PID: 229710 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 229710 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 229710 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 225269 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+
+PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
+
+

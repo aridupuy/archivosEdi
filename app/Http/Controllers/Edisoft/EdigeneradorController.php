@@ -32,7 +32,6 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
     public function generar_archivo_post() {
         $container = new \Container();
         $container->get(self::$variables["id"]);
-        $container->get(self::$variables["id"]);
         if(isset(self::$variables["fecha_recepcion"]))
             $container->set_fecha_recepcion(self::$variables["fecha_recepcion"]);
         if(isset(self::$variables["hora_recepcion"]))
