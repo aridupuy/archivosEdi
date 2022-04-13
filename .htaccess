@@ -1,4 +1,7 @@
 RewriteEngine on
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ /index.php [L,QSA]
+RewriteRule ^api/(.*)$ /archivosEdi/index.php [L]
+RewriteRule ^Export/(.*)$ /archivosEdi/public/Export/$1 [END]  
+

@@ -2419,3 +2419,39 @@ PID: 226298 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obt
 PID: 225270 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/obtener_registros
 
 
+PID: 328228 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/authstat/obtener
+
+
+PID: 328906 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/authstat/obtener
+
+
+PID: 329714 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/tipocontainer/obtener
+
+
+PID: 331029 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/authstat/obtener
+
+
+PID: 331143 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/tipoingreso/obtener
+
+
+PID: 339953 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/tipoingreso/obtener
+
+
+PID: 340092 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/tipocontainer/obtener
+
+
+PID: 340586 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/authstat/obtener
+
+
+PID: 340907 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/posicionado/exportar
+
+
+PID: 342288 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/posicionado/exportar
+
+
+PID: 342852 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/posicionado/exportar
+
+
+PID: 347941 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /archivosEdi/api/posicionado/exportar
+
+
