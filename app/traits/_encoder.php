@@ -13,6 +13,7 @@
 class _encoder extends EDI\Encoder{
         
     protected $output = '';
+    private $UNAActive = false;
 
 public function encode(array $array, $wrap = true, $filterKeys = false): string
     {

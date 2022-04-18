@@ -21,6 +21,7 @@ class Codeco_container extends \EDI\Generator\Codeco\Container{
     protected $seal ;
     protected $modeOfTransport;
     protected $weight;
+    protected $bkg;
     
     
     public function setLocation($locode) {

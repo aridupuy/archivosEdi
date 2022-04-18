@@ -43,8 +43,8 @@ abstract class Codeco extends Edi {
                 ->setBillOfLading($this->container->get_bl())
                 ->setEffectiveDate($fecha->format("YmdHi"))
                 ->setSeal($this->container->get_sello(), '') /* Hay que ver el selloIssuer */
-                ->setLocation($this->container->get_viaje()) /* ver si es viaje el campo que va aca */
-                ->setLoc99($this->container->get_viaje()) /* ver si es viaje el campo que va aca */
+                ->setLocation($this->container->get_viaje()) /* setear locode aca*/
+//                ->setLoc99($this->container->get_viaje()) /* ver si es viaje el campo que va aca */
 //                ->setOrderDescription("lalalal", "lalala")
                 ->setModeOfTransport("MERCHANT", 3)
 //                ->setGoodsDescription($this->container->get_destino())
