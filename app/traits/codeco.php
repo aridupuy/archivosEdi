@@ -38,7 +38,7 @@ abstract class Codeco extends Edi {
         }
 
         $oContainer = (new \Codeco_container())
-                ->setContainer($this->container->get_cod_contenedor(), $tipoContainer->get_tipo_container(), $imex, 4)
+                ->setContainer($this->container->get_cod_contenedor(), $tipoContainer->get_tipo_container(), $imex, $this->container->get_eir())
                 ->setBooking($this->container->get_booking())
                 ->setBillOfLading($this->container->get_bl())
                 ->setEffectiveDate($fecha->format("YmdHi"))
@@ -47,7 +47,7 @@ abstract class Codeco extends Edi {
                 ->setLoc99($this->container->get_viaje()) /* ver si es viaje el campo que va aca */
 //                ->setOrderDescription("lalalal", "lalala")
                 ->setModeOfTransport("MERCHANT", 3)
-                ->setGoodsDescription($this->container->get_destino())
+//                ->setGoodsDescription($this->container->get_destino())
         ;
         if ($this->container->get_peso() > 0)
             $oContainer->setWeight($this->container->get_peso());
