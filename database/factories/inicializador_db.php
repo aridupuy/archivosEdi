@@ -13,7 +13,7 @@ define('PATH_TRAITS',__DIR__."/../../app/traits/");
 //hay que buscar una mejor forma para esto
 define('DB_CONNECTION',"mysqli");
 define('DATABASE_NAME','transpor_EDI');
-define('DATABASE_USERNAME','transpor_edi');
+define('DATABASE_USERNAME','transpor_EDI');
 define('DATABASE_USERPASS','gyjr7q1I56hEEfwXxbga');
 define('NOMBRE_HIDDEN_INSTANCIA',getenv('NOMBRE_HIDDEN_INSTANCIA'));
 define('ALGORITMO_HASH',getenv('ALGORITMO_HASH'));
