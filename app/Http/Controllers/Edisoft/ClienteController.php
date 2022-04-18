@@ -37,6 +37,21 @@ class ClienteController extends \App\Http\Controllers\Controller {
         }
         return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados ".$rs->rowCount(), $respuesta);
     }
+    public function obtenertodos() {
+        $rs = \Cliente::select();
+        $respuesta = [];
+        $i=0;
+        foreach ($rs as $row){
+            $respuesta[$i]["id_cliente"]=$row["id_cliente"];
+            $respuesta[$i]["nombre_completo"]=$row["nombre_completo"];
+            $respuesta[$i]["documento"]=$row["documento"];
+            $respuesta[$i]["email"]=$row["email"];
+            $respuesta[$i]["telefono"]=$row["telefono"];
+            $respuesta[$i]["id_authstat"]=$row["id_authstat"];
+            $i++;
+        }
+        return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados ".$rs->rowCount(), $respuesta);
+    }
     
     public function crear_post() {
         
