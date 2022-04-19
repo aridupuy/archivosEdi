@@ -20,16 +20,16 @@ class ContainerController extends \App\Http\Controllers\Controller {
         "eir",
         "id_tipocontainer",
         "id_cliente",
-        "bl",
-        "booking",
-        "buque",
-        "viaje",
+//        "bl",
+//        "booking",
+//        "buque",
+//        "viaje",
         "sello",
-        "destino",
+//        "destino",
         "id_ie",
         "rff_ep",
         "id_tipoingreso",
-        "peso",
+//        "peso",
     );
     static $filtrado =["fecha_desde","fecha_hasta","tiene_edi_entrada","tiene_edi_salida" ,"id_estado","cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino"];
     public function validar_campos() {
