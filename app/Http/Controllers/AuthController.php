@@ -173,5 +173,24 @@ class AuthController extends Log_in_app {
         ;
     }
 
+    
+    public function changePassword(Request $request){
+        $variables = $request->json()->all();
+        $usuario= new Usuario();
+        $usuario->get($variables["id"]);
+        $usuario->set_password($variables["newPass"]);
+        if($usuario->set()){
+            $response = json_encode(["check" => true,"cuenta"=> $usuario]);
+        }
+        else{
+            $response = json_encode(["check" => false,"log"=> "Error al cambiar Password"]);
+        }
+        return response($response)->header("Access-Control-Allow-Origin", "*")
+                        //Métodos que a los que se da acceso
+                        ->header("Access-Control-Allow-Methods", "GET, POST, PUT,OPTIONS, DELETE")
+                        //Headers de la petición
+                        ->header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, X-Token-Auth, Authorization");
+    }
+    
     //put your code here
 }

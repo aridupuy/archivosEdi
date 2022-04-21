@@ -72,14 +72,14 @@ define('SOLO_REPLICA', false);
 
 define('PROJECT_KEY','');
 define('PROJECT_ID','');
-define('EMAIL_USER_INFO','noresponder@unmail.com');
-define('EMAIL_USER_NOREPPLY','noresponder@unmail.com');
-define('EMAIL_USER_ATC','noresponder@unmail.com');
-define('EMAIL_USER_DESARROLLO','noresponder@unmail.com');
-define('EMAIL_HOST','smtp.gmail.com');
-define('EMAIL_PORT','587');
-define('EMAIL_USER','noresponder@unmail.com');
-define('EMAIL_PASS','');
+define('EMAIL_USER_INFO','sistemas@transportesrossell.com');
+define('EMAIL_USER_NOREPPLY','sistemas@transportesrossell.com');
+define('EMAIL_USER_ATC','sistemas@transportesrossell.com');
+define('EMAIL_USER_DESARROLLO','sistemas@transportesrossell.com');
+define('EMAIL_HOST','mail.transportesrossell.com');
+define('EMAIL_PORT','465');
+define('EMAIL_USER','sistemas@transportesrossell.com');
+define('EMAIL_PASS','6h.4dQKG9wq+F3');
 define('APP_NAME','EDISOFT');
 
 require_once PATH_MODELS."model.php";

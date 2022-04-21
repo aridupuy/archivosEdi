@@ -39,18 +39,18 @@ abstract class Edi {
                 return new Codeco_entrada($container,$variables);
             }
         }
-//        } else {
-//            self::$posiciones = new \Array_posiciones();
-//            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::ACTIVO]);
-//              if ($rs->rowCount() > 0) {
-//                return new Codeco($container,$variables);
+////        } else {
+////            self::$posiciones = new \Array_posiciones();
+////            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::ACTIVO]);
+////              if ($rs->rowCount() > 0) {
+////                return new Codeco($container,$variables);
+////            }
+//            elseif (!$container->get_tiene_edi_salida()) {
+//                $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::SALIDA]);
+//                if ($rs->rowCount() > 0) {
+//                    return new \Codeco_salida($container,$variables);
+//                }
 //            }
-            elseif (!$container->get_tiene_edi_salida()) {
-                $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::SALIDA]);
-                if ($rs->rowCount() > 0) {
-                    return new \Codeco_salida($container,$variables);
-                }
-            }
             else{
                 throw new Exception("El contenedor ya tiene todos sus edi generado.");
             }

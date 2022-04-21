@@ -22,6 +22,7 @@ use App\Http\Controllers\EfectivoDigital;
 Route::post("login", 'AuthController@login')->middleware('auth');
 Route::post("loginBo", 'Auth_BO_Controller@login')->middleware('auth');
 Route::post("checkToken", 'AuthController@checkToken')->middleware('auth');
+Route::post("changePass", 'AuthController@changePassword')->middleware('auth');
 //Route::post("loginwithtoken", 'AuthController@loginwithtoken')->middleware('auth');
 //Route::get("usuario", 'UsuarioController@obtener_filtrado')->middleware('efectivo');
 //Route::post("alta", 'AltaController@crear')->middleware('efectivo');
