@@ -18,6 +18,7 @@ class Locode extends Model {
     private $id_locode;
     private $locode;
     private $name;
+    
     public function get_id_locode() {
         return $this->id_locode;
     }
@@ -45,6 +46,15 @@ class Locode extends Model {
         return $this;
     }
 
+    public static function obtener_locode($name){
+        $sql = "select * from ho_locode where name = '$name' or locode = '$name'";
+        $rs = self::execute_select($sql);
+        if(!$rs or $rs->rowCount()==0){
+            return false;
+        }
+        $locode = new \Locode($rs->fetchRow());
+        return $locode->get_locode();
+    }
 
             
 }

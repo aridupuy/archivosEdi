@@ -24,7 +24,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
 //        "booking",
 //        "buque",
 //        "viaje",
-        "sello",
+//        "sello",
 //        "destino",
         "id_ie",
         "rff_ep",
@@ -202,7 +202,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
     }
 
     public function salida_post() {
-        $this->validar_campos();
+//        $this->validar_campos();
         if (!isset(self::$variables["id"])) {
             throw new \Exception("No hay id");
         }

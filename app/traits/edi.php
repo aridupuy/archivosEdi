@@ -12,14 +12,16 @@
  */
 abstract class Edi {
 
-    protected \Container $container;
+    protected ArrayObject $container ;
     protected $variables;
+    protected $id;
     protected static $posiciones;
 
-    protected function __construct(\Container $container,$variables) {
+    protected function __construct(array $variables, ArrayObject $container,$id) {
         $this->container = $container;
-        $this->variables=$variables;
-        
+        $this->variables = $variables;
+        $this->id = $id;
+//        var_dump($this);
     }
 
     public function get_posiciones(): \Array_posiciones {
@@ -27,16 +29,25 @@ abstract class Edi {
     }
 
     //put your code here
-    public static function factory(\Container $container,$variables) {
+    public static function factory(ArrayObject $container, $variables,$id) {
 //        var_dump($container->get_id_authstat());
+        
+        
+        /*
+            solo deveria entrar un array del mismo cliente
+            una vez entradas otra vez salidas
+        */
+        
         self::$posiciones = new \Array_posiciones();
-        $rs = Posiciones::select(["id_container"=>$container->get_id()]);
+        $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id()]);
         self::agregar_posiciones($container);
-//          
-        if (!$container->get_tiene_edi_entrada()) {
+//        var_dump($container);
+        if (!$container->getIterator()->current()->get_tiene_edi_entrada()) {
+//        if (true ) {
 
-            if ($container->get_id_authstat() == Authstat::ENTRADA) {
-                return new Codeco_entrada($container,$variables);
+            if ($container->getIterator()->current()->get_id_authstat() == Authstat::ENTRADA) {
+                
+                return new Codeco_entrada($variables,$container,$id);
             }
         }
 ////        } else {
@@ -45,16 +56,19 @@ abstract class Edi {
 ////              if ($rs->rowCount() > 0) {
 ////                return new Codeco($container,$variables);
 ////            }
-//            elseif (!$container->get_tiene_edi_salida()) {
-//                $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::SALIDA]);
-//                if ($rs->rowCount() > 0) {
-//                    return new \Codeco_salida($container,$variables);
-//                }
-//            }
-            else{
-                throw new Exception("El contenedor ya tiene todos sus edi generado.");
+        elseif (!$container->getIterator()->current()->get_tiene_edi_salida()) {
+//        elseif (false ) {
+//                var_dump($container);
+//                var_dump($container->get_id());
+            $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id(), "id_authstat" => Authstat::SALIDA]);
+//                 var_dump($rs->rowCount());
+            if ($rs->rowCount() > 0) {
+                return new Codeco_salida($variables,$container);
             }
-            
+        } else {
+            throw new Exception("El contenedor ya tiene todos sus edi generado.");
+        }
+
 //        }
     }
 
@@ -63,12 +77,14 @@ abstract class Edi {
     }
 
     public abstract function generar_edi();
-    
+
     private static function agregar_posiciones($container) {
-        $rs = \Posiciones::select_order(["id_container" => $container->get_id()], "id_posicion", "asc");
-        foreach ($rs as $row) {
-            $posiciones = new Posiciones($row);
-            self::$posiciones->add($posiciones);
+        foreach ($container as $cont){
+            $rs = \Posiciones::select_order(["id_container" => $cont->get_id()], "id_posicion", "asc");
+            foreach ($rs as $row) {
+                $posiciones = new Posiciones($row);
+                self::$posiciones->add($posiciones);
+            }
         }
     }
 
@@ -79,8 +95,8 @@ abstract class Edi {
         $gestor_de_disco->crear_carpeta(PATH_PUBLIC_FOLDER . "Export/");
         $filename = $this->nombrar_archivo();
 //        developer_log($filename);
-        $filas= explode("\n", $content);
-        $header= $filas[0];
+        $filas = explode("\n", $content);
+        $header = $filas[0];
 //        var_dump($header);
 //        $header = $filas;
         $archivo = new Archivo();
@@ -89,42 +105,46 @@ abstract class Edi {
         $archivo->set_id_authstat(Authstat::ACTIVO);
         $archivo->set_nombre($filename);
         Model::StartTrans();
-        if($archivo->set()){
+        if ($archivo->set()) {
             developer_log($archivo->get_id());
             $error = true;
-            foreach ($filas as $fila){
+            foreach ($filas as $fila) {
                 $registro = new Registro();
                 $registro->set_id_archivo($archivo->get_id());
                 $registro->set_id_authstat(Authstat::ACTIVO);
                 $registro->set_registro($fila);
-                if($registro->set()){
+                if ($registro->set()) {
+//                    echo $content;
+//                    echo "<br/>";
+//                    echo "<br/>";
+//                    echo "<br/>";
                     if ($gestor_de_disco->crear_archivo(PATH_PUBLIC_FOLDER . "Export/", $filename, $content)) {
                         developer_log("Termino guardado");
-                        $error  = false;
-                        
+                        $error = false;
                     }
                 }
             }
         }
-        if(!$error){
-            if($this->enviar_ftp("Export/".$filename)){
+        if (!$error) {
+            if ($this->enviar_ftp("Export/" . $filename)) {
                 Model::CompleteTrans();
-                return "Export/".$filename;
+                return "Export/" . $filename;
             }
         }
         Model::FailTrans();
         Model::CompleteTrans();
         return false;
     }
-    public function enviar_ftp($file){
+
+    public function enviar_ftp($file) {
         return true;
-        /*dejo esto preparado*/
+        /* dejo esto preparado */
         $conn = Safe\ftp_connect($host);
-        if(!$conn){
+        if (!$conn) {
             developer_log("No pudimos conectarnos al ftp");
         }
-        if(ftp_login($conn, $username, $password)){
-            if(ftp_put($conn, $remote_file, PATH_PUBLIC_FOLDER.$file)){
+        if (ftp_login($conn, $username, $password)) {
+            if (ftp_put($conn, $remote_file, PATH_PUBLIC_FOLDER . $file)) {
                 return true;
             }
             developer_log("No pudimos cargar el archivo al ftp");
@@ -132,6 +152,6 @@ abstract class Edi {
         developer_log("No pudimos loguearnos al ftp");
         return false;
     }
-    
+
     abstract function nombrar_archivo();
 }

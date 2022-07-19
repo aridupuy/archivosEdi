@@ -19,19 +19,28 @@ class Codeco_entrada extends \Codeco{
     //put your code here
     public function generar_edi() {
         $archivo = parent::generar_edi();
-        if($archivo){
-            $this->container->set_tiene_edi_entrada(true);
+        
+        foreach ($this->container as $container){
+            if($archivo){
+                $container->set_tiene_edi_entrada(true);
+            }
+            if(!$this->container->getIterator()->current()->set()){
+                developer_log("sale mal");
+                $false = true;
+            }
         }
-        if($this->container->set())
-            return $archivo;
+        if(isset($false))
+            return false;
+        return $archivo;
     }
     public function nombrar_archivo(){
-        
 //        $filename = get_called_class() . "_" . $this->variables["id"] . "_archivo_" . $fecha->format("Ymdhis") . ".edi";
         $cliente = new Cliente();
-        $cliente->get($this->container->get_id_cliente());
+        $cliente->get($this->container->getIterator()->current()->get_id_cliente());
         $fecha = new DateTime("now");
-        return $cliente->get_nombre_completo()."GATE_IN".$this->variables["id"]."_".$fecha->format("Ymdhis").".edi";
+        return $cliente->get_nombre_completo()."GATE_IN".$this->id."_".$fecha->format("Ymdhis").".edi";
     }
-
+    public function compose($oCodeco) {
+        return $oCodeco->compose(9,34);
+    }
 }

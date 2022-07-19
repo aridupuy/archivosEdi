@@ -34,4 +34,7 @@ class Codeco_salida extends \Codeco{
         $fecha = new DateTime("now");
         return $cliente->get_nombre_completo()."GATE_OUT".$fecha->format("Ymdhi").".edi";
     }
+    public function compose( $oCodeco) {
+        return $oCodeco->compose(9,36);
+    }
 }

@@ -12,10 +12,10 @@ define('PATH_TRAITS',__DIR__."/../../app/traits/");
  
 //hay que buscar una mejor forma para esto
 define('DB_CONNECTION',"mysqli");
-define('DATABASE_NAME','transpor_EDI');
-define('DATABASE_USERNAME','transpor_edi');
+define('DATABASE_NAME','bumvixyxppwb9gxqgsya');
+define('DATABASE_USERNAME','ueuua6hsayrb2y7z');
 define('DATABASE_USERPASS','gyjr7q1I56hEEfwXxbga');
-define('DATABASE_HOST','localhost');
+define('DATABASE_HOST','bumvixyxppwb9gxqgsya-mysql.services.clever-cloud.com');
 define('DATABASE_PORT','3306');
 define('NOMBRE_HIDDEN_INSTANCIA',getenv('NOMBRE_HIDDEN_INSTANCIA'));
 define('ALGORITMO_HASH',getenv('ALGORITMO_HASH'));

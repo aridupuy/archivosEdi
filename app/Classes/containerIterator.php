@@ -6,13 +6,14 @@
  */
 
 /**
- * Description of _codeco
+ * Description of ContainerIterator
  *
  * @author adupuy
  */
-
-class _codeco  extends \EDI\Generator\Codeco
-
-{
-    
+class ContainerIterator implements ArrayIterator{
+    //put your code here
+   
+    public function current(): \Container {
+        return parent::current();
+    }
 }
