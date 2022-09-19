@@ -204,7 +204,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     public function borrar_usuario($id) {
         $usuario = new \Usuario();
         $usuario->get($id);
-        $usuario->set_id_authstat(\Authstat::INACTIVO);
+        $usuario->set_id_authstat(\Authstat::BORRADO);
        
         if($usuario->set()){
             $resp = self::RESPUESTA_CORRECTA;

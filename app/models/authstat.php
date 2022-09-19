@@ -15,6 +15,7 @@ class Authstat extends Model{
     CONST ENTRADA = 2;
     CONST SALIDA = 3;
     CONST INACTIVO = 4;
+    CONST BORRADO = 5;
     
     public static $id_tabla="id_authstat";
     public static $prefijo_tabla="ho_";
