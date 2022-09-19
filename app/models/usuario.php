@@ -12,6 +12,7 @@
  */
 class Usuario extends Model{
     protected $hash=true;
+    protected $actualizar_password=false;
     
     public static $id_tabla="id_usuario";
     private $id_usuario;
@@ -19,7 +20,7 @@ class Usuario extends Model{
     private $id_authstat;
     private $nombre_usuario;
     private $password;
-//    private $email;
+    private $email;
 //    private $cod_area;
 //    private $celular;
     private $last_login;
@@ -50,9 +51,9 @@ class Usuario extends Model{
         return $this->password;
     }
 
-//    public function get_email() {
-//        return $this->email;
-//    }
+    public function get_email() {
+        return $this->email;
+    }
 //
 //    public function get_cod_area() {
 //        return $this->cod_area;
@@ -87,10 +88,10 @@ class Usuario extends Model{
         return $this;
     }
 
-//    public function set_email($email) {
-//        $this->email = $email;
-//        return $this;
-//    }
+    public function set_email($email) {
+        $this->email = $email;
+        return $this;
+    }
 //
 //    public function set_cod_area($cod_area) {
 //        $this->cod_area = $cod_area;
@@ -195,7 +196,11 @@ class Usuario extends Model{
         }
         return '';
     }
-
+    
+    public function actualizar_password(){
+        $this->actualizar_password=true;
+    }
+    
     public static function select_busqueda_cuenta($usuario,$id_usuario){
         $sql = "select * from ed_usuario where (nombre_usuario=?  ) and id_usuario!=?";
         $variables[]=$usuario;

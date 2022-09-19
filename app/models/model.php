@@ -461,7 +461,7 @@ abstract class Model {
         return self::execute_select($sql);
     }
     public static function delete($id, \Model $object,$class){
-        $tabla = $object::$prefijo_tabla.$class;
+        $tabla = strtolower($object::$prefijo_tabla.$class);
         $id_tabla = $object::$id_tabla;
         $sql = "delete from $tabla where $id_tabla = $id";
         developer_log("eliminado $id de $tabla");

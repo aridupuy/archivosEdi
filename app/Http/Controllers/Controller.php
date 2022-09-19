@@ -79,7 +79,7 @@ abstract class Controller extends BaseController
             "extras"=>$param
         ]);*/
     }
-    public  function despachar(\Illuminate\Http\Request $cosa = null){
+    public  function despachar( $cosa = null){
 //        developer_log("aca");
         return call_user_func_array([$this, $this->metodo_actual],array($cosa));
 

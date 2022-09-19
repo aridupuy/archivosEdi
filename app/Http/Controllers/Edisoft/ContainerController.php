@@ -122,14 +122,15 @@ class ContainerController extends \App\Http\Controllers\Controller {
         }
         if (!\Model::HasFailedTrans()) {
             $posiciones = new \Posiciones();
-            $posiciones->set_agente_aduana(self::$variables["agente_aduana"]);
+//            $posiciones->set_agente_aduana(self::$variables["agente_aduana"]);
             $posiciones->set_id_container($container->get_id_container());
             $posiciones->set_id_authstat(\Authstat::ENTRADA);
             $posiciones->set_id_cliente($container->get_id_cliente());
             $posiciones->set_id_usuario(self::$USUARIO->get_id());
             $posiciones->set_id_tipoingreso($container->get_id_tipoingreso());
-            $posiciones->set_bl($container->get_bl());
+//            $posiciones->set_bl($container->get_bl());
             $posiciones->set_maniobra("ENTRADA");
+            
             if ($posiciones->set()) {
                 \Model::CompleteTrans();
                 $id_container = $container->get_id_container();
@@ -216,10 +217,16 @@ class ContainerController extends \App\Http\Controllers\Controller {
         if (in_array($container->get_id_authstat(), [\Authstat::ENTRADA, \Authstat::ACTIVO])) {
             $posicion = new \Posiciones();
             $posicion->set_id_authstat(\Authstat::SALIDA);
-            $posicion->set_bl($container->get_bl());
+            $posicion->set_bl(self::$variables["bl"]);
             $posicion->set_id_container($container->get_id_container());
             $posicion->set_id_cliente($container->get_id_cliente());
+            $container->set_destino(self::$variables["destino"]);
             $posicion->set_id_tipoingreso($container->get_id_tipoingreso());
+            $container->set_eir(self::$variables["eir"]);
+            $posicion->set_maniobra(self::$variables["maniobra"]);
+            $container->set_nota(self::$variables["nota"]);
+            $container->set_sello(self::$variables["sello"]);
+            $container->set_rff_ep(self::$variables["rff_ep"]);
             $posicion->set_id_usuario(self::$USUARIO->get_id());
             $posicion->set_agente_aduana(self::$variables["agente_aduana"]);
             $posicion->set_maniobra("SALIDA");

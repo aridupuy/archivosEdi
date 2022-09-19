@@ -12,11 +12,9 @@ define('PATH_TRAITS',__DIR__."/../../app/traits/");
  
 //hay que buscar una mejor forma para esto
 define('DB_CONNECTION',"mysqli");
-define('DATABASE_NAME','bumvixyxppwb9gxqgsya');
-define('DATABASE_USERNAME','ueuua6hsayrb2y7z');
+define('DATABASE_NAME','transpor_EDI');
+define('DATABASE_USERNAME','transpor_edi');
 define('DATABASE_USERPASS','gyjr7q1I56hEEfwXxbga');
-define('DATABASE_HOST','bumvixyxppwb9gxqgsya-mysql.services.clever-cloud.com');
-define('DATABASE_PORT','3306');
 define('NOMBRE_HIDDEN_INSTANCIA',getenv('NOMBRE_HIDDEN_INSTANCIA'));
 define('ALGORITMO_HASH',getenv('ALGORITMO_HASH'));
 define('PATH_VENDOR_HANDLE_ERROR',PATH_VENDOR.'/adodb/adodb-php/adodb-errorhandler.inc.php');
@@ -69,17 +67,18 @@ define('INTERVALO_SESION', "200");
 define('TIEMPO_EXTENDIDO', "day");
 define('TIEMPO', "minute");
 define('SOLO_REPLICA', false);
-
+define('DATABASE_HOST','localhost');
+define('DATABASE_PORT','3306');
 define('PROJECT_KEY','');
 define('PROJECT_ID','');
-define('EMAIL_USER_INFO','sistemas@transportesrossell.com');
-define('EMAIL_USER_NOREPPLY','sistemas@transportesrossell.com');
-define('EMAIL_USER_ATC','sistemas@transportesrossell.com');
-define('EMAIL_USER_DESARROLLO','sistemas@transportesrossell.com');
-define('EMAIL_HOST','mail.transportesrossell.com');
-define('EMAIL_PORT','465');
-define('EMAIL_USER','sistemas@transportesrossell.com');
-define('EMAIL_PASS','6h.4dQKG9wq+F3');
+define('EMAIL_USER_INFO','noresponder@unmail.com');
+define('EMAIL_USER_NOREPPLY','noresponder@unmail.com');
+define('EMAIL_USER_ATC','noresponder@unmail.com');
+define('EMAIL_USER_DESARROLLO','noresponder@unmail.com');
+define('EMAIL_HOST','smtp.gmail.com');
+define('EMAIL_PORT','587');
+define('EMAIL_USER','noresponder@unmail.com');
+define('EMAIL_PASS','');
 define('APP_NAME','EDISOFT');
 
 require_once PATH_MODELS."model.php";

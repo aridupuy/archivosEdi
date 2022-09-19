@@ -126,5 +126,16 @@ class ClienteController extends \App\Http\Controllers\Controller {
         }
         return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id]);
     }
+    public function borrar_cliente() {
+        $cliente = new \Cliente();
+        $cliente->get(self::$variables["id"]);
+        if(\Model::delete($cliente->get_id_cliente(), $cliente, \Cliente::class)){
+            $resp = self::RESPUESTA_CORRECTA;
+            return $this->retornar($resp, "Cliente Borrado", ["msg" => "Usuario Borrado", "id_usuario" => $usuario->get_id_usuario()]);
+        } else {
+             $resp = self::RESPUESTA_INCORRECTA;
+            return $this->retornar($resp, "Error, no se pudo borrar", ["msg" => "Error, no se pudo eliminar", "id_usuario" => $id_usuario]);
+        }
+    }
 
 }

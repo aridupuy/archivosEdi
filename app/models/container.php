@@ -261,7 +261,10 @@ class Container extends Model {
             $where.=" and A.id_authstat in (?)  ";
             $variables[]=$filtros["id_estado"];
         }
-        
+        if(isset($filtros["tipoingreso"])){
+            $where.=" and C.id_tipo_ingreso = ?  ";
+            $variables[]=$filtros["tipoingreso"];
+        }
         if(isset($filtros["tiene_edi_entrada"])){
             $where.=" and A.tiene_edi_entrada = ?";
             $variables[]=$filtros["tiene_edi_entrada"];
@@ -314,9 +317,10 @@ class Container extends Model {
                 . "left join ed_cliente E on A.id_cliente= E.id_cliente "
                 . "left join ed_usuario F on A.id_usuario= F.id_usuario "
                 . "left join ho_ie G on A.id_ie= G.id_ie "
-                . "where $where ";
+                . "where $where order by 1 desc";
 //        $variables = [Authstat::ACTIVO, Authstat::ENTRADA, Authstat::SALIDA, Authstat::INACTIVO];
-//        print_r($sql);
+//        print_r(DATABASE_HOST);
+        
         return self::execute_select($sql, $variables);
     }
 

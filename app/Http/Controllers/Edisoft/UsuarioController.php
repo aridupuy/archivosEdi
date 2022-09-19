@@ -18,29 +18,44 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     static $campos_obligatorios = ["nombre_usuario", "nombre_completo", "password"];
 
     //put your code here
-    public function obtener() {
-
-        $usuarios = \Usuario::select();
-
+    public function obtener($id) {
+//        var_dump($id);
         $respuesta = [];
-        foreach ($usuarios as $row) {
-//            var_dump($row);
-            $usuario = new \Usuario($row);
-            $linea["nombre"] = $usuario->get_nombre_completo();
-            $linea["id"] = $usuario->get_id();
-            $linea["username"] = $usuario->get_nombre_usuario();
-            $linea["activo"] = $usuario->get_id_authstat();
+        if(!$id){
+            $usuarios = \Usuario::select(["id_authstat"=> \Authstat::ACTIVO]);
+            foreach ($usuarios as $row) {
+    //            var_dump($row);
+                $usuario = new \Usuario($row);
+                $linea["nombre"] = $usuario->get_nombre_completo();
+                $linea["id"] = $usuario->get_id();
+                $linea["username"] = $usuario->get_nombre_usuario();
+                $linea["activo"] = $usuario->get_id_authstat();
 
-            if ($usuario->get_last_login() == null) {
-                $linea["ultimo_login"] = "No Login";
-            } else {
-                $fecha = \DateTime::createFromFormat("Y-m-d H:i:s", $usuario->get_last_login());
-                $linea["ultimo_login"] = $fecha->format("Y-m-d H:i:s");
+                if ($usuario->get_last_login() == null) {
+                    $linea["ultimo_login"] = "No Login";
+                } else {
+                    $fecha = \DateTime::createFromFormat("Y-m-d H:i:s", $usuario->get_last_login());
+                    $linea["ultimo_login"] = $fecha->format("Y-m-d H:i:s");
+                }
+                $respuesta[] = $linea;
             }
-            $respuesta[] = $linea;
+            $cant=$usuarios->rowCount();
         }
-
-        return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados " . $usuarios->rowCount(), $respuesta);
+        else{
+            $usuario = new \Usuario();
+            $usuario->get($id);
+            $cant=0;
+            if($usuario->get_id_usuario()!=null){
+                $cant=1;
+                $linea["nombre"] = $usuario->get_nombre_completo();
+                $linea["id"] = $usuario->get_id();
+                $linea["username"] = $usuario->get_nombre_usuario();
+                $linea["activo"] = $usuario->get_id_authstat();
+                $respuesta[]=$linea;
+            }
+            
+        }
+        return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados " . $cant, $respuesta);
     }
 
     public function cambiar_estado_post() {
@@ -75,7 +90,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         $this->validar_campos();
         $params["nombre_usuario"] = self::$variables["nombre_usuario"];
         $params["nombre_completo"] = self::$variables["nombre_completo"];
-
+        $params["email"] = self::$variables["email"];
         $params["password"] = self::$variables["password"];
         $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"], self::$USUARIO->get_id());
         if ($rs_usuario and $rs_usuario->fetchRow() > 0) {
@@ -84,6 +99,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $usuario = new \Usuario();
             $usuario->set_nombre_completo($params["nombre_completo"]);
             $usuario->set_nombre_usuario($params["nombre_usuario"]);
+            $usuario->set_email($params["email"]);
             $usuario->set_password($params["password"]);
             $usuario->set_id_authstat(\Authstat::ACTIVO);
             if ($usuario->set()) {
@@ -126,12 +142,19 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     public function editar_post() {
         $usuario = new \Usuario();
         $usuario->get(self::$variables["id"]);
+        if($usuario->get_id_authstat()!= \Authstat::ACTIVO){
+            $response["msg"] = "el usuario no existe";
+            $resp = self::RESPUESTA_INCORRECTA;
+            return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
+        }
         if (isset(self::$variables["nombre_completo"]))
             $usuario->set_nombre_completo(self::$variables["nombre_completo"]);
         if (isset(self::$variables["nombre_usuario"]))
             $usuario->set_nombre_usuario(self::$variables["nombre_usuario"]);
         if (isset(self::$variables["password"]))
             $usuario->set_password(self::$variables["password"]);
+        if (isset(self::$variables["email"]))
+            $usuario->set_email(self::$variables["email"]);
         if ($usuario->set()) {
             $id_usuario = $usuario->getId();
             $response["msg"] = "Usuario editado Correctamente.";
@@ -141,6 +164,55 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $resp = self::RESPUESTA_INCORRECTA;
         }
         return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
+    }
+
+    public function recovery_pass_post() {
+        $rs = \Usuario::select(array("email" => self::$variables["email"]));
+        $usuario = new \Usuario($rs->fetchRow());
+        if (!$usuario->get_id_usuario()) {
+            $response["msg"] = "Usuario no existe";
+        }
+        $id_usuario = $usuario->get_id_usuario();
+        if (\Gestor_de_correo::enviar(MAIL_INFO, $usuario->get_email(), "Cambio de contrase���a", "Para cambiar la contrase���a haz click <a href=\"#\">Aqui</a>")) {
+            $resp = self::RESPUESTA_CORRECTA;
+            $response["msg"] = "Correo enviado.";
+        } else {
+            $resp = self::RESPUESTA_INCORRECTA;
+            $response["msg"] = "Error al enviar correo.";
+        }
+        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
+    }
+
+    public function change_pass_post() {
+        $usuario = new \Usuario();
+        $usuario->get(self::$variables["id"]);
+        $usuario->activar_hash();
+        $usuario->actualizar_password();
+        if (isset(self::$variables["password"]))
+            $usuario->set_password(self::$variables["password"]);
+        if ($usuario->set()) {
+            $id_usuario = $usuario->getId();
+            $response["msg"] = "Password actualizado Correctamente.";
+            $resp = self::RESPUESTA_CORRECTA;
+        } else {
+            $response["msg"] = "Error al cambiar el password";
+            $resp = self::RESPUESTA_INCORRECTA;
+        }
+        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
+    }
+
+    public function borrar_usuario($id) {
+        $usuario = new \Usuario();
+        $usuario->get($id);
+        $usuario->set_id_authstat(\Authstat::INACTIVO);
+       
+        if($usuario->set()){
+            $resp = self::RESPUESTA_CORRECTA;
+            return $this->retornar($resp, "Usuario Borrado", ["msg" => "Usuario Borrado", "id_usuario" => $usuario->get_id_usuario()]);
+        } else {
+            $resp = self::RESPUESTA_INCORRECTA;
+            return $this->retornar($resp, "Error, no se pudo eliminar", ["msg" => "Error, no se pudo eliminar", "id_usuario" => $id_usuario]);
+        }
     }
 
 }
