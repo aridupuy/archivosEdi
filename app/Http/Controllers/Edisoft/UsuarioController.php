@@ -166,14 +166,14 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
     }
 
-    public function recovery_pass_post() {
+    public function recuperar_pass($request) {
         $rs = \Usuario::select(array("email" => self::$variables["email"]));
         $usuario = new \Usuario($rs->fetchRow());
         if (!$usuario->get_id_usuario()) {
             $response["msg"] = "Usuario no existe";
         }
         $id_usuario = $usuario->get_id_usuario();
-        if (\Gestor_de_correo::enviar(MAIL_INFO, $usuario->get_email(), "Cambio de contrase���a", "Para cambiar la contrase���a haz click <a href=\"#\">Aqui</a>")) {
+        if (\Gestor_de_correo::enviar(\Gestor_de_correo::MAIL_INFO, $usuario->get_email(),"Cambio de contraseña", "Para cambiar la contraseña haz click <a href=\"#\">Aqui</a>")) {
             $resp = self::RESPUESTA_CORRECTA;
             $response["msg"] = "Correo enviado.";
         } else {

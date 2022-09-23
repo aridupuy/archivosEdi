@@ -10,7 +10,7 @@ class Gestor_de_correo{
     const SERVIDOR_HOST=EMAIL_HOST;
             //'smtp.gmail.com'; //'10.132.254.222' Obsoleta
     const SERVIDOR_PORT=EMAIL_PORT;
-    const SERVIDOR_USER=EMAIL_USE;
+    const SERVIDOR_USER=EMAIL_USER;
     const SERVIDOR_PASS=EMAIL_PASS;
     const SERVIDOR_AUTH=true;
     const ACTIVAR_TEST=false;
@@ -25,7 +25,7 @@ class Gestor_de_correo{
         if(self::VALIDAR_CORREO AND !validar_correo($emisor)) return false;
         # Si tiene archivos adjuntos
         //if($file_path) 
-            return self::enviar_con_adjunto($emisor, $destinatario, $asunto, $mensaje,$file_path);
+            //return self::enviar_con_adjunto($emisor, $destinatario, $asunto, $mensaje,$file_path);
         # Si no tiene archivos adjuntos
         $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
         $cabeceras .= 'Content-type: text/html; charset=UTF-8' . "\r\n";

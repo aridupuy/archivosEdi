@@ -93,6 +93,8 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $respuesta[$i]["authstat"] = $authstat->get_authstat();
             $respuesta[$i]["ie"] = $ie->get_ie();
             $respuesta[$i]["peso"] = $container->get_peso();
+            $respuesta[$i]["path_edi_entrada"] = $container->get_path_edi_entrada();
+            $respuesta[$i]["path_edi_salida"] = $container->get_path_edi_salida();
 //            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
