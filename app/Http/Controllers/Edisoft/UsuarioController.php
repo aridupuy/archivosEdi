@@ -22,14 +22,14 @@ class UsuarioController extends \App\Http\Controllers\Controller {
 //        var_dump($id);
         $respuesta = [];
         if(!$id){
-            $usuarios = \Usuario::select(["id_authstat"=> \Authstat::ACTIVO]);
+            $usuarios = \Usuario::select_usuarios();
             foreach ($usuarios as $row) {
     //            var_dump($row);
                 $usuario = new \Usuario($row);
                 $linea["nombre"] = $usuario->get_nombre_completo();
                 $linea["id"] = $usuario->get_id();
                 $linea["username"] = $usuario->get_nombre_usuario();
-                $linea["activo"] = $usuario->get_id_authstat();
+                $linea["status"] = $usuario->get_id_authstat();
 
                 if ($usuario->get_last_login() == null) {
                     $linea["ultimo_login"] = "No Login";

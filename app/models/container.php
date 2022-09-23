@@ -37,7 +37,8 @@ class Container extends Model {
     private $peso;
     private $fecha_recepcion;
     private $hora_recepcion;
-
+    private $path_edi_entrada;
+    private $path_edi_salida;
     public function get_id_container() {
         return $this->id_container;
     }
@@ -248,7 +249,25 @@ class Container extends Model {
         return $this;
     }
 
-        
+    public function get_path_edi_entrada() {
+        return $this->path_edi_entrada;
+    }
+
+    public function get_path_edi_salida() {
+        return $this->path_edi_salida;
+    }
+
+    public function set_path_edi_entrada($path_edi_entrada) {
+        $this->path_edi_entrada = $path_edi_entrada;
+        return $this;
+    }
+
+    public function set_path_edi_salida($path_edi_salida) {
+        $this->path_edi_salida = $path_edi_salida;
+        return $this;
+    }
+
+            
     public static function select_containers($tipo,$filtros=[]) {
         $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA];
         $where=" TRUE ";

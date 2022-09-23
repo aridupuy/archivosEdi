@@ -22,6 +22,7 @@ class Codeco_salida extends \Codeco{
 //        var_dump($archivo);
         if($archivo){
             $this->container->set_tiene_edi_salida(true);
+            $this->container->set_path_edi_salida($archivo);
         }
         if($this->container->set())
             return $archivo;

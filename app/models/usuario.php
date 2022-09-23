@@ -208,5 +208,9 @@ class Usuario extends Model{
         
         return self::execute_select($sql, $variables);
     }
-    
+    public static function select_usuarios(){
+        $sql = "select * from ed_usuario where id_authstat in (?,?)";
+        $variables=[Authstat::ACTIVO, Authstat::INACTIVO];
+        return self::execute_select($sql, $variables);
+    }
 }
