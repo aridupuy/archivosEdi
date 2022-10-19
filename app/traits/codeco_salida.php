@@ -19,19 +19,16 @@ class Codeco_salida extends \Codeco{
     //put your code here
     public function generar_edi() {
         $archivo = parent::generar_edi();
-//        var_dump($archivo);
         if($archivo){
-            $this->container->set_tiene_edi_salida(true);
-            $this->container->set_path_edi_salida($archivo);
+            $this->container->getIterator()->current()->set_tiene_edi_salida(1);
+            $this->container->getIterator()->current()->set_path_edi_salida($archivo);
         }
-        if($this->container->set())
+        if($this->container->getIterator()->current()->set())
             return $archivo;
     }
     public function nombrar_archivo(){
-        
-//        $filename = get_called_class() . "_" . $this->variables["id"] . "_archivo_" . $fecha->format("Ymdhis") . ".edi";
         $cliente = new Cliente();
-        $cliente->get($this->container->get_id_cliente());
+        $cliente->get($this->container->getIterator()->current()->get_id_cliente());
         $fecha = new DateTime("now");
         return $cliente->get_nombre_completo()."GATE_OUT".$fecha->format("Ymdhi").".edi";
     }

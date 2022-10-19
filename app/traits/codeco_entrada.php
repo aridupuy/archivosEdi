@@ -22,10 +22,11 @@ class Codeco_entrada extends \Codeco{
         
         foreach ($this->container as $container){
             if($archivo){
-                $container->set_tiene_edi_entrada(true);
+                $container->set_tiene_edi_entrada(1);
                 $container->set_path_edi_entrada($archivo);
             }
-            if(!$this->container->getIterator()->current()->set()){
+            
+            if(!$container->set()){
                 developer_log("sale mal");
                 $false = true;
             }

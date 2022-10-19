@@ -12,12 +12,12 @@
  */
 abstract class Edi {
 
-    protected ArrayObject $container ;
+    protected ArrayObject $container;
     protected $variables;
     protected $id;
     protected static $posiciones;
 
-    protected function __construct(array $variables, ArrayObject $container,$id) {
+    protected function __construct(array $variables, ArrayObject $container, $id) {
         $this->container = $container;
         $this->variables = $variables;
         $this->id = $id;
@@ -29,47 +29,33 @@ abstract class Edi {
     }
 
     //put your code here
-    public static function factory(ArrayObject $container, $variables,$id) {
-//        var_dump($container->get_id_authstat());
-        
-        
+    public static function factory(ArrayObject $container, $variables, $id) {
         /*
-            solo deveria entrar un array del mismo cliente
-            una vez entradas otra vez salidas
-        */
-        
+          solo deveria entrar un array del mismo cliente
+          una vez entradas otra vez salidas
+         */
         self::$posiciones = new \Array_posiciones();
         $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id()]);
+        if ($container->getIterator()->current()->get_id() == null) {
+            throw new Exception("El contenedor no existe.");
+        }
         self::agregar_posiciones($container);
-//        var_dump($container);
+
         if (!$container->getIterator()->current()->get_tiene_edi_entrada()) {
-//        if (true ) {
+
 
             if ($container->getIterator()->current()->get_id_authstat() == Authstat::ENTRADA) {
-                
-                return new Codeco_entrada($variables,$container,$id);
+                return new Codeco_entrada($variables, $container, $id);
             }
-        }
-////        } else {
-////            self::$posiciones = new \Array_posiciones();
-////            $rs = Posiciones::select(["id_container" => $container->get_id(), "id_authstat" => Authstat::ACTIVO]);
-////              if ($rs->rowCount() > 0) {
-////                return new Codeco($container,$variables);
-////            }
-        elseif (!$container->getIterator()->current()->get_tiene_edi_salida()) {
-//        elseif (false ) {
-//                var_dump($container);
-//                var_dump($container->get_id());
+        } elseif (!$container->getIterator()->current()->get_tiene_edi_salida()) {
             $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id(), "id_authstat" => Authstat::SALIDA]);
-//                 var_dump($rs->rowCount());
+//            var_dump($rs->rowCount());
             if ($rs->rowCount() > 0) {
-                return new Codeco_salida($variables,$container);
+                return new Codeco_salida($variables, $container, $id);
             }
         } else {
             throw new Exception("El contenedor ya tiene todos sus edi generado.");
         }
-
-//        }
     }
 
     public function __destruct() {
@@ -79,7 +65,7 @@ abstract class Edi {
     public abstract function generar_edi();
 
     private static function agregar_posiciones($container) {
-        foreach ($container as $cont){
+        foreach ($container as $cont) {
             $rs = \Posiciones::select_order(["id_container" => $cont->get_id()], "id_posicion", "asc");
             foreach ($rs as $row) {
                 $posiciones = new Posiciones($row);
