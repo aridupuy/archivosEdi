@@ -22,5 +22,5 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 /nbproject/private/
-public/Export
-public/mdpf
+public/Export/
+public/mdpf/
