@@ -37,20 +37,20 @@ abstract class Edi {
         self::$posiciones = new \Array_posiciones();
         $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id()]);
         if ($container->getIterator()->current()->get_id() == null) {
+            developer_log("El contenedor no existe.");
             throw new Exception("El contenedor no existe.");
         }
         self::agregar_posiciones($container);
-
         if (!$container->getIterator()->current()->get_tiene_edi_entrada()) {
-
-
-            if ($container->getIterator()->current()->get_id_authstat() == Authstat::ENTRADA) {
+        if ($container->getIterator()->current()->get_id_authstat() == Authstat::ENTRADA) {
+                developer_log("Generando entrada");
                 return new Codeco_entrada($variables, $container, $id);
             }
         } elseif (!$container->getIterator()->current()->get_tiene_edi_salida()) {
             $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id(), "id_authstat" => Authstat::SALIDA]);
 //            var_dump($rs->rowCount());
             if ($rs->rowCount() > 0) {
+                developer_log("Generando salida.");
                 return new Codeco_salida($variables, $container, $id);
             }
         } else {

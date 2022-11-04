@@ -50,7 +50,7 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
                 return $this->retornar(false, $e->getMessage() . $container->get_id());
             }
             if (!$obj) 
-                return $this->retornar(false, "El contenedor ya tiene edi generado.");
+                return $this->retornar(false, "Erro al buscar el objeto.");
             $result = $obj->generar_edi();
 //            var_dump($result );
             if (!($urls[] = $result )) 
@@ -59,6 +59,7 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
                 return $this->retornar(false, "Error al actualizar registro " . $container->get_id());
                 
         }
+        
         \Model::CompleteTrans();
         return $this->retornar(true, "Archivo generado correctamente.", ["url" => $urls]);
         

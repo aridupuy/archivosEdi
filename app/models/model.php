@@ -85,9 +85,9 @@ abstract class Model {
 
         $sql="  SELECT *
                 FROM ".static::$prefijo_tabla.strtolower(get_class($this))."
-                WHERE ".static::$id_tabla."= ?
+                WHERE ".static::$id_tabla."=?
                 ";
-        $result=$this->execute_select($sql,$id);
+        $result=$this->execute_select($sql,[$id]);
         if($result AND $result->rowCount()==1) { return $this->init($result->GetRowAssoc(false)); }
         
         return false;
