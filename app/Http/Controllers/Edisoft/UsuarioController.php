@@ -15,7 +15,7 @@ namespace App\Http\Controllers\Edisoft;
 class UsuarioController extends \App\Http\Controllers\Controller {
 
     //put your code here
-    static $campos_obligatorios = ["nombre_usuario", "nombre_completo", "password"];
+    static $campos_obligatorios = ["nombre_usuario", "nombre_completo", "password","email"];
 
     //put your code here
     public function obtener($id) {
@@ -30,6 +30,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
                 $linea["id"] = $usuario->get_id();
                 $linea["username"] = $usuario->get_nombre_usuario();
                 $linea["status"] = $usuario->get_id_authstat();
+                $linea["mail"] = $usuario->get_mail();
 
                 if ($usuario->get_last_login() == null) {
                     $linea["ultimo_login"] = "No Login";

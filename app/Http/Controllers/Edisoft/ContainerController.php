@@ -20,16 +20,11 @@ class ContainerController extends \App\Http\Controllers\Controller {
         "eir",
         "id_tipocontainer",
         "id_cliente",
-//        "bl",
-//        "booking",
-//        "buque",
-//        "viaje",
-//        "sello",
-//        "destino",
-        "id_ie",
+        "bl", //bill of landing El Bill of Lading es un documento que sirve como evidencia del contrato de transporte entre el expedidor y la naviera
+        "booking", //nota de embarque es el factor clave que se necesita para que una mercancía pueda recibir la orden de ser cargada y exportada. el transportista se compromete a conservar un cierto espacio en el buque para el fletador.
+        "id_ie", //1 o 2 importacion exportacion
         "rff_ep",
-        "id_tipoingreso",
-//        "peso",
+        "id_tipoingreso", 
     );
     static $filtrado =["fecha_desde","fecha_hasta","tiene_edi_entrada","tiene_edi_salida" ,"id_estado","cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino"];
     public function validar_campos() {
@@ -205,7 +200,14 @@ class ContainerController extends \App\Http\Controllers\Controller {
     }
 
     public function salida_post() {
-//        $this->validar_campos();
+        self::$campos_obligatorios=["destino",
+                                    "sello",
+                                    "buque",
+                                    "viaje",
+                                    "peso",
+                                    "unidad_peso",
+                                    "agente_aduana"];
+        $this->validar_campos();
         if (!isset(self::$variables["id"])) {
             throw new \Exception("No hay id");
         }
@@ -222,15 +224,19 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posicion->set_bl(self::$variables["bl"]);
             $posicion->set_id_container($container->get_id_container());
             $posicion->set_id_cliente($container->get_id_cliente());
+            
             $container->set_destino(self::$variables["destino"]);
             $posicion->set_id_tipoingreso($container->get_id_tipoingreso());
-            $container->set_eir(self::$variables["eir"]);
+            $container->set_eir(self::$variables["eir"]?:null);
             $posicion->set_maniobra(self::$variables["maniobra"]);
             $container->set_nota(self::$variables["nota"]);
             $container->set_sello(self::$variables["sello"]);
             $container->set_rff_ep(self::$variables["rff_ep"]);
+            $container->set_peso(self::$variables["peso"]);
+            $container->set_buque(self::$variables["buque"]);
+//            $container->set_(self::$variables["buque"]);
             $posicion->set_id_usuario(self::$USUARIO->get_id());
-            $posicion->set_agente_aduana(self::$variables["agente_aduana"]);
+            $posicion->set_agente_aduana(self::$variables["agente_aduana"]?:"No Proporcionado");
             $posicion->set_maniobra("SALIDA");
             $container->set_id_authstat(\Authstat::SALIDA);
             if ($posicion->set() and $container->set()) {

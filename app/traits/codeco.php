@@ -52,6 +52,8 @@ abstract class Codeco extends Edi {
             }
             !$container->get_sello() ? $ca = "CA" : $ca = "";
             $locode = Locode::obtener_locode($container->get_destino());
+//            dd($container->get_bl());
+//            dd($container->get_booking());
             $oContainer = (new \Codeco_container())
                     ->setContainer($container->get_cod_contenedor(),
                             $tipoContainer->get_tipo_container(),
@@ -66,7 +68,7 @@ abstract class Codeco extends Edi {
                     /* TDT+1+HS+3' ejemplo */
                     ->setModeOfTransport("MERCHANT", 3);
 //        ;
-            if ($container->get_peso() > 0)
+            if ((float)$container->get_peso() > 0)
                 $oContainer->setWeight($container->get_peso());
             if ($container->get_nota())
                 $oContainer->setGoodsDescription($container->get_nota()); /* texto libre */

@@ -14,8 +14,8 @@ namespace App\Http\Controllers\Edisoft;
  */
 class PosicionadoController extends \App\Http\Controllers\Controller {
 
-    static $campos_obligatorios = ["id", "agente_aduana", "maniobra"];
-    static $filtrado =["fecha_desde","fecha_hasta", "cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino"];
+    static $campos_obligatorios = ["id", "agente_aduana", "maniobra","destino","sello"];
+    static $filtrado =["fecha_desde","fecha_hasta", "cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino","sello","rff_ep"];
     public function validar_campos() {
         $vars = array_keys(self::$variables);
         $diff = array_diff(self::$campos_obligatorios, $vars);
@@ -49,14 +49,20 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $posicionado = new \Posiciones();
             $posicionado->set_agente_aduana(self::$variables["agente_aduana"]);
             $posicionado->set_bl($container->get_bl());
-            $posicionado->set_id_authstat(\Authstat::ACTIVO);
+            $posicionado->set_id_authstat(\Authstat::SALIDA);
             $posicionado->set_maniobra(self::$variables["maniobra"]);
             $posicionado->set_id_cliente($container->get_id_cliente());
             $posicionado->set_id_container($container->get_id_container());
             $posicionado->set_id_tipoingreso($container->get_id_tipoingreso());
             $posicionado->set_id_usuario(self::$USUARIO->get_id_usuario());
-
-            if ($posicionado->set()) {
+            
+            $container->set_destino(self::$variables["destino"]);
+            $container->set_nota(self::$variables["nota"]?:"");
+            $container->set_sello(self::$variables["sello"]?:"");
+            $container->set_rff_ep(self::$variables["rff_ep"]?:"");
+            $container->set_id_authstat(\Authstat::SALIDA);
+            
+            if ($posicionado->set() and $container->set()) {
                 $id_container = $container->get_id_container();
                 $id_posicion = $posicionado->get_id_posicion();
                 $response["msg"] = "Maniobra " . $posicionado->get_maniobra() . " correctamente";
@@ -67,7 +73,7 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             }
             return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_container" => $id_container, "id_posicion" => $id_posicion]);
         } else {
-            throw new Exception("No se puede mover este container");
+            throw new \Exception("No se puede mover este container");
         }
     }
 
