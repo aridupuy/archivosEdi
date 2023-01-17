@@ -15,7 +15,7 @@ namespace App\Http\Controllers\Edisoft;
 class ClienteController extends \App\Http\Controllers\Controller {
 
     //put your code here
-    static $campos_obligatorios = array("documento", "email", "nombre_completo", "telefono");
+    static $campos_obligatorios = array("documento", "nombre_completo", "telefono");
 
     public function validar_campos() {
         $vars = array_keys(self::$variables);
@@ -58,14 +58,15 @@ class ClienteController extends \App\Http\Controllers\Controller {
     public function crear_post() {
 
         $this->validar_campos();
-        $rs_cliente = \Cliente::select_busqueda_cliente(self::$variables["email"], self::$variables["documento"]);
+        $rs_cliente = \Cliente::select_busqueda_cliente(self::$variables["documento"]);
         if ($rs_cliente and $rs_cliente->fetchRow() > 0) {
             throw new \Exception("Ya existe este usuario");
         }
 
         $cliente = new \Cliente();
         $cliente->set_documento(self::$variables["documento"]);
-        $cliente->set_email(self::$variables["email"]);
+        if(isset(self::$variables["email"]))
+            $cliente->set_email(self::$variables["email"]);
         $cliente->set_nombre_completo(self::$variables["nombre_completo"]);
         $cliente->set_telefono(self::$variables["telefono"]);
         $cliente->set_id_authstat(\Authstat::ACTIVO);

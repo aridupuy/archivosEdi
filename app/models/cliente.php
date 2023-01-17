@@ -77,8 +77,8 @@ class Cliente extends Model{
         return parent::get($id);
     }
 
-public static function select_busqueda_cliente($email, $documento){
-    $sql = "select * from ed_cliente where email=? or documento=?";
+public static function select_busqueda_cliente( $documento){
+    $sql = "select * from ed_cliente where documento=?";
     $vars[]=$email;
     $vars[]=$documento;
     return self::execute_select($sql, $vars);
