@@ -160,7 +160,6 @@ class ContainerController extends \App\Http\Controllers\Controller {
             "buque",
             "nota",
             "viaje",
-            "sello",
             "destino",
             "id_ie",
             "rff_ep",
