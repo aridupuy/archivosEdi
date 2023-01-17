@@ -54,6 +54,9 @@ class Usuario extends Model{
     public function get_email() {
         return $this->email;
     }
+    public function get_mail() {
+        return $this->email;
+    }
 //
 //    public function get_cod_area() {
 //        return $this->cod_area;
