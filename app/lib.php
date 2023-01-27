@@ -12,18 +12,6 @@ function developer_log($string)
 		//$nombre=Application::$usuario->getName().' | ';
 		error_log($fecha->format("Y-m-d H:i:s.u")." | ".$nombre.$string);
 	}
-//        var_dump(DEVELOPER);
-//        var_dump($GLOBALS['ACTIVAR_LOG_NAVEGADOR']!="0");
-//        var_dump(!Application::$no_log_navegador);
-//        exit();
-	/*if(DEVELOPER AND $GLOBALS['ACTIVAR_LOG_NAVEGADOR']!="0" and !Application::$no_log_navegador){
-            
-            echo "<div class='debug'>".$string."</div>";
-        }
-        
-	if(DEVELOPER AND ACTIVAR_LOG_CONSOLA_NAVEGADOR and $GLOBALS['ACTIVAR_LOG_NAVEGADOR']!="0") return log_consola_navegador($string);
-*/
-        
 }
 
     function ErrorHandler($databaseType,$type,$errorNo,$errorMsg,$sql,$inputarr,$_this)
