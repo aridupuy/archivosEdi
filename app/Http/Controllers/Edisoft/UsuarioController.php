@@ -93,6 +93,10 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         $params["nombre_completo"] = self::$variables["nombre_completo"];
         $params["email"] = self::$variables["email"];
         $params["password"] = self::$variables["password"];
+        $rs_usuario_email = \Usuario::select(["email"=>self::$variables["email"]]);
+        if($rs_usuario_email->rowCount()!=0){
+            throw new \Exception("El Email ya se encuentra registrado");
+        }
         $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"], self::$USUARIO->get_id());
         if ($rs_usuario and $rs_usuario->fetchRow() > 0) {
             throw new \Exception("Ya existe este usuario");

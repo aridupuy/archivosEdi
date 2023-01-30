@@ -21,8 +21,6 @@ class Usuario extends Model{
     private $nombre_usuario;
     private $password;
     private $email;
-//    private $cod_area;
-//    private $celular;
     private $last_login;
     
     public function activar_hash(){
