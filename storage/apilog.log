@@ -5041,3 +5041,48 @@ PID: 205102 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/posicionado/p
 PID: 179257 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/edigenerador/generar_archivo
 
 
+PID: 5848 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5849 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5850 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 5850 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_entradas
+
+
+PID: 5850 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 10601 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5846 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5848 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5849 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 11395 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5848 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5848 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5850 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+
+PID: 5847 | Entrada EDISOFT (App) id_usuario -->2 | "" ---> /api/container/exportar_posicionados
+
+

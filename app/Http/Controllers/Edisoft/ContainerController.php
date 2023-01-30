@@ -65,22 +65,17 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $container = new \Container($row);
             $methods = get_class_methods($container);
             foreach ($methods as $method) {
-//                var_dump($method);
                 if ($method !== "get_id" and strstr($method, "get_")) {
                     $respuesta[$i][substr($method, 4, strlen($method) - 4)] = $container->$method();
                 }
             }
             $tipocontainer = new \Tipocontainer($row);
-//            $tipocontainer->get($container->get_id_tipocontainer());
             $tipoingreso = new \Tipo_ingreso($row);
-//            $tipoingreso->get($container->get_id_tipoingreso());
             $cliente = new \Cliente($row);
-//            $cliente->get($posicion->get_id_cliente());
             $usuario = new \Usuario($row);
-//            $usuario->get($posicion->get_id_usuario());
             $authstat = new \Authstat($row);
             $ie = new \Ie($row);
-//            $authstat->get($posicion->get_id_authstat());
+
             $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
             $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
             $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
@@ -90,7 +85,6 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $respuesta[$i]["peso"] = $container->get_peso();
             $respuesta[$i]["path_edi_entrada"] = $container->get_path_edi_entrada();
             $respuesta[$i]["path_edi_salida"] = $container->get_path_edi_salida();
-//            $respuesta[$i]["unidad_peso"]=$container->get_unidad_peso();
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
             unset($respuesta[$i]["id_tipocontainer"]);
@@ -104,7 +98,6 @@ class ContainerController extends \App\Http\Controllers\Controller {
 
     public function entrada_post() {
         $this->validar_campos();
-
         \Model::StartTrans();
         $container = new \Container();
         foreach (self::$variables as $key => $val) {
@@ -119,13 +112,11 @@ class ContainerController extends \App\Http\Controllers\Controller {
         }
         if (!\Model::HasFailedTrans()) {
             $posiciones = new \Posiciones();
-//            $posiciones->set_agente_aduana(self::$variables["agente_aduana"]);
             $posiciones->set_id_container($container->get_id_container());
             $posiciones->set_id_authstat(\Authstat::ENTRADA);
             $posiciones->set_id_cliente($container->get_id_cliente());
             $posiciones->set_id_usuario(self::$USUARIO->get_id());
             $posiciones->set_id_tipoingreso($container->get_id_tipoingreso());
-//            $posiciones->set_bl($container->get_bl());
             $posiciones->set_maniobra("ENTRADA");
             
             if ($posiciones->set()) {
@@ -254,7 +245,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
     }
 
     public function exportar_entradas_post() {
-        $resultado = $this->get_entradas();
+        $resultado = $this->get_registros("entrada");
         $fecha = new \DateTime("now");
         switch (self::$variables["tipo"]) {
             case "xls":
@@ -266,6 +257,50 @@ class ContainerController extends \App\Http\Controllers\Controller {
         }
         
         return $this->export($filename, $resultado);
+    }
+    public function exportar_posicionados_post() {
+        $resultado = $this->get_registros("entrada");
+        $posiciones=array();
+        foreach ($resultado as $row){
+            $rs = \Posiciones::select_posiciones( $row["id_container"],["noentrada"=>true]);
+            $row=$rs->fetchRow();
+            $posicion=[];
+            $posicion["id_container"]=$row["id_container"];
+            $posicion["fecha_gen"]=$row["fecha_gen"];
+            $posicion["cod_contenedor"]=$row["cod_contenedor"];
+            $posicion["bl"]=$row["bl"];
+            $posicion["maniobra"]=$row["maniobra"];
+            $posicion["transportista"]=$row["transportista"];
+            $posicion["id_cliente"]=$row["id_cliente"];
+            $posicion["id_tipocontainer"]=$row["id_tipocontainer"];
+            $posicion["booking"]=$row["booking"];
+            $posicion["buque"]=$row["buque"];
+            $posicion["nota"]=$row["nota"];
+            $posicion["viaje"]=$row["viaje"];
+            $posicion["sello"]=$row["sello"];
+            $posicion["destino"]=$row["destino"];
+            $posicion["peso"]=$row["peso"];
+            $posicion["tipo_ingreso"]=$row["tipo_ingreso"];
+            $posicion["tipo_container"]=$row["tipo_container"];
+            $posicion["code"]=$row["code"];
+            $posicion["descrip"]=$row["descrip"];
+            $posicion["cntr_type"]=$row["cntr_type"];
+            $posicion["nombre_completo"]=$row["nombre_completo"];
+            $posicion["email"]=$row["email"];
+            $posicion["nombre_usuario"]=$row["nombre_usuario"];
+            $posiciones[]=$posicion;
+        }
+        $fecha = new \DateTime("now");
+        switch (self::$variables["tipo"]) {
+            case "xls":
+                $filename = "Export_posicionados" . $fecha->format("Y-m-d_h_i_s") . ".xlsx";
+                break;
+            case "pdf":
+                $filename = "Export_posicionados" . $fecha->format("Y-m-d_h_i_s") . ".pdf";
+                break;
+        }
+        
+        return $this->export($filename, $posiciones);
     }
     
         

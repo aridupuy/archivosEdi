@@ -162,7 +162,10 @@ class Posiciones extends Model{
             $where.=" and LOWER(B.destino) LIKE LOWER( concat('%' , concat(? , '%' )))";
             $variables[]=$filtros["destino"];
         }
-        
+        if(isset($filtros["noentrada"])){
+            $where.=" and maniobra!=?";
+            $variables[]="ENTRADA";
+        }
         $sql = "select *,F.nombre_completo nombre_completo from ed_posiciones A "
                 . "left join ed_container B on  A.id_container=B.id_container "
                 . "left join ho_authstat C on A.id_authstat=C.id_authstat "

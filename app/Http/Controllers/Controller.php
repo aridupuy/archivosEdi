@@ -138,13 +138,6 @@ abstract class Controller extends BaseController
         return true;
     }
     protected function export($filename,$resultado){
-//        foreach ($resultado as $clave => $row) {
-//            foreach ($row as $key => $value) {
-//                if (in_array($key, ["tiene_edi_entrada", "tiene_edi_salida", "tipoingreso", "authstat"])) {
-//                    unset($resultado[$clave][$key]);
-//                }
-//            }
-//        }
         $gestor_de_disco = new \Gestor_de_disco();
         $ejemplo = $resultado[0];
         $values = array_keys($ejemplo);
