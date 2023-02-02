@@ -12,9 +12,9 @@ define('PATH_TRAITS',__DIR__."/../../app/traits/");
  
 //hay que buscar una mejor forma para esto
 define('DB_CONNECTION',"mysqli");
-define('DATABASE_NAME','transpor_EDI');
-define('DATABASE_USERNAME','transpor_edi');
-define('DATABASE_USERPASS','gyjr7q1I56hEEfwXxbga');
+define('DATABASE_NAME','EDI');
+define('DATABASE_USERNAME','mobul_usr');
+define('DATABASE_USERPASS','.t&]7+tBU7!R');
 define('NOMBRE_HIDDEN_INSTANCIA',getenv('NOMBRE_HIDDEN_INSTANCIA'));
 define('ALGORITMO_HASH',getenv('ALGORITMO_HASH'));
 define('PATH_VENDOR_HANDLE_ERROR',PATH_VENDOR.'/adodb/adodb-php/adodb-errorhandler.inc.php');

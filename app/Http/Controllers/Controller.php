@@ -17,6 +17,10 @@ abstract class Controller extends BaseController
     const RESPUESTA_CORRECTA=1;
     const RESPUESTA_INCORRECTA=0;
     const CLAVE_DE_ENCRIPTACION="teganamoscon9";
+    /**
+     * @static 
+     * @var Usuario
+     *   */
     public static $USUARIO;
     private $metodo_actual;
     public static $HASH=false;
@@ -79,8 +83,6 @@ abstract class Controller extends BaseController
         }
     }
     public static function cargar_parametros($parametros){
-        var_dump("aca");
-        var_dump($parametros);
         if(self::$variables==null)
             self::$variables=$parametros;
         else

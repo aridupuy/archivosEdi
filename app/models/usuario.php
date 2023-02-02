@@ -202,10 +202,14 @@ class Usuario extends Model{
         $this->actualizar_password=true;
     }
     
-    public static function select_busqueda_cuenta($usuario,$id_usuario){
-        $sql = "select * from ed_usuario where (nombre_usuario=?  ) and id_usuario!=?";
+    public static function select_busqueda_cuenta($usuario,$id_usuario=null){
         $variables[]=$usuario;
-        $variables[]=$id_usuario;
+        $and ="";
+        if($id_usuario!=null){
+            $and = "and id_usuario!=?";
+            $variables[]=$id_usuario;
+        }
+        $sql = "select * from ed_usuario where (nombre_usuario=?  ) $and ";
         
         return self::execute_select($sql, $variables);
     }

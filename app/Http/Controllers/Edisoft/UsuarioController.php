@@ -86,10 +86,10 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             throw new \Exception("Faltan parametros.");
     }
 
-    public function crear_usuario_post() {
+    public function crear_usuario(\Illuminate\Http\Request $request) {
         /* No me gusta mezclar controladores ya que son dos capaz iguales, seria mejor pasar la logica a un trait */
+        self::cargar_parametros($request->json()->all());
         $this->validar_campos();
-        var_dump(self::$variables);
         $params["nombre_usuario"] = self::$variables["nombre_usuario"];
         $params["nombre_completo"] = self::$variables["nombre_completo"];
         $params["email"] = self::$variables["email"];
@@ -98,7 +98,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         if($rs_usuario_email->rowCount()!=0){
             throw new \Exception("El Email ya se encuentra registrado");
         }
-        $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"], self::$USUARIO->get_id());
+        $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"],self::$USUARIO->getId());
         if ($rs_usuario and $rs_usuario->fetchRow() > 0) {
             throw new \Exception("Ya existe este usuario");
         } else {
