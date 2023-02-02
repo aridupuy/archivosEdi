@@ -89,18 +89,14 @@ class Gestor_de_tokens {
     }
 
     public function leer($access_token): ?Jose\Easy\JWT {
-//        var_dump($access_token);
-        if (!$access_token) {
+        if (!$access_token OR (str_replace("Bearer undefined", "", $access_token) =="")) {
             developer_log("La peticion no se puede procesar sin estar autenticado.");
             return null;
         }
         if (str_contains($access_token, "Bearer")) {
             $bearer = explode("Bearer ", $access_token);
             $token = $bearer[1];
-//            var_dump($token);
             $time = time();
-            
-//         error_log($access_token);
          $jws = \Jose\Easy\Load::jws($token)
                     ->algs(['RS512']) // The key encryption algorithms allowed to be used
                     ->exp()
