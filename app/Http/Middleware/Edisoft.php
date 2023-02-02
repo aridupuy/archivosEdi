@@ -58,6 +58,7 @@ class Edisoft {
             if ($developers) {
                 Controller::$HASH = false;
                 $vars = $request->json()->all();
+                var_dump($vars);
                 Controller::cargar_parametros($vars);
             } else {
                 /* aca se decifra la informacion */
