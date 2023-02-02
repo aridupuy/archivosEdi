@@ -49,7 +49,7 @@ class Edisoft {
                 ;
         }
         $developers = false;
-//        var_dump($request->all());
+        var_dump($request->all());
         if (Controller::$HASH) {
             if (isset($request->all()["developers"]))
                 $developers = $request->all()["developers"];
