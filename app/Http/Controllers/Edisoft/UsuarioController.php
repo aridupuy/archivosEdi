@@ -89,6 +89,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     public function crear_usuario_post() {
         /* No me gusta mezclar controladores ya que son dos capaz iguales, seria mejor pasar la logica a un trait */
         $this->validar_campos();
+        var_dump(self::$variables);
         $params["nombre_usuario"] = self::$variables["nombre_usuario"];
         $params["nombre_completo"] = self::$variables["nombre_completo"];
         $params["email"] = self::$variables["email"];
