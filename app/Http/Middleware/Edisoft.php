@@ -59,6 +59,7 @@ class Edisoft {
                 Controller::$HASH = false;
                 $vars = $request->json()->all();
                 var_dump($vars);
+                exit();
                 Controller::cargar_parametros($vars);
             } else {
                 /* aca se decifra la informacion */
@@ -149,12 +150,6 @@ class Edisoft {
         }
 
         return response($response);
-        /* ->json(
-          [
-          "resultado"=>$resultado,
-          "log"=>$log,
-          "extras"=>$param
-          ]); */
     }
 
 }
