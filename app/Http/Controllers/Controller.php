@@ -47,40 +47,22 @@ abstract class Controller extends BaseController
             ]);
         }
         else{
-//            developer_log("aca");
             $hash=new \Gestor_de_hash(self::CLAVE_DE_ENCRIPTACION);
-//            developer_log(json_encode([
-//                "resultado"=>boolval($resultado),
-//                "log"=>$log,
-//                "extras"=>$param
-//            ]));
             $response=$hash->cryptoJsAesEncrypt(self::CLAVE_DE_ENCRIPTACION, json_encode([
                 "resultado"=>boolval($resultado),
                 "log"=>$log,
                 "extras"=>$param
             ]));
         }
-//	developer_log(json_encode([
-//                "resultado"=>boolval($resultado),
-//                "log"=>$log,
-//                "extras"=>$param
-//            ]));
         return response($response)->header("Access-Control-Allow-Origin", "*")
                             //Métodos que a los que se da acceso
                             ->header("Access-Control-Allow-Methods", "GET, POST, PUT,OPTIONS, DELETE")
                             //Headers de la petición
                             ->header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, X-Token-Auth, Authorization")
                             ->header('Content-Type', 'application/json');
-                            
-                /*->json(
-        [
-            "resultado"=>$resultado,
-            "log"=>$log,
-            "extras"=>$param
-        ]);*/
     }
     public  function despachar( $cosa = null){
-//        developer_log("aca");
+
         return call_user_func_array([$this, $this->metodo_actual],array($cosa));
 
     }
@@ -88,7 +70,6 @@ abstract class Controller extends BaseController
     public function callAction($method, $parameters)
     {
         $this->metodo_actual=$method;
-//        var_dump($parameters);
         try{
         return call_user_func_array([$this, "despachar"], $parameters);
 
@@ -96,18 +77,16 @@ abstract class Controller extends BaseController
             developer_log($e);
             return $this->retornar(false, $e->getMessage());
         }
-//        return call_user_func_array([$this, $method], $parameters);
     }
     public static function cargar_parametros($parametros){
-//        var_dump($parametros);
-//        developer_log(json_encode(self::$variables));
+        var_dump("aca");
+        var_dump($parametros);
         if(self::$variables==null)
             self::$variables=$parametros;
         else
             self::$variables=array_merge(self::$variables,$parametros);
         
         self::validar_datos();
-//            developer_log("ACA------".\GuzzleHttp\json_encode(self::$variables));
     }
     public static function validar_datos(){
         $variables =[];
@@ -131,7 +110,6 @@ abstract class Controller extends BaseController
         if(self::$USUARIO->get_id()== null or self::$USUARIO->get_id_authstat()!=1){
             throw new \Exception("No autorizado");
         }
-//        developer_log("USUARIO:".self::$USUARIO->get_id());
         if(self::$USUARIO->get_id_usuario()==null){
             return false;
         }
