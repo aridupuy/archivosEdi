@@ -98,7 +98,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         if($rs_usuario_email->rowCount()!=0){
             throw new \Exception("El Email ya se encuentra registrado");
         }
-        $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"],self::$USUARIO??self::$USUARIO->getId());
+        $rs_usuario = \Usuario::select_busqueda_cuenta($params["nombre_usuario"],self::$USUARIO!=null?self::$USUARIO->getId():null);
         if ($rs_usuario and $rs_usuario->fetchRow() > 0) {
             throw new \Exception("Ya existe este usuario");
         } else {
