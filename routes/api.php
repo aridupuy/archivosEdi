@@ -27,11 +27,9 @@ Route::get("usuario/obtener/{id}", '\App\Http\Controllers\Edisoft\UsuarioControl
 Route::delete("usuario/borrar_usuario/{id}", '\App\Http\Controllers\Edisoft\UsuarioController@borrar_usuario')->middleware('auth');
 Route::post("usuario/recovery_pass", '\App\Http\Controllers\Edisoft\UsuarioController@recuperar_pass');
 Route::post("usuario/crear_usuario", '\App\Http\Controllers\Edisoft\UsuarioController@crear_usuario');
-
-//Route::post("loginwithtoken", 'AuthController@loginwithtoken')->middleware('auth');
-//Route::get("usuario", 'UsuarioController@obtener_filtrado')->middleware('efectivo');
-//Route::post("alta", 'AltaController@crear')->middleware('efectivo');
-//$archivos = scandir(__DIR__ . "/../app/Http/Controllers");
+Route::get("cliente/obtener", '\App\Http\Controllers\Edisoft\ClienteController@obtener')->middleware('auth');
+Route::get("cliente/obtener/{id}", '\App\Http\Controllers\Edisoft\ClienteController@obtener')->middleware('auth');
+Route::delete("cliente/delete/{id}", '\App\Http\Controllers\Edisoft\ClienteController@borrar')->middleware('auth');
 iterate(false);
 
 function iterate($middleware = false) {

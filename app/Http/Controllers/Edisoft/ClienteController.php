@@ -23,9 +23,24 @@ class ClienteController extends \App\Http\Controllers\Controller {
         if (count($diff))
             throw new \Exception("Faltan parametros.");
     }
+    public function borrar($id) {
+        $cliente = new \Cliente();
+        $cliente->get($id);
+        
+        if($cliente->get_id()==$id and \Cliente::delete($id, $cliente, get_class($cliente))){
+            return $this->retornar(self::RESPUESTA_CORRECTA, "Borrados: " . 1, []);
+        }
+        else{
+            return $this->retornar(self::RESPUESTA_INCORRECTA, "Error al eliminar cliente", []);
+        }
+    }
 
-    public function obtener() {
-        $rs = \Cliente::select(["id_authstat" => \Authstat::ACTIVO]);
+    public function obtener($id=null) {
+        $where = ["id_authstat" => \Authstat::ACTIVO];
+        if($id!=null){
+            $where["id_cliente"]=$id;
+        }
+        $rs = \Cliente::select($where);
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
