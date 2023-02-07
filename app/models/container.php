@@ -269,9 +269,9 @@ class Container extends Model {
 
             
     public static function select_containers($tipo,$filtros=[]) {
-        $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA];
+        $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA,"_all"=>""];
         $where=" TRUE ";
-        if(isset($array[$tipo])){
+        if(isset($array[$tipo]) and $tipo!="_all"){
             $tipo = $array[$tipo];
             $where .= " and A.id_authstat in (?) ";
             $variables = [$tipo];

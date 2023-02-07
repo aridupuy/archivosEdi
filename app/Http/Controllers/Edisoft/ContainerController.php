@@ -258,6 +258,22 @@ class ContainerController extends \App\Http\Controllers\Controller {
         
         return $this->export($filename, $resultado);
     }
+    
+    public function exportar_todos_post() {
+        $resultado = $this->get_registros("_all");
+        $fecha = new \DateTime("now");
+        switch (self::$variables["tipo"]) {
+            case "xls":
+                $filename = "Export_all" . $fecha->format("Y-m-d_h_i_s") . ".xlsx";
+                break;
+            case "pdf":
+                $filename = "Export_all" . $fecha->format("Y-m-d_h_i_s") . ".pdf";
+                break;
+        }
+        
+        return $this->export($filename, $resultado);
+    }
+    
     public function exportar_posicionados_post() {
         $resultado = $this->get_registros("entrada");
         $posiciones=array();
