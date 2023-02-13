@@ -15,7 +15,7 @@ namespace App\Http\Controllers\Edisoft;
 class PosicionadoController extends \App\Http\Controllers\Controller {
 
     static $campos_obligatorios = ["id", "agente_aduana", "maniobra","destino","sello"];
-    static $filtrado =["fecha_desde","fecha_hasta", "cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino","sello","rff_ep"];
+    static $filtrado =["fecha_desde","fecha_hasta", "cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino","sello","rff_ep","ids"];
     public function validar_campos() {
         $vars = array_keys(self::$variables);
         $diff = array_diff(self::$campos_obligatorios, $vars);
@@ -78,9 +78,15 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
     }
 
     private function get_posiciones() {
-        $filtros= $this->set_filtros(); 
-        $id = self::$variables["id"];
-        $rs = \Posiciones::select_posiciones($id,$filtros);
+        $filtros= $this->set_filtros();
+        
+        if(isset(self::$variables["ids"])){
+            $ids = self::$variables["ids"];
+        }
+        
+        if(isset(self::$variables["ids"]))
+            $ids = [self::$variables["id"]];
+        $rs = \Posiciones::select_posiciones($ids,$filtros);
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
