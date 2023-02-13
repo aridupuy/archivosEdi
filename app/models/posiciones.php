@@ -126,9 +126,11 @@ class Posiciones extends Model{
     }
 
     public static function select_posiciones($id,$filtros=[]) {
-        $where =" A.id_container=? ";
-        $variables[]=$id;
-        
+        $where =" true ";
+        if($id!=null){
+            $where .=" AND A.id_container=? ";    
+            $variables[]=$id;
+        }
         if(isset($filtros["fecha_desde"])){
             $where.=" and date(A.fecha_gen)  >=? ";
             $variables[]=$filtros["fecha_desde"];
@@ -175,7 +177,7 @@ class Posiciones extends Model{
                 . "left join ed_usuario G on A.id_usuario= G.id_usuario "
                 . " where $where "
                 ." order by A.id_posicion desc ";
-//        print_r($sql);
+        
         return self::execute_select($sql,$variables);
     }
     
