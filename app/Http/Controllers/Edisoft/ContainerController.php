@@ -58,7 +58,8 @@ class ContainerController extends \App\Http\Controllers\Controller {
     
     private function get_registros($tipo){
         $filtros=$this->set_filtros();
-        $rs = \Container::select_containers($tipo,$filtros);
+        $ids= isset(self::$variables["ids"])?self::$variables["ids"]:null;
+        $rs = \Container::select_containers($tipo,$filtros,$ids);
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
