@@ -268,7 +268,7 @@ class Container extends Model {
     }
 
             
-    public static function select_containers($tipo,$filtros=[]) {
+    public static function select_containers($tipo,$filtros=[],$ids=null) {
         $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA,"_all"=>""];
         $where=" TRUE ";
         if(isset($array[$tipo]) and $tipo!="_all"){
@@ -324,6 +324,17 @@ class Container extends Model {
         if(isset($filtros["destino"])){
             $where.=" and LOWER(A.destino) LIKE LOWER( concat('%' , concat(? , '%' )))";
             $variables[]=$filtros["destino"];
+        }
+        if($ids!=null){
+            if($ids!=null || count($ids)>0){
+                foreach ($ids as $id){
+                    $in=$in==""?$in."(?": $in.",?";
+                    $variables[]=$id;
+                }
+                $in.=")";
+                $where .=" AND A.id_container in $in";    
+            }
+            
         }
         
         $sql = "select *,

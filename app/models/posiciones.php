@@ -125,11 +125,15 @@ class Posiciones extends Model{
         return $this;
     }
 
-    public static function select_posiciones($id,$filtros=[]) {
+    public static function select_posiciones($ids,$filtros=[]) {
         $where =" true ";
-        if($id!=null){
-            $where .=" AND A.id_container=? ";    
-            $variables[]=$id;
+        if($ids!=null || count($ids)>0){
+            foreach ($ids as $id){
+                $in=$in==""?$in."(?": $in.",?";
+                $variables[]=$id;
+            }
+            $in.=")";
+            $where .=" AND A.id_container in $in";    
         }
         if(isset($filtros["fecha_desde"])){
             $where.=" and date(A.fecha_gen)  >=? ";
