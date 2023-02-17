@@ -397,7 +397,7 @@ class Gestor_de_disco {
                 return true;
             }
         } catch (\Exception $e) {
-//            var_dump($e->getMessage());
+            var_dump($e->getMessage());
             developer_log($e->getMessage());
             return false;
         }
