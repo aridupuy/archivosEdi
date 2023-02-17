@@ -354,7 +354,6 @@ class Gestor_de_disco {
 //        $mpdf = new \Mpdf\Mpdf(['tempDir' => PATH_PUBLIC_FOLDER]);
         
         $vista = new Vista();
-        $vista = new Vista();
         $table = $vista->createElement("table");
         $tr = $vista->createElement("tr");
         $headers = $resultado[0];
@@ -393,11 +392,10 @@ class Gestor_de_disco {
         $mpdf->WriteHTML($html,2);
         try {
             $mpdf->Output($filename);
-            if(file_exists(PATH_PUBLIC_FOLDER.$filename)){
+            if(file_exists($filename)){
                 return true;
             }
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
             developer_log($e->getMessage());
             return false;
         }
