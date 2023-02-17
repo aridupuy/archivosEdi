@@ -172,6 +172,15 @@ class Posiciones extends Model{
             $where.=" and maniobra!=?";
             $variables[]="ENTRADA";
         }
+        if(isset($filtros["id_authstat"])){
+            $where.=" and id_authstat=?";
+            $variables[]=$filtros["id_authstat"];
+        }
+        if(isset($filtros["exclude"])){
+            $where.=" and ".$filtros["exclude"];
+        }
+        
+        
         $sql = "select *,F.nombre_completo nombre_completo from ed_posiciones A "
                 . "left join ed_container B on  A.id_container=B.id_container "
                 . "left join ho_authstat C on A.id_authstat=C.id_authstat "
@@ -181,8 +190,6 @@ class Posiciones extends Model{
                 . "left join ed_usuario G on A.id_usuario= G.id_usuario "
                 . " where $where "
                 ." order by A.id_posicion desc ";
-        var_dump($sql);
-        exit();
         return self::execute_select($sql,$variables);
     }
     
