@@ -190,6 +190,8 @@ class Posiciones extends Model{
                 . "left join ed_usuario G on A.id_usuario= G.id_usuario "
                 . " where $where "
                 ." order by A.id_posicion desc ";
+        var_dump($sql);
+        exit();
         return self::execute_select($sql,$variables);
     }
     
