@@ -86,6 +86,9 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
         
         if(isset(self::$variables["ids"]))
             $ids = [self::$variables["id"]];
+        $filtros["id_authstat"]= \Authstat::SALIDA;
+        $filtros["exclude"]="maniobra!='SALIDA'";
+        
         $rs = \Posiciones::select_posiciones($ids,$filtros);
         $respuesta = [];
         $i = 0;
