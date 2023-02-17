@@ -133,7 +133,7 @@ abstract class Controller extends BaseController
                     $error = true;
                 break;
             case "pdf":
-                if (!$gestor_de_disco->generar_pdf($resultado, "Export/" . $filename)) {
+                if (!$gestor_de_disco->generar_pdf($resultado, PATH_PUBLIC_FOLDER."Export/" . $filename)) {
                     $error = true;
                 }
                 break;
