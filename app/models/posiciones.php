@@ -173,7 +173,7 @@ class Posiciones extends Model{
             $variables[]="ENTRADA";
         }
         if(isset($filtros["id_authstat"])){
-            $where.=" and id_authstat=?";
+            $where.=" and A.id_authstat=?";
             $variables[]=$filtros["id_authstat"];
         }
         if(isset($filtros["exclude"])){
