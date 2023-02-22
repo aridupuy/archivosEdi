@@ -94,33 +94,18 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
-            $posicion = new \Posiciones($row);
-            $methods = get_class_methods($posicion);
-            foreach ($methods as $method) {
-//                var_dump($method);
-                if ($method !== "get_id" and strstr($method, "get_")) {
-                    $respuesta[$i][substr($method, 4, strlen($method) - 4)] = $posicion->$method();
-                }
-            }
             $container = new \Container($row);
-//            $container->get($posicion->get_id_container());
             $methods = get_class_methods($container);
             foreach ($methods as $method) {
-//                var_dump($method);
                 if ($method !== "get_id" and strstr($method, "get_")) {
                     $respuesta[$i][substr($method, 4, strlen($method) - 4)] = $container->$method();
                 }
             }
             $tipocontainer = new \Tipocontainer($row);
-//            $tipocontainer->get($container->get_id_tipocontainer());
             $tipoingreso = new \Tipo_ingreso($row);
-//            $tipoingreso->get($container->get_id_tipoingreso());
             $cliente = new \Cliente($row);
-//            $cliente->get($posicion->get_id_cliente());
             $usuario = new \Usuario($row);
-//            $usuario->get($posicion->get_id_usuario());
             $authstat = new \Authstat($row);
-//            $authstat->get($posicion->get_id_authstat());
             $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
             $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
             $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
