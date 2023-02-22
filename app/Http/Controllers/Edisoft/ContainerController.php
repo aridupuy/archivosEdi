@@ -276,9 +276,8 @@ class ContainerController extends \App\Http\Controllers\Controller {
     }
     
     public function exportar_posicionados_post() {
-//        $resultado = $this->get_registros("entrada");
         $posiciones=array();
-        $rs = \Container::select_contenedores_posicionados( $row["id_container"],["noentrada"=>true]);
+        $rs = \Container::select_contenedores_posicionados(self::$variables["ids"]);
         foreach ($rs as $row){
             
             $row=$rs->fetchRow();

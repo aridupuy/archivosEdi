@@ -359,7 +359,7 @@ class Container extends Model {
         return self::execute_select($sql, $variables);
     }
 
-    public static function select_contenedores_posicionados($ids, $filtros) {
+    public static function select_contenedores_posicionados($ids, $filtros=false) {
         $where = " A.id_authstat=?";
         $variables[] = Authstat::POSICIONADO;
 
