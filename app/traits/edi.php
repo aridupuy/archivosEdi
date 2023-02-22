@@ -47,7 +47,7 @@ abstract class Edi {
                 return new Codeco_entrada($variables, $container, $id);
 //            }
         } 
-        elseif($container->getIterator()->current()->get_id_authstat()==Authstat::POSICIONADO){
+        elseif($container->getIterator()->current()->get_id_authstat()==Authstat::POSICIONADO and !$container->getIterator()->current()->get_tiene_edi_salida()){
             $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id(), "id_authstat" => Authstat::POSICIONADO]);
             if ($rs->rowCount() > 0) {
                 developer_log("Generando posicionado.");
