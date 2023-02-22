@@ -86,10 +86,11 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
         
         if(isset(self::$variables["ids"]))
             $ids = [self::$variables["id"]];
-        $filtros["id_authstat"]= \Authstat::SALIDA;
-        $filtros["exclude"]="A.maniobra!='SALIDA'";
+//        $filtros["id_authstat"]= \Authstat::SALIDA;
+//        $filtros["exclude"]="A.maniobra!='SALIDA'";
         
-        $rs = \Posiciones::select_posiciones($ids,$filtros);
+//        $rs = \Posiciones::select_posiciones($ids,$filtros);
+        $rs = \Container::select_contenedores_posicionados($ids,$filtros);
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
