@@ -420,7 +420,7 @@ class Container extends Model {
                 . "left join ed_usuario G on A.id_usuario= G.id_usuario "
                 . " where $where "
                 . " order by A.id_container desc ";
-        
+        var_dump($sql);
         return self::execute_select($sql, $variables);
     }
 
