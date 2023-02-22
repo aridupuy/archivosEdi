@@ -46,7 +46,17 @@ abstract class Edi {
                 developer_log("Generando entrada");
                 return new Codeco_entrada($variables, $container, $id);
 //            }
-        } elseif (!$container->getIterator()->current()->get_tiene_edi_salida()) {
+        } 
+        elseif($container->getIterator()->current()->get_id_authstat()==Authstat::POSICIONADO){
+            $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id(), "id_authstat" => Authstat::POSICIONADO]);
+            if ($rs->rowCount() > 0) {
+                developer_log("Generando posicionado.");
+                return new Codeco_salida($variables, $container, $id);
+            } else {
+                throw new Exception("El contenedor ya tiene todos sus edi generado.");
+            }
+        }
+        elseif (!$container->getIterator()->current()->get_tiene_edi_salida()) {
             $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id(), "id_authstat" => Authstat::SALIDA]);
             if ($rs->rowCount() > 0) {
                 developer_log("Generando salida.");
