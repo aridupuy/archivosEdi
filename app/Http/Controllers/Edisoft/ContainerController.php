@@ -278,10 +278,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
     public function exportar_posicionados_post() {
         $posiciones=array();
         $rs = \Container::select_contenedores_posicionados(self::$variables["ids"]);
-        var_dump($rs->rowCount());
         foreach ($rs as $row){
-            
-            $row=$rs->fetchRow();
             $posicion=[];
             $posicion["id_container"]=$row["id_container"];
             $posicion["fecha_gen"]=$row["fecha_gen"];
