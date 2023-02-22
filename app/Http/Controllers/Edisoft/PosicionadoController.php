@@ -49,7 +49,7 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $posicionado = new \Posiciones();
             $posicionado->set_agente_aduana(self::$variables["agente_aduana"]);
             $posicionado->set_bl($container->get_bl());
-            $posicionado->set_id_authstat(\Authstat::SALIDA);
+            $posicionado->set_id_authstat(\Authstat::POSICIONADO);
             $posicionado->set_maniobra(self::$variables["maniobra"]);
             $posicionado->set_id_cliente($container->get_id_cliente());
             $posicionado->set_id_container($container->get_id_container());
@@ -60,7 +60,7 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $container->set_nota(self::$variables["nota"]?:"");
             $container->set_sello(self::$variables["sello"]?:"");
             $container->set_rff_ep(self::$variables["rff_ep"]?:"");
-            $container->set_id_authstat(\Authstat::SALIDA);
+            $container->set_id_authstat(\Authstat::POSICIONADO);
             
             if ($posicionado->set() and $container->set()) {
                 $id_container = $container->get_id_container();

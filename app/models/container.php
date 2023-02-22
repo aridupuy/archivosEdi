@@ -269,7 +269,7 @@ class Container extends Model {
 
             
     public static function select_containers($tipo,$filtros=[],$ids=null) {
-        $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA,"_all"=>""];
+        $array=["entrada"=> \Authstat::ENTRADA,"salida"=> \Authstat::SALIDA,"posicionado"=> \Authstat::POSICIONADO,"_all"=>""];
         $where=" TRUE ";
         if(isset($array[$tipo]) and $tipo!="_all"){
             $tipo = $array[$tipo];
@@ -325,6 +325,7 @@ class Container extends Model {
             $where.=" and LOWER(A.destino) LIKE LOWER( concat('%' , concat(? , '%' )))";
             $variables[]=$filtros["destino"];
         }
+        
         if($ids!=null){
             if($ids!=null || count($ids)>0){
                 foreach ($ids as $id){
@@ -348,9 +349,6 @@ class Container extends Model {
                 . "left join ed_usuario F on A.id_usuario= F.id_usuario "
                 . "left join ho_ie G on A.id_ie= G.id_ie "
                 . "where $where order by 1 desc";
-//        $variables = [Authstat::ACTIVO, Authstat::ENTRADA, Authstat::SALIDA, Authstat::INACTIVO];
-//        print_r(DATABASE_HOST);
-        
         return self::execute_select($sql, $variables);
     }
 
