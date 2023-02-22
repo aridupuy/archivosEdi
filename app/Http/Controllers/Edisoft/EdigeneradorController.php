@@ -52,7 +52,6 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
             if (!$obj) 
                 return $this->retornar(false, "Erro al buscar el objeto.");
             $result = $obj->generar_edi();
-//            var_dump($result );
             if (!($urls[] = $result )) 
                 return $this->retornar(false, "Error al generar archivo.");
             if (!$container->set()) 
