@@ -329,7 +329,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posicion[]["Maniobra"] =  $pos->get_maniobra();
             $posicion[]["Transportista"] =  $pos->get_transportista();
             $posicion[]["Agente Aduana"] =  $pos->get_agente_aduana();
-            $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen());
+            $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $pos->get_fecha_gen());
             $posicion[]["fecha posicionado"] =  $fechaPosicion->format("d/m/Y H:i:s");
             $UsuarioPosicionado=new \Usuario();
             $UsuarioPosicionado->get($pos->get_id_usuario());
