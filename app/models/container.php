@@ -346,7 +346,7 @@ class Container extends Model {
                 . "left join ed_cliente E on A.id_cliente= E.id_cliente "
                 . "left join ed_usuario F on A.id_usuario= F.id_usuario "
                 . "left join ho_ie G on A.id_ie= G.id_ie "
-                . "left join ed_posiciones H on A.id_container= H.id_container and H.id_authstat=A.id_authstat "
+                . "right join ed_posiciones H on A.id_container= H.id_container and H.id_authstat=A.id_authstat "
                 . "where $where order by 1 desc";
         return self::execute_select($sql, $variables);
     }
