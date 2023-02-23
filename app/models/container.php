@@ -415,12 +415,13 @@ class Container extends Model {
         if (isset($filtros["exclude"])) {
             $where .= " and " . $filtros["exclude"];
         }
-        $sql = "select *,F.nombre_completo nombre_completo from ed_container A "
+        $sql = "select *,F.nombre_completo nombre_completo, from ed_container A "
                 . "left join ho_authstat C on A.id_authstat=C.id_authstat "
                 . "left join ho_tipo_ingreso D on A.id_tipoingreso = D.id_tipo_ingreso "
                 . "left join ho_tipocontainer E on A.id_tipocontainer = E.id_tipocontainer "
                 . "left join ed_cliente F on A.id_cliente= F.id_cliente "
                 . "left join ed_usuario G on A.id_usuario= G.id_usuario "
+                . "left join ed_posiciones H on A.id_container= H.id_container and H.id_authstat=A.id_authstat"
                 . " where $where "
                 . " order by A.id_container desc ";
         return self::execute_select($sql, $variables);

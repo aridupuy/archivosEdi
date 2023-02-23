@@ -125,11 +125,6 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $respuesta[$i]["fecha posicionado"] =  $fechaPosicion->format("d/m/Y H:i:s");
             $respuesta[$i]["posicionado Usuario"] = (new \Usuario())->get($posiciones->get_id_usuario())->get_nombre_completo();
             
-            unset($respuesta[$i]["id_usuario"]);
-            unset($respuesta[$i]["id_tipoingreso"]);
-            unset($respuesta[$i]["id_tipocontainer"]);
-            unset($respuesta[$i]["id_authstat"]);
-            unset($respuesta[$i]["id_cliente"]);
             $i++;
         }
         return $respuesta;
