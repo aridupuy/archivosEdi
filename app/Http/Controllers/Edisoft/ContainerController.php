@@ -75,17 +75,18 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $authstat = new \Authstat($row);
             $posiciones = new \Posiciones($row);
             $ie = new \Ie($row);
-            var_dump($row["fecha_generacion"]);
             if(!$container->get_fecha_gen())
                 $container->set_fecha_gen($row["fecha_generacion"]);
-            $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
+            var_dump($container->get_fecha_gen());
+            $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", $container->get_fecha_recepcion()==null ? $container->get_fecha_gen() : $container->get_fecha_recepcion());
             if(!$fecha_recepcion){
                 $fecha_recepcion=\DateTime::createFromFormat("Ymd", $container->get_fecha_recepcion());
             }
             if($fecha_recepcion)
                 $hora_recepcion = $container->get_hora_recepcion()!=null ? $container->get_hora_recepcion() : $fecha_recepcion->format("H:i");
             else $hora_recepcion="00:00";
-            
+            var_dump($fecha_recepcion);
+            var_dump($hora_recepcion);
             $respuesta[$i]["id"] = $container->get_id_container();
             $respuesta[$i]["Fecha"] = $fecha_recepcion->format("Y-m-d");
             $respuesta[$i]["Hora"] = $hora_recepcion ;
