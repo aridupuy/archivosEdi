@@ -77,7 +77,6 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $ie = new \Ie($row);
             if(!$container->get_fecha_gen())
                 $container->set_fecha_gen($row["fecha_generacion"]);
-            var_dump($container->get_fecha_gen());
             $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", $container->get_fecha_recepcion()==null ? $container->get_fecha_gen() : $container->get_fecha_recepcion());
             if(!$fecha_recepcion){
                 $fecha_recepcion=\DateTime::createFromFormat("Ymd", $container->get_fecha_recepcion());
@@ -85,8 +84,6 @@ class ContainerController extends \App\Http\Controllers\Controller {
             if($fecha_recepcion)
                 $hora_recepcion = $container->get_hora_recepcion()!=null ? $container->get_hora_recepcion() : $fecha_recepcion->format("H:i");
             else $hora_recepcion="00:00";
-            var_dump($fecha_recepcion);
-            var_dump($hora_recepcion);
             $respuesta[$i]["id"] = $container->get_id_container();
             $respuesta[$i]["Fecha"] = $fecha_recepcion->format("Y-m-d");
             $respuesta[$i]["Hora"] = $hora_recepcion ;
@@ -107,6 +104,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $respuesta[$i]["Maniobra"] =  $posiciones->get_maniobra();
             $respuesta[$i]["Transportista"] =  $posiciones->get_transportista();
             $respuesta[$i]["Agente Aduana"] =  $posiciones->get_agente_aduana();
+            var_dump($posiciones->get_fecha_gen());
             $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen());
             $respuesta[$i]["fecha posicionado"] =  $fechaPosicion->format("d/m/Y H:i:s");
             $UsuarioPosicionado=new \Usuario();
