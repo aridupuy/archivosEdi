@@ -326,8 +326,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posicion[]["Nota"] = $container->get_nota();
             $posicion[]["Sello"] = $container->get_sello();
             $posicion[]["Rff_ep"] =  $container->get_rff_ep();
-            $posicion[]["Maniobra"] = strtoupper($tipo);
-            $posicion[]["Maniobra"] =  $posiciones->get_maniobra();
+            $posicion[]["Maniobra"] =  $pos->get_maniobra();
             $posicion[]["Transportista"] =  $pos->get_transportista();
             $posicion[]["Agente Aduana"] =  $pos->get_agente_aduana();
             $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen());

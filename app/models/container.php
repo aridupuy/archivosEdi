@@ -424,7 +424,6 @@ class Container extends Model {
                 . "left join ed_posiciones H on A.id_container= H.id_container and H.id_authstat=A.id_authstat"
                 . " where $where "
                 . " order by A.id_container desc ";
-        var_dump($sql);
         return self::execute_select($sql, $variables);
     }
 
