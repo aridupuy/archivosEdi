@@ -423,10 +423,8 @@ class Container extends Model {
                 . "left join ed_cliente F on A.id_cliente= F.id_cliente "
                 . "left join ed_usuario G on A.id_usuario= G.id_usuario "
                 . "left join ed_posiciones H on A.id_container= H.id_container and H.id_authstat=A.id_authstat "
-                . "left join ho_ie i on A.id_ie = I.id_ie "
                 . " where $where "
                 . " order by A.id_container desc ";
-//        var_dump($sql);
         return self::execute_select($sql, $variables);
     }
 
