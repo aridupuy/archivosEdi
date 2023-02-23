@@ -336,7 +336,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posicion["Transportista"] =  $pos->get_transportista();
             $posicion["Agente Aduana"] =  $pos->get_agente_aduana();
             $fechaPosicion ="";
-            if($posiciones->get_fecha_gen()){
+            if($pos->get_fecha_gen()){
                 $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $pos->get_fecha_gen())->format("d/m/Y H:i:s");
             }
             $posicion["fecha posicionado"] =  $fechaPosicion;
