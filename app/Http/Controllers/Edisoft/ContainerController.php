@@ -292,7 +292,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             
             $fecha_recepcion = $hora_recepcion = "";
             if($row["fecha_recepcion"]!=null )
-                $fecha_recepcion = \DateTime::createFromFormat("!Y-m-d", $row["fecha_recepcion"])->format("Y-m-d");
+                $fecha_recepcion = \DateTime::createFromFormat("Ymd", $row["fecha_recepcion"])->format("Y-m-d");
             if($fecha_recepcion==""){
                 $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", $row["fecha_gen"])->format("Y-m-d");
             }
@@ -356,7 +356,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             
             $fecha_recepcion = $hora_recepcion = "";
             if($row["fecha_recepcion"]!=null )
-                $fecha_recepcion = \DateTime::createFromFormat("!Y-m-d", $row["fecha_recepcion"])->format("Y-m-d");
+                $fecha_recepcion = \DateTime::createFromFormat("Ymd", $row["fecha_recepcion"])->format("Y-m-d");
             if($fecha_recepcion==""){
                 $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", $row["fecha_gen"])->format("Y-m-d");
             }
