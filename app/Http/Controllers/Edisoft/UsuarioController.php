@@ -112,6 +112,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
                 $id_usuario = $usuario->getId();
                 $response["msg"] = "Usuario generado Correctamente.";
                 $resp = self::RESPUESTA_CORRECTA;
+                \Gestor_de_correo::enviar(\Gestor_de_correo::MAIL_INFO, $usuario->get_email(),"Generación de Usuario", "Hola ".$usuario->get_nombre_completo().". Hemos generado un nuevo usuario a tu nombre, para ingresar click <a href='https://transportesrossell.com/admin/'>Aqui</a>");
             } else {
                 $response["msg"] = "Error al generar el usuario";
                 $resp = self::RESPUESTA_INCORRECTA;

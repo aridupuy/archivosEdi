@@ -335,7 +335,9 @@ class Container extends Model {
 
         $sql = "select *,
                     A.fecha_gen as fecha_gen,
-                    F.fecha_gen as fecha_usuario  "
+                    F.fecha_gen as fecha_usuario  ,
+                    H.*
+                    "
                 . "from ed_container A "
                 . "left join ho_authstat B on A.id_authstat=B.id_authstat "
                 . "left join ho_tipo_ingreso C on A.id_tipoingreso = C.id_tipo_ingreso "
@@ -343,6 +345,7 @@ class Container extends Model {
                 . "left join ed_cliente E on A.id_cliente= E.id_cliente "
                 . "left join ed_usuario F on A.id_usuario= F.id_usuario "
                 . "left join ho_ie G on A.id_ie= G.id_ie "
+                . "left join ed_posiciones H on A.id_container= H.id_container and H.id_authstat=A.id_authstat "
                 . "where $where order by 1 desc";
         return self::execute_select($sql, $variables);
     }

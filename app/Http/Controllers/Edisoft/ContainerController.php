@@ -24,74 +24,85 @@ class ContainerController extends \App\Http\Controllers\Controller {
         "booking", //nota de embarque es el factor clave que se necesita para que una mercancía pueda recibir la orden de ser cargada y exportada. el transportista se compromete a conservar un cierto espacio en el buque para el fletador.
         "id_ie", //1 o 2 importacion exportacion
         "rff_ep",
-        "id_tipoingreso", 
+        "id_tipoingreso",
     );
-    static $filtrado =["fecha_desde","fecha_hasta","tiene_edi_entrada","tiene_edi_salida" ,"id_estado","cod_contenedor", "id_tipocontenedor","tipocontenedor", "id_cliente","cliente","destino"];
+    static $filtrado = ["fecha_desde", "fecha_hasta", "tiene_edi_entrada", "tiene_edi_salida", "id_estado", "cod_contenedor", "id_tipocontenedor", "tipocontenedor", "id_cliente", "cliente", "destino"];
+
     public function validar_campos() {
         $vars = array_keys(self::$variables);
         $diff = array_diff(self::$campos_obligatorios, $vars);
         if (count($diff))
             throw new \Exception("Faltan parametros.");
     }
+
     public function obtener_registros_post() {
         $respuesta = $this->get_registros("todos");
         return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados " . count($respuesta), $respuesta);
     }
-    
+
     public function obtener_entradas() {
         $respuesta = $this->get_registros("entrada");
         return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados " . count($respuesta), $respuesta);
     }
+
     public function obtener_entradas_post() {
         return $this->obtener_entradas();
     }
-    
 
     public function obtener_salidas() {
         $respuesta = $this->get_registros("salida");
         return $this->retornar(self::RESPUESTA_CORRECTA, "Encontrados " . count($respuesta), $respuesta);
     }
-     public function obtener_salidas_post() {
-         
+
+    public function obtener_salidas_post() {
+
         return $this->obtener_salidas();
     }
-    
-    private function get_registros($tipo){
-        $filtros=$this->set_filtros();
-        $ids= isset(self::$variables["ids"])?self::$variables["ids"]:null;
-        $rs = \Container::select_containers($tipo,$filtros,$ids);
+
+    private function get_registros($tipo) {
+        $filtros = $this->set_filtros();
+        $ids = isset(self::$variables["ids"]) ? self::$variables["ids"] : null;
+        $rs = \Container::select_containers($tipo, $filtros, $ids);
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
             $container = new \Container($row);
-            $methods = get_class_methods($container);
-            foreach ($methods as $method) {
-                if ($method !== "get_id" and strstr($method, "get_")) {
-                    $respuesta[$i][substr($method, 4, strlen($method) - 4)] = $container->$method();
-                }
-            }
             $tipocontainer = new \Tipocontainer($row);
             $tipoingreso = new \Tipo_ingreso($row);
             $cliente = new \Cliente($row);
             $usuario = new \Usuario($row);
             $authstat = new \Authstat($row);
+            $posiciones = new \Posiciones($row);
             $ie = new \Ie($row);
-
-            $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
-            $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
-            $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
-            $respuesta[$i]["usuario"] = $usuario->get_nombre_usuario();
-            $respuesta[$i]["authstat"] = $authstat->get_authstat();
-            $respuesta[$i]["ie"] = $ie->get_ie();
+            
+            $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
+            $hora_recepcion = $container->get_hora_recepcion()!=null?$container->get_hora_recepcion():$fecha_recepcion->format("H:i");
+            $respuesta[$i]["id"] = $container->get_id_container();
+            $respuesta[$i]["Fecha"] = $fecha_recepcion->format("Y-m-d");
+            $respuesta[$i]["Hora"] = $hora_recepcion ;
+            $respuesta[$i]["Contenedor"] = $container->get_cod_contenedor();
+            $respuesta[$i]["Tipo"] = $tipocontainer->get_tipo_container();
+            $respuesta[$i]["Cliente"] = $cliente->get_nombre_completo();
+            $respuesta[$i]["Usuario"] = $usuario->get_nombre_usuario();
+            $respuesta[$i]["Estado"] = $authstat->get_authstat();
+            $respuesta[$i]["Tipo Ingreso"] = $tipoingreso->get_tipo_ingreso();
+            $respuesta[$i]["Ie"] = $ie->get_ie();
             $respuesta[$i]["peso"] = $container->get_peso();
-            $respuesta[$i]["path_edi_entrada"] = $container->get_path_edi_entrada();
-            $respuesta[$i]["path_edi_salida"] = $container->get_path_edi_salida();
-            unset($respuesta[$i]["id_usuario"]);
-            unset($respuesta[$i]["id_tipoingreso"]);
-            unset($respuesta[$i]["id_tipocontainer"]);
-            unset($respuesta[$i]["id_authstat"]);
-            unset($respuesta[$i]["id_cliente"]);
-            unset($respuesta[$i]["id_ie"]);
+            $respuesta[$i]["Destino"] = $container->get_destino();
+            $respuesta[$i]["Eir"] = $container->get_eir();
+            $respuesta[$i]["Nota"] = $container->get_nota();
+            $respuesta[$i]["Sello"] = $container->get_sello();
+            $respuesta[$i]["Rff_ep"] =  $container->get_rff_ep();
+            $respuesta[$i]["Maniobra"] = strtoupper($tipo);
+            $respuesta[$i]["Maniobra"] =  $posiciones->get_maniobra();
+            $respuesta[$i]["Transportista"] =  $posiciones->get_transportista();
+            $respuesta[$i]["Agente Aduana"] =  $posiciones->get_agente_aduana();
+            $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen());
+            $respuesta[$i]["fecha posicionado"] =  $fechaPosicion->format("d/m/Y H:i:s");
+            $UsuarioPosicionado=new \Usuario();
+            $UsuarioPosicionado->get($posiciones->get_id_usuario());
+            $respuesta[$i]["posicionado Usuario"] = $UsuarioPosicionado->get_nombre_usuario();
+           
             $i++;
         }
         return $respuesta;
@@ -119,7 +130,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posiciones->set_id_usuario(self::$USUARIO->get_id());
             $posiciones->set_id_tipoingreso($container->get_id_tipoingreso());
             $posiciones->set_maniobra("ENTRADA");
-            
+
             if ($posiciones->set()) {
                 \Model::CompleteTrans();
                 $id_container = $container->get_id_container();
@@ -191,13 +202,13 @@ class ContainerController extends \App\Http\Controllers\Controller {
     }
 
     public function salida_post() {
-        self::$campos_obligatorios=["destino",
-                                    "sello",
-                                    "buque",
-                                    "viaje",
-                                    "peso",
-                                    "unidad_peso",
-                                    "agente_aduana"];
+        self::$campos_obligatorios = ["destino",
+            "sello",
+            "buque",
+            "viaje",
+            "peso",
+            "unidad_peso",
+            "agente_aduana"];
         $this->validar_campos();
         if (!isset(self::$variables["id"])) {
             throw new \Exception("No hay id");
@@ -215,10 +226,10 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posicion->set_bl(self::$variables["bl"]);
             $posicion->set_id_container($container->get_id_container());
             $posicion->set_id_cliente($container->get_id_cliente());
-            
+
             $container->set_destino(self::$variables["destino"]);
             $posicion->set_id_tipoingreso($container->get_id_tipoingreso());
-            $container->set_eir(self::$variables["eir"]?:null);
+            $container->set_eir(self::$variables["eir"] ?: null);
             $posicion->set_maniobra(self::$variables["maniobra"]);
             $container->set_nota(self::$variables["nota"]);
             $container->set_sello(self::$variables["sello"]);
@@ -227,7 +238,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $container->set_buque(self::$variables["buque"]);
 //            $container->set_(self::$variables["buque"]);
             $posicion->set_id_usuario(self::$USUARIO->get_id());
-            $posicion->set_agente_aduana(self::$variables["agente_aduana"]?:"No Proporcionado");
+            $posicion->set_agente_aduana(self::$variables["agente_aduana"] ?: "No Proporcionado");
             $posicion->set_maniobra("SALIDA");
             $container->set_id_authstat(\Authstat::SALIDA);
             if ($posicion->set() and $container->set()) {
@@ -256,10 +267,10 @@ class ContainerController extends \App\Http\Controllers\Controller {
                 $filename = "Export_entradas" . $fecha->format("Y-m-d_h_i_s") . ".pdf";
                 break;
         }
-        
+
         return $this->export($filename, $resultado);
     }
-    
+
     public function exportar_todos_post() {
         $resultado = $this->get_registros("_all");
         $fecha = new \DateTime("now");
@@ -271,39 +282,39 @@ class ContainerController extends \App\Http\Controllers\Controller {
                 $filename = "Export_all" . $fecha->format("Y-m-d_h_i_s") . ".pdf";
                 break;
         }
-        
+
         return $this->export($filename, $resultado);
     }
-    
+
     public function exportar_posicionados_post() {
-        $posiciones=array();
+        $posiciones = array();
         $rs = \Container::select_contenedores_posicionados(self::$variables["ids"]);
-        foreach ($rs as $row){
-            $posicion=[];
-            $posicion["id_container"]=$row["id_container"];
-            $posicion["fecha_gen"]=$row["fecha_gen"];
-            $posicion["cod_contenedor"]=$row["cod_contenedor"];
-            $posicion["bl"]=$row["bl"];
-            $posicion["maniobra"]=$row["maniobra"];
-            $posicion["transportista"]=$row["transportista"];
-            $posicion["id_cliente"]=$row["id_cliente"];
-            $posicion["id_tipocontainer"]=$row["id_tipocontainer"];
-            $posicion["booking"]=$row["booking"];
-            $posicion["buque"]=$row["buque"];
-            $posicion["nota"]=$row["nota"];
-            $posicion["viaje"]=$row["viaje"];
-            $posicion["sello"]=$row["sello"];
-            $posicion["destino"]=$row["destino"];
-            $posicion["peso"]=$row["peso"];
-            $posicion["tipo_ingreso"]=$row["tipo_ingreso"];
-            $posicion["tipo_container"]=$row["tipo_container"];
-            $posicion["code"]=$row["code"];
-            $posicion["descrip"]=$row["descrip"];
-            $posicion["cntr_type"]=$row["cntr_type"];
-            $posicion["nombre_completo"]=$row["nombre_completo"];
-            $posicion["email"]=$row["email"];
-            $posicion["nombre_usuario"]=$row["nombre_usuario"];
-            $posiciones[]=$posicion;
+        foreach ($rs as $row) {
+            $posicion = [];
+            $posicion["id_container"] = $row["id_container"];
+            $posicion["fecha_gen"] = $row["fecha_gen"];
+            $posicion["cod_contenedor"] = $row["cod_contenedor"];
+            $posicion["bl"] = $row["bl"];
+            $posicion["maniobra"] = $row["maniobra"];
+            $posicion["transportista"] = $row["transportista"];
+            $posicion["id_cliente"] = $row["id_cliente"];
+            $posicion["id_tipocontainer"] = $row["id_tipocontainer"];
+            $posicion["booking"] = $row["booking"];
+            $posicion["buque"] = $row["buque"];
+            $posicion["nota"] = $row["nota"];
+            $posicion["viaje"] = $row["viaje"];
+            $posicion["sello"] = $row["sello"];
+            $posicion["destino"] = $row["destino"];
+            $posicion["peso"] = $row["peso"];
+            $posicion["tipo_ingreso"] = $row["tipo_ingreso"];
+            $posicion["tipo_container"] = $row["tipo_container"];
+            $posicion["code"] = $row["code"];
+            $posicion["descrip"] = $row["descrip"];
+            $posicion["cntr_type"] = $row["cntr_type"];
+            $posicion["nombre_completo"] = $row["nombre_completo"];
+            $posicion["email"] = $row["email"];
+            $posicion["nombre_usuario"] = $row["nombre_usuario"];
+            $posiciones[] = $posicion;
         }
         $fecha = new \DateTime("now");
         switch (self::$variables["tipo"]) {
@@ -314,11 +325,10 @@ class ContainerController extends \App\Http\Controllers\Controller {
                 $filename = "Export_posicionados" . $fecha->format("Y-m-d_h_i_s") . ".pdf";
                 break;
         }
-        
+
         return $this->export($filename, $posiciones);
     }
-    
-        
+
     public function exportar_salidas_post() {
         $resultado = $this->get_registros("salida");
         $fecha = new \DateTime("now");
@@ -332,6 +342,5 @@ class ContainerController extends \App\Http\Controllers\Controller {
         }
         return $this->export($filename, $resultado);
     }
-    
 
 }

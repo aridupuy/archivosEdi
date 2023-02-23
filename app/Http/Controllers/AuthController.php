@@ -104,7 +104,7 @@ class AuthController extends Log_in_app {
         $rs_usuario = \Usuario::select_login($variables["usuario"], $variables["clave"]);
         $usuario = new \Usuario($rs_usuario->fetchRow());
         if($rs_usuario->rowCount()==0){
-            throw new Exception("Falla en la autenticacion, revise credenciales");    
+            throw new Exception("Falla en la autenticación, revise credenciales");    
         }
         $gestor_tok=new \Gestor_de_tokens();
         $array["token"] = $gestor_tok->crear($usuario);
