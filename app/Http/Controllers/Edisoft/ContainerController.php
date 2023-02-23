@@ -80,7 +80,10 @@ class ContainerController extends \App\Http\Controllers\Controller {
             if(!$fecha_recepcion){
                 $fecha_recepcion=\DateTime::createFromFormat("Ymd", $container->get_fecha_recepcion());
             }
-            $hora_recepcion = $container->get_hora_recepcion()!=null?$container->get_hora_recepcion():$fecha_recepcion->format("H:i");
+            if($fecha_recepcion)
+                $hora_recepcion = $container->get_hora_recepcion()!=null ? $container->get_hora_recepcion() : $fecha_recepcion->format("H:i");
+            else $hora_recepcion="00:00";
+            
             $respuesta[$i]["id"] = $container->get_id_container();
             $respuesta[$i]["Fecha"] = $fecha_recepcion->format("Y-m-d");
             $respuesta[$i]["Hora"] = $hora_recepcion ;
