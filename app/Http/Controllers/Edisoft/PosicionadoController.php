@@ -77,6 +77,7 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
         }
     }
 
+    
     private function get_posiciones() {
         $filtros= $this->set_filtros();
         
@@ -86,53 +87,32 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
         
         if(isset(self::$variables["ids"]))
             $ids = [self::$variables["id"]];
-//        $filtros["id_authstat"]= \Authstat::SALIDA;
-//        $filtros["exclude"]="A.maniobra!='SALIDA'";
-        
-//        $rs = \Posiciones::select_posiciones($ids,$filtros);
         $rs = \Container::select_contenedores_posicionados($ids,$filtros);
         $respuesta = [];
         $i = 0;
         foreach ($rs as $row) {
             $container = new \Container($row);
+            $methods = get_class_methods($container);
+            foreach ($methods as $method) {
+                if ($method !== "get_id" and strstr($method, "get_")) {
+                    $respuesta[$i][substr($method, 4, strlen($method) - 4)] = $container->$method();
+                }
+            }
             $tipocontainer = new \Tipocontainer($row);
             $tipoingreso = new \Tipo_ingreso($row);
             $cliente = new \Cliente($row);
             $usuario = new \Usuario($row);
             $authstat = new \Authstat($row);
-            $posiciones= new \Posiciones($row);
-            $ie= new \Ie($row);
-            $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
-            if(!$fecha_recepcion){
-                $fecha_recepcion=\DateTime::createFromFormat("Ymd", $container->get_fecha_recepcion());
-            }
-            $respuesta[$i]["id"] = $container->get_id_container();
-            $respuesta[$i]["Fecha"] = $fecha_recepcion->format("Y-m-d");
-            $respuesta[$i]["Hora"] = $container->get_hora_recepcion();
-            $respuesta[$i]["Contenedor"] = $container->get_cod_contenedor();
-            $respuesta[$i]["Tipo"] = $tipocontainer->get_tipo_container();
-            $respuesta[$i]["Cliente"] = $cliente->get_nombre_completo();
-            $respuesta[$i]["Usuario"] = $usuario->get_nombre_usuario();
-            $respuesta[$i]["Estado"] = $authstat->get_authstat();
-            $respuesta[$i]["Tipo Ingreso"] = $tipoingreso->get_tipo_ingreso();
-            $respuesta[$i]["ie"] = $ie->get_ie();
-            $respuesta[$i]["peso"] = $container->get_peso();
-            $respuesta[$i]["Destino"] = $container->get_destino();
-            $respuesta[$i]["Eir"] = $container->get_eir();
-            $respuesta[$i]["Nota"] = $container->get_nota();
-            $respuesta[$i]["Sello"] = $container->get_sello();
-            $respuesta[$i]["Rff_ep"] =  $container->get_rff_ep();
-            $respuesta[$i]["Maniobra"] =  $posiciones->get_maniobra();
-            $respuesta[$i]["Transportista"] =  $posiciones->get_transportista();
-            $respuesta[$i]["Agente Aduana"] =  $posiciones->get_agente_aduana();
-            $fechaPosicion ="";
-            if($posiciones->get_fecha_gen()){
-                $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen())->format("d/m/Y H:i:s");
-            }
-            $respuesta[$i]["fecha posicionado"] =  $fechaPosicion;
-            $usuarioP = new \Usuario(); $usuarioP->get($posiciones->get_id_usuario());
-            $respuesta[$i]["posicionado Usuario"] = $usuarioP->get_nombre_completo();
-            
+            $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
+            $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
+            $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
+            $respuesta[$i]["usuario"] = $usuario->get_nombre_usuario();
+            $respuesta[$i]["authstat"] = $authstat->get_authstat();
+            unset($respuesta[$i]["id_usuario"]);
+            unset($respuesta[$i]["id_tipoingreso"]);
+            unset($respuesta[$i]["id_tipocontainer"]);
+            unset($respuesta[$i]["id_authstat"]);
+            unset($respuesta[$i]["id_cliente"]);
             $i++;
         }
         return $respuesta;

@@ -67,6 +67,12 @@ class ContainerController extends \App\Http\Controllers\Controller {
         $i = 0;
         foreach ($rs as $row) {
             $container = new \Container($row);
+            $methods = get_class_methods($container);
+            foreach ($methods as $method) {
+                if ($method !== "get_id" and strstr($method, "get_")) {
+                    $respuesta[$i][substr($method, 4, strlen($method) - 4)] = $container->$method();
+                }
+            }
             $tipocontainer = new \Tipocontainer($row);
             $tipoingreso = new \Tipo_ingreso($row);
             $cliente = new \Cliente($row);
@@ -75,6 +81,22 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $authstat = new \Authstat($row);
             $posiciones = new \Posiciones($row);
             $ie = new \Ie($row);
+            $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
+            $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
+            $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
+            $respuesta[$i]["usuario"] = $usuario->get_nombre_usuario();
+            $respuesta[$i]["authstat"] = $authstat->get_authstat();
+            $respuesta[$i]["ie"] = $ie->get_ie();
+            $respuesta[$i]["peso"] = $container->get_peso();
+            $respuesta[$i]["path_edi_entrada"] = $container->get_path_edi_entrada();
+            $respuesta[$i]["path_edi_salida"] = $container->get_path_edi_salida();
+            unset($respuesta[$i]["id_usuario"]);
+            unset($respuesta[$i]["id_tipoingreso"]);
+            unset($respuesta[$i]["id_tipocontainer"]);
+            unset($respuesta[$i]["id_authstat"]);
+            unset($respuesta[$i]["id_cliente"]);
+            unset($respuesta[$i]["id_ie"]);
+            /*
             if(!$container->get_fecha_gen())
                 $container->set_fecha_gen($row["fecha_generacion"]);
             $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", $container->get_fecha_recepcion()==null ? $container->get_fecha_gen() : $container->get_fecha_recepcion());
@@ -112,7 +134,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $UsuarioPosicionado=new \Usuario();
             $UsuarioPosicionado->get($posiciones->get_id_usuario());
             $respuesta[$i]["posicionado Usuario"] = $UsuarioPosicionado->get_nombre_usuario();
-           
+           */
             $i++;
         }
         return $respuesta;
@@ -301,48 +323,36 @@ class ContainerController extends \App\Http\Controllers\Controller {
         $rs = \Container::select_contenedores_posicionados(self::$variables["ids"]);
         foreach ($rs as $row) {
             $container = new \Container($row);
+            $methods = get_class_methods($container);
+            foreach ($methods as $method) {
+                if ($method !== "get_id" and strstr($method, "get_")) {
+                    $respuesta[$i][substr($method, 4, strlen($method) - 4)] = $container->$method();
+                }
+            }
             $tipocontainer = new \Tipocontainer($row);
             $tipoingreso = new \Tipo_ingreso($row);
             $cliente = new \Cliente($row);
             $usuario = new \Usuario();
             $usuario->get($row["idusuario"]);
             $authstat = new \Authstat($row);
-            $pos = new \Posiciones($row);
+            $posiciones = new \Posiciones($row);
             $ie = new \Ie($row);
+            $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
+            $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
+            $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
+            $respuesta[$i]["usuario"] = $usuario->get_nombre_usuario();
+            $respuesta[$i]["authstat"] = $authstat->get_authstat();
+            $respuesta[$i]["ie"] = $ie->get_ie();
+            $respuesta[$i]["peso"] = $container->get_peso();
+            $respuesta[$i]["path_edi_entrada"] = $container->get_path_edi_entrada();
+            $respuesta[$i]["path_edi_salida"] = $container->get_path_edi_salida();
+            unset($respuesta[$i]["id_usuario"]);
+            unset($respuesta[$i]["id_tipoingreso"]);
+            unset($respuesta[$i]["id_tipocontainer"]);
+            unset($respuesta[$i]["id_authstat"]);
+            unset($respuesta[$i]["id_cliente"]);
+            unset($respuesta[$i]["id_ie"]);
             
-            $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
-            if(!$fecha_recepcion){
-                $fecha_recepcion=\DateTime::createFromFormat("Ymd", $container->get_fecha_recepcion());
-            }
-            $hora_recepcion = $container->get_hora_recepcion()!=null?$container->get_hora_recepcion():$fecha_recepcion->format("H:i");
-            $posicion = [];
-            $posicion["id"] = $container->get_id_container();
-            $posicion["Fecha"] = $fecha_recepcion->format("Y-m-d");
-            $posicion["Hora"] = $hora_recepcion ;
-            $posicion["Contenedor"] = $container->get_cod_contenedor();
-            $posicion["Tipo"] = $tipocontainer->get_tipo_container();
-            $posicion["Cliente"] = $cliente->get_nombre_completo();
-            $posicion["Usuario"] = $usuario->get_nombre_usuario();
-            $posicion["Estado"] = $authstat->get_authstat();
-            $posicion["Tipo Ingreso"] = $tipoingreso->get_tipo_ingreso();
-            $posicion["Ie"] = $ie->get_ie();
-            $posicion["peso"] = $container->get_peso();
-            $posicion["Destino"] = $container->get_destino();
-            $posicion["Eir"] = $container->get_eir();
-            $posicion["Nota"] = $container->get_nota();
-            $posicion["Sello"] = $container->get_sello();
-            $posicion["Rff_ep"] =  $container->get_rff_ep();
-            $posicion["Maniobra"] =  $pos->get_maniobra();
-            $posicion["Transportista"] =  $pos->get_transportista();
-            $posicion["Agente Aduana"] =  $pos->get_agente_aduana();
-            $fechaPosicion ="";
-            if($pos->get_fecha_gen()){
-                $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $pos->get_fecha_gen())->format("d/m/Y H:i:s");
-            }
-            $posicion["fecha posicionado"] =  $fechaPosicion;
-            $UsuarioPosicionado=new \Usuario();
-            $UsuarioPosicionado->get($pos->get_id_usuario());
-            $posicion["posicionado Usuario"] = $UsuarioPosicionado->get_nombre_usuario();
             $posiciones[] = $posicion;
         }
         $fecha = new \DateTime("now");
