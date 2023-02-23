@@ -75,6 +75,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $authstat = new \Authstat($row);
             $posiciones = new \Posiciones($row);
             $ie = new \Ie($row);
+            var_dump($row["fecha_generacion"]);
             if(!$container->get_fecha_gen())
                 $container->set_fecha_gen($row["fecha_generacion"]);
             $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
