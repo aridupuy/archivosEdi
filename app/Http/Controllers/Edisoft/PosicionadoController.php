@@ -101,6 +101,7 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $usuario = new \Usuario($row);
             $authstat = new \Authstat($row);
             $posiciones= new \Posiciones($row);
+            $ie= new \Ie($row);
             $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
             if(!$fecha_recepcion){
                 $fecha_recepcion=\DateTime::createFromFormat("Ymd", $container->get_fecha_recepcion());
