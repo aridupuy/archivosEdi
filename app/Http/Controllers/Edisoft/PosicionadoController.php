@@ -130,7 +130,8 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
                 $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen())->format("d/m/Y H:i:s");
             }
             $respuesta[$i]["fecha posicionado"] =  $fechaPosicion;
-            $respuesta[$i]["posicionado Usuario"] = (new \Usuario())->get($posiciones->get_id_usuario())->get_nombre_completo();
+            $usuario = new \Usuario(); $usuario->get($posiciones->get_id_usuario());
+            $respuesta[$i]["posicionado Usuario"] = $usuario->get_nombre_completo();
             
             $i++;
         }
