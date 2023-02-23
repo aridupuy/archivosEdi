@@ -410,8 +410,10 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $pos = new \Posiciones($row);
             $ie = new \Ie($row);
             $fecha_recepcion = $hora_recepcion = "";
-            if($row["fecha_recepcion"]!=null )
+            if($row["fecha_recepcion"]!=null ){
+                var_dump($row["fecha_recepcion"]);
                 $fecha_recepcion = \DateTime::createFromFormat("Y-m-d", $row["fecha_recepcion"])->format("Y-m-d");
+            }
             if($fecha_recepcion==""){
                 $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", $row["fecha_gen"])->format("Y-m-d");
             }
