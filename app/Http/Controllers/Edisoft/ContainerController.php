@@ -301,7 +301,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $usuario = new \Usuario();
             $usuario->get($row["idusuario"]);
             $authstat = new \Authstat($row);
-            $posiciones = new \Posiciones($row);
+            $pos = new \Posiciones($row);
             $ie = new \Ie($row);
             
             $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
@@ -328,12 +328,12 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posicion[]["Rff_ep"] =  $container->get_rff_ep();
             $posicion[]["Maniobra"] = strtoupper($tipo);
             $posicion[]["Maniobra"] =  $posiciones->get_maniobra();
-            $posicion[]["Transportista"] =  $posiciones->get_transportista();
-            $posicion[]["Agente Aduana"] =  $posiciones->get_agente_aduana();
+            $posicion[]["Transportista"] =  $pos->get_transportista();
+            $posicion[]["Agente Aduana"] =  $pos->get_agente_aduana();
             $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen());
             $posicion[]["fecha posicionado"] =  $fechaPosicion->format("d/m/Y H:i:s");
             $UsuarioPosicionado=new \Usuario();
-            $UsuarioPosicionado->get($posiciones->get_id_usuario());
+            $UsuarioPosicionado->get($pos->get_id_usuario());
             $posicion[]["posicionado Usuario"] = $UsuarioPosicionado->get_nombre_usuario();
             $posiciones[] = $posicion;
         }
