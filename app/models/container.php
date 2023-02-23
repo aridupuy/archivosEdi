@@ -336,7 +336,7 @@ class Container extends Model {
         $sql = "select *,
                     A.fecha_gen as fecha_gen,
                     F.fecha_gen as fecha_usuario  ,
-                    H.*
+                    H.*,F.id_usuario as idusuario
                     "
                 . "from ed_container A "
                 . "left join ho_authstat B on A.id_authstat=B.id_authstat "
