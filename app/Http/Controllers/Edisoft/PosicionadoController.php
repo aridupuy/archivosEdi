@@ -101,7 +101,10 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $usuario = new \Usuario($row);
             $authstat = new \Authstat($row);
             $posiciones= new \Posiciones($row);
-            $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", $container->get_fecha_recepcion());
+            $fecha_recepcion = \DateTime::createFromFormat("Y-m-d H:i:s", !$container->get_fecha_recepcion()?$container->get_fecha_gen():$container->get_fecha_recepcion());
+            if(!$fecha_recepcion){
+                $fecha_recepcion=\DateTime::createFromFormat("Ymd", $container->get_fecha_recepcion());
+            }
             $respuesta[$i]["id"] = $container->get_id_container();
             $respuesta[$i]["Fecha"] = $fecha_recepcion->format("Y-m-d");
             $respuesta[$i]["Hora"] = $container->get_hora_recepcion();
@@ -121,8 +124,11 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $respuesta[$i]["Maniobra"] =  $posiciones->get_maniobra();
             $respuesta[$i]["Transportista"] =  $posiciones->get_transportista();
             $respuesta[$i]["Agente Aduana"] =  $posiciones->get_agente_aduana();
-            $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen());
-            $respuesta[$i]["fecha posicionado"] =  $fechaPosicion->format("d/m/Y H:i:s");
+            $fechaPosicion ="";
+            if($posiciones->get_fecha_gen()){
+                $fechaPosicion = \DateTime::createFromFormat("Y-m-d H:i:s", $posiciones->get_fecha_gen())->format("d/m/Y H:i:s");
+            }
+            $respuesta[$i]["fecha posicionado"] =  $fechaPosicion;
             $respuesta[$i]["posicionado Usuario"] = (new \Usuario())->get($posiciones->get_id_usuario())->get_nombre_completo();
             
             $i++;
