@@ -177,10 +177,14 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         $rs = \Usuario::select(array("email" => self::$variables["email"]));
         $usuario = new \Usuario($rs->fetchRow());
         if (!$usuario->get_id_usuario()) {
-            $response["msg"] = "Usuario no existe";
+            $rs = \Usuario::select(array("username" => self::$variables["email"]));
+            $usuario = new \Usuario($rs->fetchRow());
+            if (!$usuario->get_id_usuario()) {
+                $response["msg"] = "Usuario no existe";
+            }
         }
         $id_usuario = $usuario->get_id_usuario();
-        if (\Gestor_de_correo::enviar(\Gestor_de_correo::MAIL_INFO, $usuario->get_email(),"Cambio de contraseña", "Para cambiar la contraseña haz click <a href=\"#\">Aqui</a>")) {
+        if (\Gestor_de_correo::enviar(\Gestor_de_correo::MAIL_INFO, $usuario->get_email(),"Cambio de contraseña", "Para cambiar la contraseña haz click en <a href=\"https://www.transportesrossell.com/admin/#/change-password?key={$id_usuario}\">Recuperar clave</a>")) {
             $resp = self::RESPUESTA_CORRECTA;
             $response["msg"] = "Correo enviado.";
         } else {
