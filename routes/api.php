@@ -26,6 +26,7 @@ Route::post("changePass", 'AuthController@changePassword');
 Route::get("usuario/obtener/{id}", '\App\Http\Controllers\Edisoft\UsuarioController@obtener')->middleware('auth');
 Route::delete("usuario/borrar_usuario/{id}", '\App\Http\Controllers\Edisoft\UsuarioController@borrar_usuario')->middleware('auth');
 Route::post("usuario/recovery_pass", '\App\Http\Controllers\Edisoft\UsuarioController@recuperar_pass');
+Route::post("usuario/recovery_pass_before", '\App\Http\Controllers\Edisoft\UsuarioController@change_pass_final_action');
 Route::post("usuario/crear_usuario", '\App\Http\Controllers\Edisoft\UsuarioController@crear_usuario');
 Route::get("cliente/obtener", '\App\Http\Controllers\Edisoft\ClienteController@obtener')->middleware('auth');
 Route::get("cliente/obtener/{id}", '\App\Http\Controllers\Edisoft\ClienteController@obtener')->middleware('auth');

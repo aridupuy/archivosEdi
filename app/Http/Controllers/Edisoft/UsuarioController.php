@@ -194,7 +194,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
     }
 
-    public function change_pass_post() {
+    public function change_pass_final_action() {
         $usuario = new \Usuario();
         $usuario->get(self::$variables["id"]);
         $usuario->activar_hash();
