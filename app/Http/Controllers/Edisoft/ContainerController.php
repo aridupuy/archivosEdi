@@ -80,9 +80,10 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $usuario->get($row["idusuario"]);
             $authstat = new \Authstat($row);
             $posiciones = new \Posiciones($row);
+            
             $ie = new \Ie($row);
             $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
-            $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
+            $respuesta[$i]["tipoingreso"] = $tipoingreso->get_tipo_ingreso();
             $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
             $respuesta[$i]["usuario"] = $usuario->get_nombre_usuario();
             $respuesta[$i]["authstat"] = $authstat->get_authstat();
@@ -90,6 +91,9 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $respuesta[$i]["peso"] = $container->get_peso();
             $respuesta[$i]["path_edi_entrada"] = $container->get_path_edi_entrada();
             $respuesta[$i]["path_edi_salida"] = $container->get_path_edi_salida();
+            $respuesta[$i]["agente"] = $posiciones->get_agente_aduana();
+            $respuesta[$i]["maniobra"] = $posiciones->get_maniobra();
+            $respuesta[$i]["fecha_ultima_maniobra"] = $posiciones->get_fecha_gen();
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
             unset($respuesta[$i]["id_tipocontainer"]);
