@@ -101,13 +101,19 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $tipocontainer = new \Tipocontainer($row);
             $tipoingreso = new \Tipo_ingreso($row);
             $cliente = new \Cliente($row);
-            $usuario = new \Usuario($row);
+            $usuario = new \Usuario();
+            $usuario->get($row["idusuario"]);
             $authstat = new \Authstat($row);
+            $pos=new \Posiciones($row);
             $respuesta[$i]["tipocontainer"] = $tipocontainer->get_tipo_container();
             $respuesta[$i]["tipoingreso"] = $tipoingreso->get_id_tipo_ingreso();
             $respuesta[$i]["cliente"] = $cliente->get_nombre_completo();
             $respuesta[$i]["usuario"] = $usuario->get_nombre_usuario();
             $respuesta[$i]["authstat"] = $authstat->get_authstat();
+            $respuesta[$i]["agente"] = $pos->get_agente_aduana();
+            $respuesta[$i]["maniobra"] = $pos->get_maniobra();
+            $respuesta[$i]["fecha_ultima_maniobra"] = $pos->get_fecha_gen();
+            
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
             unset($respuesta[$i]["id_tipocontainer"]);
