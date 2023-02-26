@@ -177,7 +177,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         $rs = \Usuario::select(array("email" => self::$variables["email"]));
         $usuario = new \Usuario($rs->fetchRow());
         if (!$usuario->get_id_usuario()) {
-            $rs = \Usuario::select(array("username" => self::$variables["email"]));
+            $rs = \Usuario::select(array("nombre_usuario" => self::$variables["email"]));
             $usuario = new \Usuario($rs->fetchRow());
             if (!$usuario->get_id_usuario()) {
                 $response["msg"] = "Usuario no existe";
