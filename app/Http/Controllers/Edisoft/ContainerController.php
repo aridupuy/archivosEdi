@@ -92,7 +92,6 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $respuesta[$i]["path_edi_entrada"] = $container->get_path_edi_entrada();
             $respuesta[$i]["path_edi_salida"] = $container->get_path_edi_salida();
             $respuesta[$i]["agente"] = $posiciones->get_agente_aduana();
-            $respuesta[$i]["maniobra"] = $posiciones->get_maniobra();
             $respuesta[$i]["fecha_ultima_maniobra"] = $posiciones->get_fecha_gen();
             unset($respuesta[$i]["id_usuario"]);
             unset($respuesta[$i]["id_tipoingreso"]);
