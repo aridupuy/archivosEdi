@@ -173,7 +173,8 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
     }
 
-    public function recuperar_pass($request) {
+    public function recuperar_pass(\Illuminate\Http\Request $request) {
+        self::cargar_parametros($request->json()->all());
         $rs = \Usuario::select(array("email" => self::$variables["email"]));
         $usuario = new \Usuario($rs->fetchRow());
         var_dump($usuario->get_id_usuario());
