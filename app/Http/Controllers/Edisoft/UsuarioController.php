@@ -177,7 +177,6 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         self::cargar_parametros($request->json()->all());
         $rs = \Usuario::select(array("email" => self::$variables["email"]));
         $usuario = new \Usuario($rs->fetchRow());
-        var_dump($usuario->get_id_usuario());
         if ($usuario->get_id_usuario()==null) {
             $rs = \Usuario::select(array("nombre_usuario" => self::$variables["email"]));
             $usuario = new \Usuario($rs->fetchRow());
@@ -186,7 +185,6 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             }
         }
         $id_usuario = $usuario->get_id_usuario();
-        var_dump($usuario->get_id_usuario());
         if (\Gestor_de_correo::enviar_con_adjunto(\Gestor_de_correo::MAIL_INFO, self::$variables["email"],"Cambio de contraseña", "Para cambiar la contraseña haz click en <a href=\"https://www.transportesrossell.com/admin/#/change-password?key={$id_usuario}\">Recuperar clave</a>",null)) {
             $resp = self::RESPUESTA_CORRECTA;
             $response["msg"] = "Correo enviado.";
