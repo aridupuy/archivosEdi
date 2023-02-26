@@ -16,9 +16,7 @@ class Gestor_de_correo{
     const ACTIVAR_TEST=false;
     const NOMBRE_APP=APP_NAME;
     public static function enviar($emisor, $destinatario, $asunto, $mensaje,$file_path=false)
-    {
-//        var_dump(ACTIVAR_TEST);
-        
+    {   
         if(self::ACTIVAR_TEST=='true')
             return true;
         if(self::VALIDAR_CORREO AND !validar_correo($destinatario)) return false;
@@ -41,7 +39,8 @@ class Gestor_de_correo{
         if(ACTIVAR_LOG_APACHE_DE_CORREO) developer_log('Ha ocurrido un error al intentar enviar un correo a: '.$destinatario.'. ');
         return false;
     }
-    private static function enviar_con_adjunto($emisor, $destinatario, $asunto, $mensaje,$file_path){
+    
+    public static function enviar_con_adjunto($emisor, $destinatario, $asunto, $mensaje,$file_path){
         if(self::VALIDAR_CORREO AND !validar_correo($emisor)) return false;
         if(self::VALIDAR_CORREO AND !validar_correo($destinatario)) return false;
 //        if(!is_file($file_path)) {
