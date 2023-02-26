@@ -29,7 +29,7 @@ class Edisoft {
             Controller::$HASH = false;
         }
         if (!$token) {
-            return response(false, "Falta el parametro token para la autenticacion", [])->header("Access-Control-Allow-Origin", "*");
+            return response("Falta el parametro token para la autenticacion",200, [])->header("Access-Control-Allow-Origin", "*");
         }
         try{
             if (!$this->verificar_autenticacion($token)) {
