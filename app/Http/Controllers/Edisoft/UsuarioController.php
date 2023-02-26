@@ -184,7 +184,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             }
         }
         $id_usuario = $usuario->get_id_usuario();
-        if (\Gestor_de_correo::enviar_con_adjunto(\Gestor_de_correo::MAIL_INFO, self::$variables["email"],"Cambio de contraseña", "Para cambiar la contraseña haz click en <a href=\"https://www.transportesrossell.com/admin/#/change-password?key={$id_usuario}\">Recuperar clave</a>")) {
+        if (\Gestor_de_correo::enviar_con_adjunto(\Gestor_de_correo::MAIL_INFO, self::$variables["email"],"Cambio de contraseña", "Para cambiar la contraseña haz click en <a href=\"https://www.transportesrossell.com/admin/#/change-password?key={$id_usuario}\">Recuperar clave</a>"),null) {
             $resp = self::RESPUESTA_CORRECTA;
             $response["msg"] = "Correo enviado.";
         } else {
