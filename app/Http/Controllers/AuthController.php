@@ -185,7 +185,7 @@ class AuthController extends Log_in_app {
         else{
             $response = json_encode(["check" => false,"log"=> "Error al cambiar Password"]);
         }
-        return response($response)->header("Access-Control-Allow-Origin", "*")
+        return response($response)->setStatusCode(200)->header("Access-Control-Allow-Origin", "*")
                         //Métodos que a los que se da acceso
                         ->header("Access-Control-Allow-Methods", "GET, POST, PUT,OPTIONS, DELETE")
                         //Headers de la petición
