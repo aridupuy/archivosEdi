@@ -75,7 +75,8 @@ class ContainerController extends \App\Http\Controllers\Controller {
             }
             $tipocontainer = new \Tipocontainer($row);
             $tipoingreso = new \Tipo_ingreso($row);
-            $cliente = new \Cliente($row);
+            $cliente = new \Cliente();
+            $cliente->get($row["idCliente"]);
             $usuario = new \Usuario();
             $usuario->get($row["idusuario"]);
             $authstat = new \Authstat($row);

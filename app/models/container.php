@@ -336,7 +336,8 @@ class Container extends Model {
         $sql = "select *,
                     A.fecha_gen as fecha_generacion,
                     F.fecha_gen as fecha_usuario  ,
-                    H.*,F.id_usuario as idusuario
+                    H.*,F.id_usuario as idusuario,
+                    E.id_cliente as idCliente
                     
                     "
                 . "from ed_container A "
