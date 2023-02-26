@@ -69,6 +69,10 @@ class Gestor_de_correo{
             $mensaje=utf8_encode($mensaje);
         $mensaje = wordwrap($mensaje, 70, "\r\n");
      //   $email->SMTPDebug = 3;
+     var_dump(self::SERVIDOR_USER);
+     var_dump(self::SERVIDOR_PASS);
+     var_dump(self::SERVIDOR_HOST);
+     
         $email->isSMTP();
         $email->Host      =self::SERVIDOR_HOST;
         $email->Port      =  self::SERVIDOR_PORT; 
