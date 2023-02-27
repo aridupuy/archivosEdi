@@ -192,7 +192,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $resp = self::RESPUESTA_INCORRECTA;
             $response["msg"] = "Error al enviar correo.";
         }
-        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
+        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"]]);
     }
 
     public function change_pass_final_action() {
