@@ -94,7 +94,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         $params["nombre_completo"] = self::$variables["nombre_completo"];
         $params["email"] = self::$variables["email"];
         $params["password"] = self::$variables["password"];
-        $rs_usuario_email = \Usuario::select(["email"=>self::$variables["email"]]);
+        $rs_usuario_email = \Usuario::select(["email"=>self::$variables["email"],"id_authstat"=> \Authstat::ACTIVO]);
         if($rs_usuario_email->rowCount()!=0){
             throw new \Exception("El Email ya se encuentra registrado");
         }
