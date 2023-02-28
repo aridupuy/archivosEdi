@@ -198,6 +198,9 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     public function change_pass_final_action() {
         $usuario = new \Usuario();
         $usuario->get(self::$variables["id"]);
+        if($usuario->getId()==null){
+            return $this->retornar(false, "No se encontraron datos", ["msg" => "No se encontraron datos"]);
+        }
         $usuario->activar_hash();
         $usuario->actualizar_password();
         if (isset(self::$variables["password"]))
@@ -210,7 +213,7 @@ class UsuarioController extends \App\Http\Controllers\Controller {
             $response["msg"] = "Error al cambiar el password";
             $resp = self::RESPUESTA_INCORRECTA;
         }
-        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"], "id_usuario" => $id_usuario]);
+        return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"]]);
     }
 
     public function borrar_usuario($id) {
