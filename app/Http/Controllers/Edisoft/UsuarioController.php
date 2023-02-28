@@ -195,7 +195,8 @@ class UsuarioController extends \App\Http\Controllers\Controller {
         return $this->retornar($resp, $response["msg"], ["msg" => $response["msg"]]);
     }
 
-    public function change_pass_final_action() {
+    public function change_pass_final_action(\Illuminate\Http\Request $request) {
+        self::cargar_parametros($request->json()->all());
         $usuario = new \Usuario();
         $usuario->get(self::$variables["id"]);
         if($usuario->getId()==null){
