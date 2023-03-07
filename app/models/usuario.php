@@ -15,13 +15,13 @@ class Usuario extends Model{
     protected $actualizar_password=false;
     
     public static $id_tabla="id_usuario";
-    private $id_usuario;
-    private $nombre_completo;
-    private $id_authstat;
-    private $nombre_usuario;
-    private $password;
-    private $email;
-    private $last_login;
+    public $id_usuario;
+    public $nombre_completo;
+    protected $id_authstat;
+    public $nombre_usuario;
+    protected $password;
+    public $email;
+    public $last_login;
     
     public function activar_hash(){
            $this->hash=true;
@@ -209,7 +209,7 @@ class Usuario extends Model{
             $and = "and id_usuario!=?";
             $variables[]=$id_usuario;
         }
-        $sql = "select * from ed_usuario where (nombre_usuario=?  ) $and ";
+        $sql = "select * from ed_usuario where (nombre_usuario=?  ) $and  and id_authstat!=5";
         
         return self::execute_select($sql, $variables);
     }
