@@ -51,6 +51,7 @@ class PosicionadoController extends \App\Http\Controllers\Controller {
             $posicionado->set_bl($container->get_bl());
             $posicionado->set_id_authstat(\Authstat::POSICIONADO);
             $posicionado->set_maniobra(self::$variables["maniobra"]);
+            $posicionado->set_tipo("POSICIONADO");
             $posicionado->set_id_cliente($container->get_id_cliente());
             $posicionado->set_id_container($container->get_id_container());
             $posicionado->set_id_tipoingreso($container->get_id_tipoingreso());
