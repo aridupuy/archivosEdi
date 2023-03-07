@@ -410,7 +410,7 @@ class Container extends Model {
             $variables[] = $filtros["destino"];
         }
         if (isset($filtros["noentrada"])) {
-            $where .= " and maniobra!=?";
+            $where .= " and tipo!=?";
             $variables[] = "ENTRADA";
         }
 
