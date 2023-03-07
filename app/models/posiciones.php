@@ -23,6 +23,7 @@ class Posiciones extends Model{
     private $id_tipoingreso;
     private $bl;
     private $maniobra;
+    private $tipo;
     private $transportista;
     private $id_cliente;
     
@@ -125,6 +126,15 @@ class Posiciones extends Model{
         return $this;
     }
 
+    public function get_tipo() {
+        return $this->tipo;
+    }
+
+    public function set_tipo($tipo) {
+        $this->tipo = $tipo;
+        return $this;
+    }
+
     public static function select_posiciones($ids,$filtros=[]) {
         $where =" true ";
         if($ids!=null || count($ids)>0){
@@ -169,7 +179,7 @@ class Posiciones extends Model{
             $variables[]=$filtros["destino"];
         }
         if(isset($filtros["noentrada"])){
-            $where.=" and maniobra!=?";
+            $where.=" and tipo!=?";
             $variables[]="ENTRADA";
         }
         if(isset($filtros["id_authstat"])){
