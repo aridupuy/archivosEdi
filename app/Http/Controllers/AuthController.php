@@ -176,6 +176,7 @@ class AuthController extends Log_in_app {
     
     public function changePassword(Request $request){
         $variables = $request->json()->all();
+        dd($variables);
         $usuario= new Usuario();
         $usuario->get($variables["id"]);
         $usuario->actualizar_password();
