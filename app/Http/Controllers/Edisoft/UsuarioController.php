@@ -176,6 +176,9 @@ class UsuarioController extends \App\Http\Controllers\Controller {
     public function recuperar_pass(\Illuminate\Http\Request $request) {
         self::cargar_parametros($request->json()->all());
         $rs = \Usuario::select(array("email" => self::$variables["email"]));
+        if($rs->rowCount()==0){
+            return $this->retornar(false, "No existe ningun usuario con ese correo", ["msg" => "No existe ningun usuario con ese correo"]);
+        }
         $usuario = new \Usuario($rs->fetchRow());
         if ($usuario->get_id_usuario()==null) {
             $rs = \Usuario::select(array("nombre_usuario" => self::$variables["email"]));
