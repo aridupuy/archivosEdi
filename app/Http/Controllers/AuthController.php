@@ -180,7 +180,7 @@ class AuthController extends Log_in_app {
         $usuario->get($variables["id"]);
         $usuario->set_password($variables["newPass"]);
         if($usuario->set()){
-            $response = json_encode(["check" => true,"cuenta"=> (array) $usuario]);
+            $response = json_encode(["check" => true,"cuenta"=> $usuario]);
         }
         else{
             $response = json_encode(["check" => false,"log"=> "Error al cambiar Password"]);
