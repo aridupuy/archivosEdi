@@ -179,7 +179,7 @@ class AuthController extends Log_in_app {
         $usuario= new Usuario();
         $usuario->get($variables["id"]);
         $usuario->actualizar_password();
-        $usuario->set_password($variables["newPass"]);
+        $usuario->set_password(isset($variables["newPass"])?$variables["newPass"]:$variables["clave"]);
         if($usuario->set()){
             $response = json_encode(["check" => true,"cuenta"=> $usuario]);
         }
