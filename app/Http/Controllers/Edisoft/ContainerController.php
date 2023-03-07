@@ -146,7 +146,8 @@ class ContainerController extends \App\Http\Controllers\Controller {
             $posiciones->set_id_cliente($container->get_id_cliente());
             $posiciones->set_id_usuario(self::$USUARIO->get_id());
             $posiciones->set_id_tipoingreso($container->get_id_tipoingreso());
-            $posiciones->set_maniobra("ENTRADA");
+            $posiciones->set_maniobra(self::$variables["maniobra"]);
+            $posiciones->set_tipo('ENTRADA');
 
             if ($posiciones->set()) {
                 \Model::CompleteTrans();
@@ -256,7 +257,7 @@ class ContainerController extends \App\Http\Controllers\Controller {
 //            $container->set_(self::$variables["buque"]);
             $posicion->set_id_usuario(self::$USUARIO->get_id());
             $posicion->set_agente_aduana(self::$variables["agente_aduana"] ?: "No Proporcionado");
-            $posicion->set_maniobra("SALIDA");
+            $posicion->set_tipo("SALIDA");
             $container->set_id_authstat(\Authstat::SALIDA);
             if ($posicion->set() and $container->set()) {
                 $id_container = $container->get_id_container();
