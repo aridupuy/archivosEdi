@@ -22,6 +22,7 @@ use App\Http\Controllers\EfectivoDigital;
 Route::post("login", 'AuthController@login')->middleware('auth');
 Route::post("loginBo", 'Auth_BO_Controller@login')->middleware('auth');
 Route::post("checkToken", 'AuthController@checkToken')->middleware('auth');
+Route::post("changepass", 'AuthController@changePassword');
 Route::post("changePass", 'AuthController@changePassword');
 Route::get("usuario/obtener/{id}", '\App\Http\Controllers\Edisoft\UsuarioController@obtener')->middleware('auth');
 Route::delete("usuario/borrar_usuario/{id}", '\App\Http\Controllers\Edisoft\UsuarioController@borrar_usuario')->middleware('auth');
