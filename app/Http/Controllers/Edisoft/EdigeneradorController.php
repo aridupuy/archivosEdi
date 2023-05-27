@@ -45,7 +45,7 @@ class EdigeneradorController extends \App\Http\Controllers\Controller {
                 $container->set_nota(self::$variables["comentario"]);
             try {
                 $array->append($container);
-                $obj = \Edi::factory($array, self::$variables,$id);
+                $obj = \Edi::factory($array, self::$variables, $id);
             } catch (\Exception $e) {
                 return $this->retornar(false, $e->getMessage() . $container->get_id());
             }

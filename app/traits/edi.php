@@ -16,12 +16,11 @@ abstract class Edi {
     protected $variables;
     protected $id;
     protected static $posiciones;
-
+    
     protected function __construct(array $variables, ArrayObject $container, $id) {
         $this->container = $container;
         $this->variables = $variables;
         $this->id = $id;
-//        var_dump($this);
     }
 
     public function get_posiciones(): \Array_posiciones {
@@ -40,18 +39,17 @@ abstract class Edi {
             developer_log("El contenedor no existe.");
             throw new Exception("El contenedor no existe.");
         }
+        
         self::agregar_posiciones($container);
         if (!$container->getIterator()->current()->get_tiene_edi_entrada()) {
-//            if ($container->getIterator()->current()->get_id_authstat() == Authstat::ENTRADA) {
                 developer_log("Generando entrada");
                 return new Codeco_entrada($variables, $container, $id);
-//            }
         } 
         elseif($container->getIterator()->current()->get_id_authstat()==Authstat::POSICIONADO and !$container->getIterator()->current()->get_tiene_edi_salida()){
             $rs = Posiciones::select(["id_container" => $container->getIterator()->current()->get_id(), "id_authstat" => Authstat::POSICIONADO]);
             if ($rs->rowCount() > 0) {
                 developer_log("Generando posicionado.");
-                return new Codeco_salida($variables, $container, $id);
+                return new Codeco_posicionado($variables, $container, $id);
             } else {
                 throw new Exception("El contenedor ya tiene todos sus edi generado.");
             }
@@ -132,72 +130,12 @@ abstract class Edi {
     }
 
     public function enviar_ftp($file) {
-//        return true;
-        /* dejo esto preparado */
-        /*los posicionados son salidas, generar el archivo edi destino=> nombre del predio.*/
-        /*posicionados genera archiv edi tambien como una salida.*/
-        /*campo sello se llena a la salida. o posicionado.*/
-        /*modificar el flujo para que los posicionados finalicen como una salida.*/
-        /*salida va directamente al puerto.*/
-        /**/
-        $host = "ftp.msc.com";
-        $username = "SV520-TRANSPORTES_LOU";
-        $password = "ct6OnuRe";
-        $SERVER_URL = "/To_MSC/CODECO/";
-//        var_dump(scandir("pecl install ssh2"));
-//        var_dump(exec("/usr/local/cpanel/"));
-//        var_dump(exec("cd wget http://www.libssh2.org/snapshots/libssh2-1.4.0-20120319.tar.gz"));
-//        var_dump(exec(" tar -xzf libssh2-1.4.0-20120319.tar.gz"));
-//        var_dump(exec("cd libssh2-*"));
-//        var_dump(exec("./configure"));
-//        var_dump(exec("make all install"));
-//        var_dump(exec("php -m | grep ssh2"));
         
-
-///usr/local/cpanel/3rdparty/bin/pecl install ssh2
-
-
-//        $conn = ftp_connect($host);
-//        if (!$conn) {
-//            developer_log("No pudimos conectarnos al ftp");
-//        }
-//        if (ftp_login($conn, $username, $password)) {
-//            if (ftp_put($conn, $SERVER_URL.basename($file), PATH_PUBLIC_FOLDER . $file)) {
-//                return true;
-//            }
-//            developer_log("No pudimos cargar el archivo al ftp");
-//        }
-//        developer_log("No pudimos loguearnos al ftp");
-//        return false;
-//        $fileContents = file_get_contents(PATH_PUBLIC_FOLDER.$file);
-        $connection = ssh2_connect($host, 22);
-        ssh2_auth_password($connection, $username, $password);
-        $sftp = ssh2_sftp($connection);
-//        $stream = @fopen("ssh2.sftp://$sftp$SERVER_URL".basename($file), 'w');
-//        if (!$stream)
-//            throw new Exception("Could not open file: ".$SERVER_URL.basename($file));
-        return $this->uploadFile($sftp,PATH_PUBLIC_FOLDER . $file, $SERVER_URL . basename($file));
-        
-//        ssh2_scp_send($connection, '/local/filename', '/remote/filename', 0644);
-//        Illuminate\Support\Facades\Storage::disk('sftp')->put($SERVER_URL.basename($file), $fileContents);
+        $fptController = new Gestor_de_ftp();
+        return $fptController->enviar_ftp($file);
     }
 
-    public function uploadFile($sftp,$local_file, $remote_file) {
-        $stream = @fopen("ssh2.sftp://$sftp$remote_file", 'w');
-
-        if (!$stream)
-            throw new Exception("Could not open file: $remote_file");
-
-        $data_to_send = @file_get_contents($local_file);
-        if ($data_to_send === false)
-            throw new Exception("Could not open local file: $local_file.");
-
-        if (@fwrite($stream, $data_to_send) === false)
-            throw new Exception("Could not send data from file: $local_file.");
-        developer_log("Archivo Enviado");
-        @fclose($stream);
-        return true;
-    }
+    
 
     abstract function nombrar_archivo();
 }

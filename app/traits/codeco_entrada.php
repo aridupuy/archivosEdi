@@ -36,11 +36,8 @@ class Codeco_entrada extends \Codeco{
         return $archivo;
     }
     public function nombrar_archivo(){
-//        $filename = get_called_class() . "_" . $this->variables["id"] . "_archivo_" . $fecha->format("Ymdhis") . ".edi";
-        $cliente = new Cliente();
-        $cliente->get($this->container->getIterator()->current()->get_id_cliente());
         $fecha = new DateTime("now");
-        return $cliente->get_nombre_completo()."GATE_IN".$this->id."_".$fecha->format("Ymdhis").".edi";
+        return "{$this->container->getIterator()->current()->get_cod_contenedor()}_GATE_IN_{$this->id}_{$fecha->format("Ymdhi")}.edi";
     }
     public function compose($oCodeco) {
         return $oCodeco->compose(9,34);

@@ -27,10 +27,8 @@ class Codeco_salida extends \Codeco{
             return $archivo;
     }
     public function nombrar_archivo(){
-        $cliente = new Cliente();
-        $cliente->get($this->container->getIterator()->current()->get_id_cliente());
         $fecha = new DateTime("now");
-        return $cliente->get_nombre_completo()."GATE_OUT".$fecha->format("Ymdhi").".edi";
+        return "{$this->container->getIterator()->current()->get_cod_contenedor()}_GATE_OUT_{$fecha->format("Ymdhi")}.edi";
     }
     public function compose( $oCodeco) {
         return $oCodeco->compose(9,36);
