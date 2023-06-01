@@ -17,8 +17,6 @@ public_html/hot
 
 storage/*.key
 storage/
-.env
-/.env
 Homestead.yaml
 Homestead.json
 /.vagrant
@@ -28,3 +26,4 @@ public/Export/
 public/mdpf/
 project.properties
 storage/
+.env
