@@ -12,9 +12,9 @@ define('PATH_TRAITS',__DIR__."/../../app/traits/");
  
 //hay que buscar una mejor forma para esto
 define('DB_CONNECTION',"mysqli");
-define('DATABASE_NAME','EDI');
-define('DATABASE_USERNAME','mobul_usr');
-define('DATABASE_USERPASS','.t&]7+tBU7!R');
+define('DATABASE_NAME','transpor_EDI');
+define('DATABASE_USERNAME','transpor_edi');
+define('DATABASE_USERPASS','?!,9_&afeJn(');
 define('NOMBRE_HIDDEN_INSTANCIA',getenv('NOMBRE_HIDDEN_INSTANCIA'));
 define('ALGORITMO_HASH',getenv('ALGORITMO_HASH'));
 define('PATH_VENDOR_HANDLE_ERROR',PATH_VENDOR.'/adodb/adodb-php/adodb-errorhandler.inc.php');
@@ -71,14 +71,14 @@ define('DATABASE_HOST','localhost');
 define('DATABASE_PORT','3306');
 define('PROJECT_KEY','');
 define('PROJECT_ID','');
-define('EMAIL_USER_INFO','editransportesrm@gmail.com');
-define('EMAIL_USER_NOREPPLY','editransportesrm@gmail.com');
-define('EMAIL_USER_ATC','editransportesrm@gmail.com');
-define('EMAIL_USER_DESARROLLO','editransportesrm@gmail.com');
-define('EMAIL_HOST','smtp.gmail.com');
-define('EMAIL_PORT','587');
-define('EMAIL_USER','editransportesrm@gmail.com');
-define('EMAIL_PASS','0lWx1UKc1^$Jgp8t');
+define('EMAIL_USER_INFO', getenv("EMAIL_USER_INFO"));
+define('EMAIL_USER_NOREPPLY',getenv("EMAIL_USER_NOREPPLY"));
+define('EMAIL_USER_ATC',getenv("EMAIL_USER_ATC"));
+define('EMAIL_USER_DESARROLLO',getenv("EMAIL_USER_DESARROLLO"));
+define('EMAIL_HOST',getenv("EMAIL_HOST"));
+define('EMAIL_PORT',getenv("EMAIL_PORT"));
+define('EMAIL_USER',getenv("EMAIL_USER"));
+define('EMAIL_PASS',getenv("EMAIL_PASS"));
 define('APP_NAME','EDISOFT');
 
 require_once PATH_MODELS."model.php";
