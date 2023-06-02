@@ -18,10 +18,11 @@ class Gestor_de_ftp {
     */
     public function enviar_ftp($file): bool {
 
-        $host = getenv("HOST");
+        
+        $host = getenv("FTP_HOST");
         $username = getenv("USERNAME");
         $password = getenv("PASSWORD");
-        $SERVER_URL = getenv("SERVER_URL");
+        $SERVER_URL = "/To_MSC/CODECO/";
 
         $connection = ssh2_connect($host, 22);
         ssh2_auth_password($connection, $username, $password);
