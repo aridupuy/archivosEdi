@@ -18,7 +18,6 @@ class Gestor_de_ftp {
     */
     public function enviar_ftp($file): bool {
 
-        
         $host = getenv("FTP_HOST");
         $username = getenv("USERNAME");
         $password = getenv("PASSWORD");
